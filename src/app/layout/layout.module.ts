@@ -12,6 +12,7 @@ import { DashboardComponent } from './dashboard/dashboard.component';
 import { MainComponent } from './main/main.component';
 
 
+
 @NgModule({
   declarations: [IndexComponent, DefaultComponent, HeaderComponent, FooterComponent, FooterDefComponent, SidebarDefComponent, DashboardComponent, MainComponent],
   imports: [

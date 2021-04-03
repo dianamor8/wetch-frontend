@@ -1,18 +1,29 @@
-<ul>
-<li>
-    <a href="">Elemento 1</a>   
-</li>
-<li>
-    <a href="">Elemento 1</a>   
-</li>
-<li>
-    <a href="">Elemento 1</a>   
-</li>
-<li>
-    <a href="">Elemento 1</a>   
-</li>
-<li>
-    <a href="">Elemento 1</a>   
-</li>
+<!-- https://www.youtube.com/watch?v=FP7Hs8lTy1k MENÚ DE ITEMS --> 
+<mat-nav-list>        
+    <h2 matSubheader> <small> Proyectos</small></h2>
+    <a mat-list-item routerLink='/prefact/areaVivienda' (click)="onSidenavClose()"> Mis Proyectos </a>
+    
+    <mat-divider></mat-divider>
 
-</ul>
+    <h2 matSubheader><small>Prefactibilidad</small></h2>
+    <a mat-list-item routerLink='/prefact/areaVivienda' (click)="onSidenavClose()"> Área de Vivienda </a>
+    <a mat-list-item routerLink='/prefact/areaVivienda' (click)="onSidenavClose()"> Tipos de área de Vivienda </a>
+    <a mat-list-item routerLink='/prefact/areaVivienda' (click)="onSidenavClose()"> Ambientes </a>
+    
+    <mat-divider></mat-divider>
+    
+    <h2 matSubheader><small>Presupuesto</small></h2>
+    <a mat-list-item routerLink='/prefact/areaVivienda' (click)="onSidenavClose()">Rubros</a>
+    <a mat-list-item routerLink='/prefact/areaVivienda' (click)="onSidenavClose()">Costo Indirecto</a>
+
+    <mat-divider></mat-divider>
+    
+    <h2 matSubheader><small>Configuraciones</small></h2>
+    <a mat-list-item routerLink='/prefact/areaVivienda' (click)="onSidenavClose()">Info Prefactibilidad</a>
+    <a mat-list-item routerLink='/prefact/areaVivienda' (click)="onSidenavClose()">Info Presupuestos</a>
+
+    <mat-divider></mat-divider>
+    
+    <h2 matSubheader><small>Nosotros</small></h2>
+    <a mat-list-item routerLink='/prefact/areaVivienda' (click)="onSidenavClose()">Version</a>
+</mat-nav-list>

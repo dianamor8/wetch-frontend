@@ -1,3 +1,10 @@
+:host {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}
+
+// PARA SIDENAV SMALL
 mat-sideav-container, 
 mat-sidenav-content,
 mat-sidenav {
@@ -9,5 +16,19 @@ mat-sidenav {
 }
 
 .main {
+    margin: 10px;
+    height: 100vh;
+}
+
+// PARA SIDENAV > SMALL
+mat-drawer {
+   width: 20%;    
+}
+
+mat-drawer-container{    
+    height: 100vh;
+}
+
+mat-drawer-content {
     padding: 10px;
 }

@@ -1,0 +1,25 @@
+@import url('https://fonts.googleapis.com/css2?family=Lexend:wght@100&display=swap');
+.space-menu {
+    flex: 1 1 auto;
+}
+
+.navigation-items {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+}
+
+.item {
+    font-family: 'Lexend', sans-serif;
+    color: azure;
+    text-decoration: none;
+}
+
+.titulo {
+    font-family: 'Lexend', sans-serif;
+    text-decoration: none;
+    color: aliceblue;
+    font-weight: bold;
+    margin-left: 5px;
+    margin-right: 5px;
+}
