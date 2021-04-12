@@ -1,0 +1,21 @@
+footer {    
+    width: 100%;     
+    background: rgb(0,0,5);
+    background: linear-gradient(95deg, rgba(0,0,5,1) 0%, rgba(84,82,78,1) 86%);
+    color: var(--wetch-white);    
+    padding: 10px;
+}
+
+.icons-redes-sociales {
+    margin: 10px;
+}
+
+.p-footer {
+    margin: 0;
+}
+
+@media screen and (max-width: 599px){
+    .footer-title {
+        text-align: center;
+    }
+}

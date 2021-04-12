@@ -1,3 +1,49 @@
-<footer style="background-color: aqua;">
-    footer para páginas coorporativas
+<footer fxFlexFill>
+    <div fxLayout="row" fxLayout.xs="column">
+        <div fxFlex='20'  fxFlex.xs="80" fxLayoutAlign="center">
+            <div class="contenedor-imagen">
+                <picture >
+                    <img class="logo" mat-card-image src="./../../../../assets/images/logofooter.png" alt="Photo of a Shiba Inu">
+                </picture>
+                
+            </div>    
+            
+        </div>
+        <div fxFlex='58' class="contact-footer" fxLayout="row" fxLayout.xs="column">
+            <div fxFlex='50' class="contactanos-div">
+                <h3>CONTÁCTANOS</h3>
+                <p>
+                    <i class="fas fa-phone-alt"></i> + 593 990493445</p>
+                <p><i class="fas fa-envelope-open"></i> info@arquiconstruye.com</p>
+                <p fxHide.xs class="copyright">© Wetch 2021 Todos los derechos reservados</p>            
+            </div>
+            <br>
+            <div fxFlex='50'>
+                <h3 class="services">NUESTROS PRODUCTOS</h3>
+                <div fxLayout.lt-md="column" fxLayout="row">
+                    <div class="services__items">                        
+                        <p>Proyectos arquitectónicos</p>                        
+                        <p>Construcción de obras</p>
+                    </div>
+                    <div  class="services__items">                        
+                        <p>Presupuestos y avalúos</p>
+                        <p>Asesoramiento y servicios</p>
+                    </div>
+                </div>                            
+            </div>
+        </div>
+        <div fxFlex='22' fxLayout="column" fxFlexAlign="center" class="icons-container">
+            <!-- <div fxFlex='100' fxLayoutAlign="center">
+                <h3 class='icons-title'>REDES SOCIALES</h3>
+            </div> -->
+            <div fxFlex='60' fxLayout="row" fxLayoutAlign="center center">
+                <i class="fab fa-facebook-f icons-redes-sociales"></i>
+                <i class="fab fa-twitter icons-redes-sociales"></i>    
+                <i class="fab fa-instagram icons-redes-sociales"></i>            
+            </div>
+            
+        </div>
+    </div>
+    <p fxHide.gt-xs class="copyright services">© Wetch 2021 Todos los derechos reservados</p>            
 </footer>
+

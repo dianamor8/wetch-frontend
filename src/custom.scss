@@ -4,8 +4,13 @@
 // Define the palettes for your theme using the Material Design palettes available in palette.scss
 // (imported above). For each palette, you can optionally specify a default, lighter, and darker
 // hue. Available color palettes: https://material.io/design/color/
-
-$wetch-yellow: #E1C159;
+:root{
+  --wetch-yellow: #E1C159;
+  --wetch-black: #000005;
+  --wetch-white: #ffffff;
+  --wetch-gray: #c1c1c1;
+  --wetch-green: #269fa4;  
+}
 
 $mat-wetch-green: (
   50: #e1f8f8,

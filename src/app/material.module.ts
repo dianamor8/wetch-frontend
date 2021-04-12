@@ -7,11 +7,15 @@ import { FlexLayoutModule } from '@angular/flex-layout';
 import {MatMenuModule} from '@angular/material/menu';
 import {MatListModule} from '@angular/material/list';
 import {MatDividerModule} from '@angular/material/divider';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { ReactiveFormsModule } from '@angular/forms';
+
 
 
 @NgModule({
   exports: [
       FlexLayoutModule,
+      FontAwesomeModule,
       MatButtonModule,
       MatSidenavModule,
       MatToolbarModule,
@@ -19,10 +23,11 @@ import {MatDividerModule} from '@angular/material/divider';
       MatMenuModule,
       MatListModule,
       MatDividerModule,
-
+      ReactiveFormsModule
     ],
   imports: [
     FlexLayoutModule,
+    FontAwesomeModule,
     MatButtonModule,
     MatSidenavModule,
     MatToolbarModule,
@@ -30,6 +35,7 @@ import {MatDividerModule} from '@angular/material/divider';
     MatMenuModule,
     MatListModule,
     MatDividerModule,
+    ReactiveFormsModule
   ]
 })
 export class MaterialModule { }

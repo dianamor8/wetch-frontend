@@ -18,9 +18,13 @@
     <div>
       <button mat-button [matMenuTriggerFor]="menu"><mat-icon>account_circle</mat-icon></button>
       <mat-menu #menu="matMenu" xPosition="before">
-        <button mat-menu-item>Iniciar Sesión</button>
-        <button mat-menu-item>Regístrate</button>
-        <button mat-menu-item>Cerrar Sesión</button>
+        <ng-container *ngIf="user; else elseTemplate">
+          <button mat-menu-item [routerLink]="['logout']">Cerrar Sesión</button>
+        </ng-container>
+        <ng-template #elseTemplate>
+          <button mat-menu-item [routerLink]="['login']">Iniciar Sesión</button>
+          <button mat-menu-item [routerLink]="['register']">Regístrate</button>
+        </ng-template>              
       </mat-menu>       
     </div>
 </mat-toolbar>
