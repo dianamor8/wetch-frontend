@@ -1,15 +1,12 @@
 export class User {
     
-    public id:number;
+    public id:number|null;
     public name:string;
     public email:string;
     public password:string;
 
-    constructor(id:number, name:string, email:string, password:string){
-        this.id = id;
-        this.name = name;
-        this.email=email;
-        this.password=password;
+    public constructor(init?: Partial<User>) {
+        Object.assign(this, init);
     }
 
 }

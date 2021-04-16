@@ -18,7 +18,7 @@ export const siginup = createAction(
   );
 
 export const siginupSuccess = createAction(
-    '[AUTH] Sigin up success', props<{ user: User}>()
+    '[AUTH] Sigin up success', props<{ user: User, access_token:string, token_type:string}>()
 );
 
 

@@ -8,6 +8,7 @@
             <mat-sidenav-content>
                 <app-header (sidenavToggle)='sidenav.toggle()'></app-header>
                 <main class="main">
+                    <app-messages></app-messages>
                     <router-outlet></router-outlet>
                 </main>
                 <app-footer-def></app-footer-def>
@@ -25,7 +26,9 @@
                 <app-sidebar-def></app-sidebar-def>
             </mat-drawer>
             <mat-drawer-content>            
-                <router-outlet></router-outlet>        
+                <!-- <app-messages></app-messages> -->
+                <router-outlet>                    
+                </router-outlet>        
             </mat-drawer-content>
         </mat-drawer-container>
         <app-footer-def></app-footer-def>

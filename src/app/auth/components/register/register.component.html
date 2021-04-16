@@ -1,1 +1,78 @@
-<p>register works!</p>
+<ng-container *ngIf="loginState$.loading; else elseTemplate">
+    <div class="display-spinner">
+        <mat-spinner></mat-spinner>
+    </div>
+</ng-container>
+<ng-template #elseTemplate>
+    <div class="container-uoc">
+        <mat-card class="login-card mat-elevation-z24">
+            <mat-card-header class="header-card">
+                <mat-card-title>Nuevo usuario</mat-card-title>
+            </mat-card-header>
+            <div>
+            <form [formGroup]="registerForm" (ngSubmit)="register()">
+                <section class='section-form'>
+                    <!-- Name -->
+                    <mat-form-field appearance="fill" class="item-form">
+                        <mat-label>Name</mat-label>
+                        <input matInput type="name" [formControl]="name" placeholder="Nombre de usuario">
+                        <mat-error *ngIf="name.hasError('required')">Nombre es requerido</mat-error>
+                        <mat-error *ngIf="name.hasError('maxLength')">Máximo 240 caracteres</mat-error>
+                    </mat-form-field>
+                </section>
+
+                <section class='section-form'>
+                    <!-- Email -->
+                    <mat-form-field appearance="fill" class="item-form">
+                        <mat-label>Correo electrónico</mat-label>
+                        <input matInput type="email" [formControl]="email" placeholder="Correo electrónico" emailAsyncValidator>
+                        <mat-error *ngIf="email.hasError('required')">Email es requerido</mat-error>
+                        <mat-error *ngIf="email.hasError('email')">Email no tiene el formato correcto</mat-error>
+                        <mat-error *ngIf="email.hasError('userExist')">Este email ya se encuentra registrado</mat-error>
+                    </mat-form-field>
+                </section>
+
+                <section class='section-form'>
+                    <!-- Password -->
+                    <mat-form-field appearance="fill" class="item-form">
+                        <mat-label>Contraseña</mat-label>
+                        <input matInput [type]="hide ? 'password' : 'text'" [formControl]="password" >
+                        <button type='button' mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Esconder contraseña'" [attr.aria-pressed]="hide">
+                        <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon></button>
+                        <mat-hint>La contraseña debe tener entre 8 y 16 caracteres y, al menos: un dígito, una minúscula, una mayúscula.</mat-hint>                        
+                        <mat-error *ngIf="password.hasError('required')">Contraseña de usuario requerida</mat-error>
+                        <mat-error *ngIf="password.hasError('pattern')">Formato de contraseña no válida</mat-error>                        
+                    </mat-form-field>
+                </section>
+                <br>
+
+                <section class='section-form'>
+                    <!-- Repeat Password -->
+                    <mat-form-field appearance="fill" class="item-form">
+                        <mat-label>Confirmación de contraseña</mat-label>
+                        <input matInput [type]="hidecp ? 'password' : 'text'" [formControl]="confirm_password">
+                        <button type='button'  mat-icon-button matSuffix (click)="hidecp = !hidecp" [attr.aria-label]="'Esconder contraseña'" [attr.aria-pressed]="hidecp">
+                            <mat-icon>{{hidecp ? 'visibility_off' : 'visibility'}}</mat-icon></button>
+                        <mat-error *ngIf="confirm_password.hasError('required')">Confirmación de contraseña requerida</mat-error>                        
+                    </mat-form-field>
+                </section>
+
+                <section class='section-form'>
+                    <mat-error class="item-form" *ngIf="loginState$.error && (bSubmitted)"> 
+                        <small> {{loginState$.error.message}}</small>
+                    </mat-error>
+                    <mat-error *ngIf="registerForm.hasError('noEquals') && (confirm_password.dirty && password.dirty)">
+                        <small>Las contraseñas no coinciden</small> </mat-error>
+                </section>
+                <!-- Sign in button -->
+                <section class='section-form'>
+                    <button mat-raised-button color="primary" type="submit" [disabled]="!registerForm.valid" class="item-form">Registrarse</button>
+                </section>        
+                <section class='section-form'>
+                    <small>
+                <p>Si ya tienes una cuenta, <a routerLink='/login'>Inicia sesión</a> </p> </small></section>        
+            </form>
+            </div>
+        </mat-card>
+    </div>
+</ng-template>

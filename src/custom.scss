@@ -149,3 +149,15 @@ $candy-app-theme: mat-light-theme((
 // Alternatively, you can import and @include the theme mixins for each component
 // that you are using.
 @include angular-material-theme($candy-app-theme);
+
+small.error{    
+  color:#EF5350;
+}
+
+small.warning{
+  color: var(--wetch-yellow);
+}
+
+small.success{
+  color: var(--wetch-green);  
+}

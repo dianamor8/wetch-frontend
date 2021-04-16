@@ -4,16 +4,19 @@
         <mat-icon>menu</mat-icon>
       </button>  
       <span>
-        <a href="/dashboard" class="titulo">Wetch</a>
+          <a *ngIf="user" [routerLink]="['dashboard']" class="titulo">Wetch</a>          
+          <a *ngIf="!user" [routerLink]="['']" class="titulo">Wetch</a>          
       </span>
     </div>
     <span class="space-menu"></span>
     <div fxHide fxShow.gt-xs>
-      <ul fxLayout fxLayoutGap='15px' class="navigation-items">      
-        <li><a class="item" routerLink='/empresa/info'>Empresa</a></li>
-        <li><a class="item" routerLink='/empresa/info'>Proyectos</a></li>
-        <li><a class="item" routerLink='/empresa/info'>Contacto</a></li>      
-      </ul>
+        <ul fxLayout fxLayoutGap='15px' class="navigation-items">      
+          <li *ngIf="!user"><a class="item" routerLink='/empresa/info'>Empresa</a></li>
+          <li *ngIf="!user"><a class="item" routerLink='/empresa/info'>Proyectos</a></li>
+          <li *ngIf="!user"><a class="item" routerLink='/empresa/info'>Contacto</a></li>      
+          <li *ngIf="user"><a class="item" routerLink='/empresa/info'>Proyectos</a></li>      
+          <li *ngIf="user"><a class="item" routerLink='/empresa/info'>Configuraciones</a></li>      
+        </ul>       
     </div>  
     <div>
       <button mat-button [matMenuTriggerFor]="menu"><mat-icon>account_circle</mat-icon></button>

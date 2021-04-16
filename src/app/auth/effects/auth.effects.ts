@@ -4,7 +4,8 @@ import { of } from 'rxjs';
 import * as authAccions from '../actions';
 import { loginError } from '../actions';
 import { AuthService } from '../services/auth.service';
-import { mergeMap, map, catchError, find, tap, filter, exhaustMap, switchMap } from 'rxjs/operators';
+import { mergeMap, map, catchError, find, tap, filter, exhaustMap, switchMap, delay } from 'rxjs/operators';
+import { MessageService } from 'src/app/utilitarios/messages/services/message.service';
 
 @Injectable({
     providedIn: 'root'
@@ -13,7 +14,8 @@ export class AuthEffects {
     
     constructor(
         private actions$: Actions,
-        private authService: AuthService
+        private authService: AuthService,
+        private messageService:MessageService
         ) {}
 
 
@@ -21,9 +23,25 @@ export class AuthEffects {
         ofType(authAccions.login),
         mergeMap((resp)=>
             this.authService.login(resp.email,resp.password).pipe(        
-                tap((x)=>{console.log(x)}),                        
-                map((response)=>authAccions.loginSuccess({...response})),                
+                // tap((x)=>{console.log(">>>efects"+x)}),      
+                // delay(500),                  
+                map((response)=>                                                
+                    {   this.messageService.showNotification('Bienvenido.', 'Éxito','Ok', 'success');                        
+                        return authAccions.loginSuccess({...response})}
+                ),                
                 catchError((err)=> of(authAccions.loginError({payload:err}))),
             ))
         ));
+
+        sigInUp$ = createEffect(()=>this.actions$.pipe(
+            ofType(authAccions.siginup),
+            mergeMap((resp)=>
+                this.authService.register(resp.user).pipe(                            
+                    map((response)=>                                                
+                        {   this.messageService.showNotification('Creado con éxito.', 'Éxito','Ok', 'success');                        
+                            return authAccions.siginupSuccess({...response})}
+                    ),                
+                    catchError((err)=> of(authAccions.siginupError({payload:err}))),
+                ))
+            ));
 }

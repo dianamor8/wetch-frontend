@@ -20,9 +20,9 @@ export class AuthGuard implements CanActivate, CanDeactivate<unknown> {
 
   //     }
   //   });
-
   // }
 
+  //ACTIVA LA RUTA SI EL USUARIO ESTÁ LOGEADO
   canActivate(
     route: ActivatedRouteSnapshot,
     state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {

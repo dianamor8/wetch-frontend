@@ -14,6 +14,7 @@ import { appReducers, metaReducers } from './app.reducer';
 import { EffectsModule } from "@ngrx/effects";
 import { EffectsArray as EffectsArrayAuth } from './auth/effects';
 import { AuthModule } from './auth/auth.module';
+import { UtilitariosModule } from './utilitarios/utilitarios.module';
 
 
 
@@ -30,6 +31,7 @@ import { AuthModule } from './auth/auth.module';
     FlexLayoutModule,
     FontAwesomeModule,
     AuthModule,
+    UtilitariosModule,
     StoreModule.forRoot(appReducers, {metaReducers}),
     EffectsModule.forRoot(EffectsArrayAuth),
     StoreDevtoolsModule.instrument({

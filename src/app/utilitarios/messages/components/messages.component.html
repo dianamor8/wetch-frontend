@@ -1,0 +1,9 @@
+<div class="snack-header" fxLayout="row" fxFill fxLayout="space-between center">
+  <small [ngClass]="data.type">
+    <strong>{{ data.title | uppercase }}</strong> 
+  </small>  
+  <button (click)="snackBarRef.dismiss()" mat-icon-button> <small> {{data.buttonText}} </small></button>
+</div>
+<div>  
+  {{data.message}}  
+</div>

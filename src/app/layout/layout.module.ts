@@ -10,6 +10,7 @@ import { RouterModule } from '@angular/router';
 import { MaterialModule } from '../material.module';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { MainComponent } from './main/main.component';
+import { UtilitariosModule } from '../utilitarios/utilitarios.module';
 
 
 
@@ -18,7 +19,8 @@ import { MainComponent } from './main/main.component';
   imports: [
     CommonModule,
     MaterialModule,
-    RouterModule
+    RouterModule,
+    UtilitariosModule
   ],
   schemas: [ CUSTOM_ELEMENTS_SCHEMA ]
 })

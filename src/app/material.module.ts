@@ -9,7 +9,11 @@ import {MatListModule} from '@angular/material/list';
 import {MatDividerModule} from '@angular/material/divider';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { ReactiveFormsModule } from '@angular/forms';
-
+import {MatSnackBarModule} from '@angular/material/snack-bar';
+import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
+import {MatCardModule} from '@angular/material/card';
+import {MatFormFieldModule} from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
 
 
 @NgModule({
@@ -23,7 +27,12 @@ import { ReactiveFormsModule } from '@angular/forms';
       MatMenuModule,
       MatListModule,
       MatDividerModule,
-      ReactiveFormsModule
+      ReactiveFormsModule,
+      MatProgressSpinnerModule,
+      MatSnackBarModule,
+      MatCardModule,
+      MatFormFieldModule,
+      MatInputModule
     ],
   imports: [
     FlexLayoutModule,
@@ -35,6 +44,11 @@ import { ReactiveFormsModule } from '@angular/forms';
     MatMenuModule,
     MatListModule,
     MatDividerModule,
+    MatSnackBarModule,
+    MatProgressSpinnerModule,
+    MatCardModule,
+    MatFormFieldModule,
+    MatInputModule,
     ReactiveFormsModule
   ]
 })
