@@ -7,10 +7,13 @@ import { RegisterComponent } from './components/register/register.component';
 import { MaterialModule } from '../material.module';
 import { HttpClientModule } from '@angular/common/http';
 import { MyAsyncValidator } from './validators/auth.async.validator';
+import { ResetPasswordComponent } from './components/reset-password/reset-password.component';
+import { UserAsyncValidator } from './validators/user.async.validator';
+import { ChangePasswordComponent } from './components/change-password/change-password.component';
 
 
 @NgModule({
-  declarations: [ LoginComponent, RegisterComponent, MyAsyncValidator],
+  declarations: [ LoginComponent, RegisterComponent, MyAsyncValidator, ResetPasswordComponent, UserAsyncValidator, ChangePasswordComponent],
   imports: [
     CommonModule,
     AuthRoutingModule,

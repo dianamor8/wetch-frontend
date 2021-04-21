@@ -15,6 +15,9 @@ import { EffectsModule } from "@ngrx/effects";
 import { EffectsArray as EffectsArrayAuth } from './auth/effects';
 import { AuthModule } from './auth/auth.module';
 import { UtilitariosModule } from './utilitarios/utilitarios.module';
+import { CookieService } from 'ngx-cookie-service';
+import { HTTP_INTERCEPTORS } from '@angular/common/http';
+import { AuthInterceptor } from './auth/interceptors/auth.interceptor';
 
 
 
@@ -39,9 +42,12 @@ import { UtilitariosModule } from './utilitarios/utilitarios.module';
       logOnly:environment.production
     })        
   ],
-  providers: [],
+  providers: [
+    CookieService,
+    { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true }
+  ],
   bootstrap: [AppComponent],
-  schemas: [ CUSTOM_ELEMENTS_SCHEMA ]
+  // schemas: [ CUSTOM_ELEMENTS_SCHEMA ]
 })
 export class AppModule {   
 }

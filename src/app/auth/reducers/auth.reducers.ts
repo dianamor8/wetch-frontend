@@ -1,5 +1,5 @@
 import { createReducer, on } from "@ngrx/store";
-import { login, loginError, loginSuccess, siginup, siginupError, siginupSuccess } from "../actions";
+import { login, loginError, loginSuccess, resetPassword, resetPasswordError, resetPasswordSuccess, siginup, siginupError, siginupSuccess, cookieAuthentication, cookieAuthenticationError, cookieAuthenticationSuccess } from "../actions";
 import { User } from "../models/user";
 
 export interface AuthState{
@@ -9,6 +9,7 @@ export interface AuthState{
     loading:boolean;
     loaded: boolean;
     error:any;
+    cookieAuthenticate:any;
 }
 
 export const initialState:AuthState = {
@@ -18,6 +19,7 @@ export const initialState:AuthState = {
     loading:false,
     loaded: false, 
     error:null,
+    cookieAuthenticate:null
 }
 
 const __authReducer = createReducer(
@@ -78,6 +80,64 @@ const __authReducer = createReducer(
             status:payload.status,
             statusText:payload.statusText,            
             message: displayMessageErrors(payload.error.errors)
+        }
+    })),
+    on(resetPassword, (state) => ({
+        ...state, 
+        error:null, 
+        loading:true,
+        loaded:false
+    })),
+    on(resetPasswordSuccess, (state, {message})=>({
+        ...state,
+        loading:false,
+        loaded:true,
+        userAuth:null,
+        access_token:"",
+        token_type:"",
+        error: null
+    })),
+    on(resetPasswordError, (state, {payload})=>({
+        ...state,
+        loading:false,
+        loaded:false,
+        userAuth:null,
+        access_token:"",
+        token_type:"",
+        error:{
+            url:payload.url,
+            status:payload.status,
+            statusText:payload.statusText,            
+            message: payload.error
+        }
+    })),
+
+    on(cookieAuthentication, (state) => ({
+        ...state, 
+        error:null, 
+        loading:true,
+        loaded:false,
+        cookieAuthenticate:null
+    })),
+
+    on(cookieAuthenticationSuccess, (state, {cookie}) => ({
+        ...state, 
+        error:null, 
+        loading:false,
+        loaded:true,
+        cookieAuthenticate:cookie
+    })),
+
+    on(cookieAuthenticationError, (state, {payload}) => ({
+        ...state,         
+        loading:false,
+        loaded:true,
+        cookieAuthenticate:null,
+        error:{
+            url:payload.url,
+            status:payload.status,
+            statusText:payload.statusText,            
+            message: payload.error
         }
     })),
 );

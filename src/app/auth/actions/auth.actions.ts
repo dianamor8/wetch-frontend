@@ -1,3 +1,4 @@
+import { HttpHeaders } from "@angular/common/http";
 import { createAction, props } from "@ngrx/store";
 import { User } from "../models/user";
 
@@ -24,6 +25,31 @@ export const siginupSuccess = createAction(
 
 export const siginupError = createAction(
     '[AUTH] Sigin up error', props<{payload: any}>()
+);
+
+export const resetPassword = createAction(
+    '[AUTH] Reset password', props<{email: string}>()
+);
+
+export const resetPasswordSuccess = createAction(
+    '[AUTH] Reset password suscess', props<{message: string}>()
+);
+
+export const resetPasswordError = createAction(
+    '[AUTH] Reset password error', props<{payload: any}>()
+);
+
+
+export const cookieAuthentication = createAction(
+    '[AUTH] Cookie Authentication'
+);
+
+export const cookieAuthenticationSuccess = createAction(
+    '[AUTH] Cookie Authentication success', props<{cookie: number}>()
+);
+
+export const cookieAuthenticationError = createAction(
+    '[AUTH] Cookie Authentication error', props<{payload: any}>()
 );
 
 export const logout = createAction(

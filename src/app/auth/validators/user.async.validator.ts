@@ -4,19 +4,18 @@ import { Observable, of } from "rxjs";
 import { catchError, map, tap } from "rxjs/operators";
 import { AuthService } from "../services/auth.service";
 
-// @Injectable({ providedIn: 'root' })
 @Directive({
-  selector: '[emailAsyncValidator]',
-  providers: [{provide: NG_ASYNC_VALIDATORS, useExisting: MyAsyncValidator, multi:true}]
+  selector: '[useremailAsyncValidator]',
+  providers: [{provide: NG_ASYNC_VALIDATORS, useExisting: UserAsyncValidator, multi:true}]
 })
-export class MyAsyncValidator implements AsyncValidator {
+export class UserAsyncValidator implements AsyncValidator {
   constructor(private authService: AuthService) {}
 
   validate(
     ctrl: AbstractControl
   ): Promise<ValidationErrors | null> | Observable<ValidationErrors | null> {    
-    return this.authService.userExist(ctrl.value).pipe(            
-      map(isTaken => (isTaken.user===null ? null:{ userExist: true })),
+    return this.authService.userExist(ctrl.value).pipe(      
+      map(isTaken => (isTaken.user===null ?  { userNoExist: true } : null)),
       catchError((x) => of(null))
     );
   }

@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { InicializationGuard } from './auth/guard/inicialization.guard';
 import { RedirectToLoginGuard } from './auth/guard/redirect-to-login.guard';
 import { DashboardComponent } from './layout/dashboard/dashboard.component';
 import { DefaultComponent } from './layout/default/default.component';
@@ -15,7 +16,7 @@ const routes: Routes = [
     { path: 'dashboard', component:DashboardComponent, canActivate:[RedirectToLoginGuard]},
     { path: 'prefact', loadChildren: () => import('./prefactibilidad/prefactibilidad.module').then(m => m.PrefactibilidadModule) },
   ]},
-  { path: 'auth', loadChildren: () => import('./auth/auth.module').then(m => m.AuthModule) },
+  { path: 'auth', loadChildren: () => import('./auth/auth.module').then(m => m.AuthModule), canActivate:[InicializationGuard]},
   { path: '', redirectTo: '', pathMatch: 'full'}
 ];
 

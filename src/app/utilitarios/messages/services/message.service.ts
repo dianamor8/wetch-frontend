@@ -34,7 +34,7 @@ export class MessageService {
     this.messages=this.messages.filter((e)=>e.message!=message);
   }
   
-  showNotification(message:string, title:string, buttonText:string, messageType:'error'|'success'|'warning') {
+  showNotification(message:string, title:string, buttonText:string, messageType:'error'|'success'|'warning', duration:number) {
     
     this.addMessage({message, title, buttonText, messageType});
     this.messages.forEach((element, index) => {
@@ -46,7 +46,7 @@ export class MessageService {
             buttonText:element.buttonText,
             type: element.messageType
           },
-          duration: 5000,
+          duration: duration,
           horizontalPosition: this.horizontalPosition,
           verticalPosition: this.verticalPosition,
           panelClass: element.messageType
