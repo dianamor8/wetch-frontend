@@ -7,6 +7,7 @@ import { AuthService } from '../services/auth.service';
 import { mergeMap, map, catchError, find, tap, filter, exhaustMap, switchMap, delay, take } from 'rxjs/operators';
 import { MessageService } from 'src/app/utilitarios/messages/services/message.service';
 import { environment } from "./../../../environments/environment";
+import { Router } from '@angular/router';
 
 @Injectable({
     providedIn: 'root'
@@ -16,35 +17,34 @@ export class AuthEffects {
     constructor(
         private actions$: Actions,
         private authService: AuthService,
-        private messageService:MessageService
+        private messageService:MessageService,
+        private router: Router
         ) {}
 
 
     login$ = createEffect(()=>this.actions$.pipe(
         ofType(authAccions.login),
         mergeMap((resp)=>
-            this.authService.login(resp.email,resp.password).pipe(        
-                // tap((x)=>{console.log(">>>efects"+x)}),      
-                // delay(500),                  
+            this.authService.login(resp.email,resp.password).pipe(                                 
                 map((response)=>                                                
                     {   this.messageService.showNotification('Bienvenido.', 'Éxito','Ok', 'success', 5000);                        
-                        return authAccions.loginSuccess({...response})}
+                        return authAccions.loginSuccess({...response, returnUrl:resp.returnUrl})}
                 ),                
                 catchError((err)=> of(authAccions.loginError({payload:err}))),
             ))
         ));
 
-        sigInUp$ = createEffect(()=>this.actions$.pipe(
-            ofType(authAccions.siginup),
-            mergeMap((resp)=>
-                this.authService.register(resp.user).pipe(                            
-                    map((response)=>                                                
-                        {   this.messageService.showNotification('Creado con éxito.', 'Éxito','Ok', 'success', 5000);                        
-                            return authAccions.siginupSuccess({...response})}
-                    ),                
-                    catchError((err)=> of(authAccions.siginupError({payload:err}))),
-                ))
-            ));
+    sigInUp$ = createEffect(()=>this.actions$.pipe(
+        ofType(authAccions.siginup),
+        mergeMap((resp)=>
+            this.authService.register(resp.user, (environment.wetchUrl+'/validate-account')).pipe(                            
+                map((response)=>                                                
+                    {   this.messageService.showNotification(response.message, 'Éxito','Ok', 'success', 5000);                        
+                        return authAccions.siginupSuccess({...response})}
+                ),                
+                catchError((err)=> of(authAccions.siginupError({payload:err}))),
+            ))
+        ));
 
 
     resetPassword$ = createEffect(()=>this.actions$.pipe(
@@ -52,7 +52,7 @@ export class AuthEffects {
         mergeMap((resp)=>{            
             return this.authService.resetPassword(resp.email, (environment.wetchUrl+'/change-password')).pipe(                            
                 map((response)=>                                                
-                    {   this.messageService.showNotification(response.message, 'Éxito','Ok', 'success', 20000);                        
+                    {   this.messageService.showNotification(response.message, 'Éxito','Ok', 'success', 20000);                                            
                         return authAccions.resetPasswordSuccess({...response})}
                 ),                
                 catchError((err)=> of(authAccions.resetPasswordError({payload:err}))),
@@ -72,4 +72,57 @@ export class AuthEffects {
                 catchError((err)=> of(authAccions.cookieAuthenticationError({payload:err})))                 
             )}),            
         ));
+
+    logOut$ = createEffect(()=>this.actions$.pipe(
+        ofType(authAccions.logout),
+        mergeMap((resp)=>{       
+            return this.authService.logOut().pipe(                            
+                map((response)=>                                                
+                    {   this.messageService.showNotification(response.message, 'Éxito','Ok', 'success', 6000);                        
+                        return authAccions.logoutSuccess()}
+                ),                
+                catchError((err)=> of(authAccions.logoutError({payload:err}))),
+            )})
+        ));
+
+
+
+    changePassword$ = createEffect(()=>this.actions$.pipe(
+        ofType(authAccions.changePassword),
+        mergeMap((resp)=>{       
+            return this.authService.changePassword(resp.password).pipe(                            
+                map((response)=>                                                
+                    {   this.messageService.showNotification(response.message, 'Éxito','Ok', 'success', 6000);                        
+                        return authAccions.changePasswordSuccess()}
+                ),                
+                catchError((err)=> {
+                    this.messageService.showNotification(err, 'Error','Ok', 'error', 6000);
+                    return of(authAccions.changePasswordError({payload:err}))
+                }),
+            )})
+        ));
+
+    //EFECTS TO REDIRECT
+
+    $LoginRedirectTo = createEffect(()=>this.actions$.pipe(
+        ofType(authAccions.loginSuccess),
+        tap((x)=>{
+            this.router.navigateByUrl(x.returnUrl);                
+        })
+    ), { dispatch: false });
+
+    $LogOutRedirectTo = createEffect(()=>this.actions$.pipe(
+        ofType(authAccions.logoutSuccess),
+        tap((x)=>{
+            this.router.navigateByUrl('/');
+        })
+    ), { dispatch: false });
+
+    $ChangePasswordRedirectTo = createEffect(()=>this.actions$.pipe(
+        ofType(authAccions.changePasswordSuccess),
+        tap((x)=>{
+            this.router.navigateByUrl('/login');
+        })
+    ), { dispatch: false });  
+
 }

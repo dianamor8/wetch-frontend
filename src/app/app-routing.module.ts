@@ -9,15 +9,16 @@ import { MainComponent } from './layout/main/main.component';
 
 const routes: Routes = [  
   { path: '', component: IndexComponent, children:[
-    { path: '', component:MainComponent},
-    { path: 'empresa', loadChildren: () => import('./empresa/empresa.module').then(m => m.EmpresaModule) }
+    { path: '', component:MainComponent, canActivate:[InicializationGuard]},
+    { path: 'empresa', loadChildren: () => import('./empresa/empresa.module').then(m => m.EmpresaModule), canActivate:[InicializationGuard]}
   ]},
   { path: '', component: DefaultComponent, children:[
     { path: 'dashboard', component:DashboardComponent, canActivate:[RedirectToLoginGuard]},
-    { path: 'prefact', loadChildren: () => import('./prefactibilidad/prefactibilidad.module').then(m => m.PrefactibilidadModule) },
+    { path: 'prefactibilidad', loadChildren: () => import('./prefactibilidad/prefactibilidad.module').then(m => m.PrefactibilidadModule) },
   ]},
-  { path: 'auth', loadChildren: () => import('./auth/auth.module').then(m => m.AuthModule), canActivate:[InicializationGuard]},
-  { path: '', redirectTo: '', pathMatch: 'full'}
+  { path: 'auth', loadChildren: () => import('./auth/auth.module').then(m => m.AuthModule)},
+  { path: '', redirectTo: '', pathMatch: 'full'},
+  { path: 'proyectos', loadChildren: () => import('./proyectos/proyectos.module').then(m => m.ProyectosModule) }
 ];
 
 @NgModule({

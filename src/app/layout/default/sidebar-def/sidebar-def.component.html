@@ -1,29 +1,34 @@
-<!-- https://www.youtube.com/watch?v=FP7Hs8lTy1k MENÚ DE ITEMS --> 
-<mat-nav-list>        
-    <h2 matSubheader> <small> Proyectos</small></h2>
-    <a mat-list-item routerLink='/prefact/areaVivienda' (click)="onSidenavClose()"> Mis Proyectos </a>
-    
-    <mat-divider></mat-divider>
+<!-- https://www.youtube.com/watch?v=FP7Hs8lTy1k MENÚ DE ITEMS -->
+<mat-nav-list>
 
-    <h2 matSubheader><small>Prefactibilidad</small></h2>
-    <a mat-list-item routerLink='/prefact/areaVivienda' (click)="onSidenavClose()"> Área de Vivienda </a>
-    <a mat-list-item routerLink='/prefact/areaVivienda' (click)="onSidenavClose()"> Tipos de área de Vivienda </a>
-    <a mat-list-item routerLink='/prefact/areaVivienda' (click)="onSidenavClose()"> Ambientes </a>
-    
-    <mat-divider></mat-divider>
-    
+    <div *ngIf="user && user.isPlanificador()">
+        <h2 matSubheader> <small> Proyectos</small></h2>
+        <a mat-list-item href="/prefactibilidad/areaVivienda" (click)="onSidenavClose()"> Mis Proyectos </a>
+
+        <mat-divider></mat-divider>
+    </div>
+
+    <div *ngIf="user && user.isPlanificador()">
+        <h2 matSubheader><small>Prefactibilidad</small></h2>        
+        <a mat-list-item href='/prefactibilidad/tipo-area-vivienda' (click)="onSidenavClose()"> Área de Vivienda </a>
+        <a mat-list-item href='/prefactibilidad/ambiente-list' (click)="onSidenavClose()"> Ambientes </a>
+        <small> <a mat-list-item href='/prefactibilidad/acabado-list' (click)="onSidenavClose()"> Acabados </a></small>
+
+        <mat-divider></mat-divider>
+    </div>
+
     <h2 matSubheader><small>Presupuesto</small></h2>
-    <a mat-list-item routerLink='/prefact/areaVivienda' (click)="onSidenavClose()">Rubros</a>
-    <a mat-list-item routerLink='/prefact/areaVivienda' (click)="onSidenavClose()">Costo Indirecto</a>
+    <a mat-list-item href='/' (click)="onSidenavClose()">Rubros</a>
+    <a mat-list-item href='/' (click)="onSidenavClose()">Costo Indirecto</a>
 
     <mat-divider></mat-divider>
-    
-    <h2 matSubheader><small>Configuraciones</small></h2>
-    <a mat-list-item routerLink='/prefact/areaVivienda' (click)="onSidenavClose()">Info Prefactibilidad</a>
-    <a mat-list-item routerLink='/prefact/areaVivienda' (click)="onSidenavClose()">Info Presupuestos</a>
 
-    <mat-divider></mat-divider>
-    
+    <div *ngIf="user && user.isPlanificador()">
+        <h2 matSubheader><small>Configuraciones</small></h2>
+        <a mat-list-item href='/prefact/areaVivienda' (click)="onSidenavClose()">Info Prefactibilidad</a>
+        <a mat-list-item href='/prefact/areaVivienda' (click)="onSidenavClose()">Info Presupuestos</a>
+        <mat-divider></mat-divider>
+    </div>
     <h2 matSubheader><small>Nosotros</small></h2>
-    <a mat-list-item routerLink='/prefact/areaVivienda' (click)="onSidenavClose()">Version</a>
+    <a mat-list-item href='/prefact/areaVivienda' (click)="onSidenavClose()">Version</a>
 </mat-nav-list>

@@ -1,0 +1,52 @@
+<h3 mat-dialog-title>{{title}} Área de Vivienda</h3>
+<div mat-dialog-content>
+    <form [formGroup]="tipoAreaViviendaForm" (ngSubmit)="save()" fxLayout="row wrap" fxLayoutAlign="space-between center">
+        <section class='section-form' fxFlex.xs="100%" fxFlex.sm="90%" fxFlex.md="96%" fxFlex.xl="96%" fxFlex.lg="96%">
+            <!-- Nombre -->
+            <mat-form-field appearance="standard" class="item-form">
+                <mat-label>Nombre</mat-label>
+                <input matInput [formControl]="nombre">
+                <mat-error *ngIf="nombre.hasError('required')">Nombre identificador es requerido</mat-error>
+                <mat-error *ngIf="nombre.hasError('maxLength')">Máximo 240 caracteres</mat-error>
+            </mat-form-field>
+        </section>
+        
+        <!-- Factor de Circulación de paredes -->
+        <section class='section-form' fxFlex.xs="100%" fxFlex.sm="90%" fxFlex.md="44%" fxFlex.xl="46%" fxFlex.lg="46%">    
+            <mat-form-field appearance="standard" class="item-form">
+                <mat-label>Factor Circulación de Paredes</mat-label>
+                <input matInput [formControl]="factorCirculacionParedes" placeholder="Porcentaje de circulación de paredes" class="text-right-align" >
+                <span matSuffix class="sufix">% x m<sup> <small>2</small></sup></span>
+                <mat-error *ngIf="factorCirculacionParedes.hasError('required')">Factor de Circulacion de paredes es requerido</mat-error>                
+                <mat-error *ngIf="factorCirculacionParedes.hasError('min')">El valor mínimo es 0.00%</mat-error>
+                <mat-error *ngIf="factorCirculacionParedes.hasError('max')">El valor máximo es 100.00%</mat-error>
+                <mat-error *ngIf="factorCirculacionParedes.hasError('pattern')">Ingrese un valor numérico, use 2 decimales y separador punto (.)</mat-error>
+            </mat-form-field>
+        </section>                
+        <!-- Factor de Dirección Técnica -->
+        <section class='section-form' fxFlex.xs="100%" fxFlex.sm="90%" fxFlex.md="44%" fxFlex.xl="46%" fxFlex.lg="46%">    
+            <mat-form-field appearance="standard" class="item-form" [hideRequiredMarker]="true">
+                <mat-label>Factor de Dirección Técnica</mat-label>
+                <input matInput [formControl]="factorDireccionTecnica" placeholder="Porcentaje de utilidad de dirección técnica" class="text-right-align" >
+                <span matSuffix class="sufix">% x m<sup> <small>2</small></sup></span>
+                <mat-error *ngIf="factorDireccionTecnica.hasError('required')">Factor de Dirección Técnica es requerido</mat-error>                
+                <mat-error *ngIf="factorDireccionTecnica.hasError('min')">El valor mínimo es 0.00%</mat-error>
+                <mat-error *ngIf="factorDireccionTecnica.hasError('max')">El valor máximo es 100.00%</mat-error>
+                <mat-error *ngIf="factorDireccionTecnica.hasError('pattern')">Ingrese un valor numérico, use 2 decimales y separador punto (.)</mat-error>
+                
+            </mat-form-field>
+        </section>
+
+
+        <section class='section-form'>
+            <mat-error class="item-form" *ngIf="prefactibilidadState$.error && (bSubmitted)">
+                <small> {{prefactibilidadState$.error.message}}</small>
+            </mat-error>            
+        </section>          
+
+        <section fxFlex='100%' fxLayoutAlign='end center'>
+            <button mat-button mat-dialog-close>Cerrar</button>
+            <button mat-raised-button color="primary" type="submit" [disabled]="!tipoAreaViviendaForm.valid">Guardar</button>            
+        </section>
+    </form>
+</div>

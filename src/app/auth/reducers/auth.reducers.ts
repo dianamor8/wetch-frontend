@@ -1,6 +1,6 @@
 import { createReducer, on } from "@ngrx/store";
-import { login, loginError, loginSuccess, resetPassword, resetPasswordError, resetPasswordSuccess, siginup, siginupError, siginupSuccess, cookieAuthentication, cookieAuthenticationError, cookieAuthenticationSuccess } from "../actions";
-import { User } from "../models/user";
+import { login, loginError, loginSuccess, resetPassword, resetPasswordError, resetPasswordSuccess, siginup, siginupError, siginupSuccess, cookieAuthentication, cookieAuthenticationError, cookieAuthenticationSuccess, logout, logoutSuccess, logoutError, changePassword, changePasswordSuccess, changePasswordError, addToken } from "../actions";
+import { User  } from "../models/user";
 
 export interface AuthState{
     userAuth: User | null;    
@@ -140,6 +140,72 @@ const __authReducer = createReducer(
             message: payload.error
         }
     })),
+
+    on(logout, (state) => ({
+        ...state, 
+        error:null, 
+        loading:true,
+        loaded:false        
+    })),
+
+    on(logoutSuccess, (state) => ({
+        ...state, 
+        userAuth: null,    
+        access_token:"",
+        token_type:"",
+        loading:false,
+        loaded: true, 
+        error:null,
+        cookieAuthenticate:null        
+    })),
+
+    on(logoutError, (state, {payload}) => ({
+        ...state,                 
+        loading:false,
+        loaded: true,                 
+        error:{
+            url:payload.url,
+            status:payload.status,
+            statusText:payload.statusText,            
+            message: payload.error
+        }
+    })),
+
+    on(changePassword, (state) => ({
+        ...state, 
+        error:null, 
+        loading:true,
+        loaded:false        
+    })),
+
+    on(changePasswordSuccess, (state) => ({
+        ...state, 
+        userAuth: null,    
+        access_token:"",
+        token_type:"",
+        loading:false,
+        loaded: true, 
+        error:null,
+        cookieAuthenticate:null        
+    })),
+
+    on(changePasswordError, (state, {payload}) => ({
+        ...state,                 
+        loading:false,
+        loaded: true,                 
+        error:{
+            url:payload.url,
+            status:payload.status,
+            statusText:payload.statusText,            
+            message: payload.error.message
+        }
+    })),
+
+    on(addToken, (state, {token}) => ({
+        ...state,             
+        access_token:token,        
+    })),
+
 );
 
 export function displayMessageErrors(errors:any):string{

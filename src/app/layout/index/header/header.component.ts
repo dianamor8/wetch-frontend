@@ -1,6 +1,7 @@
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { AppState } from 'src/app/app.reducer';
+import { logout } from 'src/app/auth/actions';
 import { User } from 'src/app/auth/models/user';
 
 @Component({
@@ -20,7 +21,11 @@ export class HeaderComponent implements OnInit {
 
   ngOnInit(): void {
     this.store.select('authApp').subscribe(authResponse =>{
-      this.user = authResponse.userAuth;
+      if(authResponse.userAuth){
+        this.user = Object.assign(new User(), authResponse.userAuth);
+      }else{
+        this.user = authResponse.userAuth;
+      }      
     })
   }
 
@@ -30,5 +35,9 @@ export class HeaderComponent implements OnInit {
 
   public print(){
     
+  }
+
+  logOut():void{
+    this.store.dispatch(logout());   
   }
 }

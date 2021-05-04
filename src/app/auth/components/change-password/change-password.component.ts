@@ -3,6 +3,7 @@ import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms'
 import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { AppState } from 'src/app/app.reducer';
+import { changePassword } from '../../actions';
 import { AuthState } from '../../reducers';
 import { checkEquality } from '../../validators/auth.validator';
 
@@ -41,6 +42,11 @@ export class ChangePasswordComponent implements OnInit {
     this.bSubmitted = false;
   }
   
-  change():void{}
+  change():void{
+    this.bSubmitted = true;
+    if(this.changePasswordForm.valid){ 
+      this.store.dispatch(changePassword({password: this.changePasswordForm.get('password').value}))
+    }
+  }
 
 }

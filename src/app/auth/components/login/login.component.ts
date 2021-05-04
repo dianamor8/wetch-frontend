@@ -55,12 +55,12 @@ export class LoginComponent implements OnInit {
 
   logIn():void{
     this.bSubmitted = true
-    if(this.loginForm.valid){ 
-      this.store.dispatch(login({email: this.loginForm.get('email').value, password: this.loginForm.get('password').value }));
+    if(this.loginForm.valid){       
+      this.store.dispatch(login({email: this.loginForm.get('email').value, password: this.loginForm.get('password').value, returnUrl: this.returnUrl}));
     }
-    this.store.select('authApp').subscribe((response)=>
-      {this.router.navigateByUrl(this.returnUrl);}
-    )
+    // this.store.select('authApp').subscribe((response)=>
+    //   {this.router.navigateByUrl(this.returnUrl);}
+    // )
   }   
 
 }

@@ -1,0 +1,9 @@
+<h3 mat-dialog-title>Eliminar Ambiente</h3>
+<div mat-dialog-content>    
+    <p>Está seguro de eliminar el ambiente <strong> <em> {{ambiente.nombre}} </em></strong></p>          
+</div>
+<div mat-dialog-actions class="btn-right">    
+    <button mat-button mat-dialog-close>Cerrar</button>
+    <button mat-raised-button (click)="delete()" color="warn" type="submit">Eliminar</button>
+</div>
+

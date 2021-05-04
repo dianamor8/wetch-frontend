@@ -14,7 +14,12 @@ import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 import {MatCardModule} from '@angular/material/card';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
-
+import {MatTableModule} from '@angular/material/table';
+import {MatTooltipModule} from '@angular/material/tooltip';
+import {MatDialogModule} from '@angular/material/dialog';
+import {MatSelectModule} from '@angular/material/select';
+import {MatExpansionModule} from '@angular/material/expansion';
+import {MatPaginatorModule} from '@angular/material/paginator';
 
 @NgModule({
   exports: [
@@ -32,7 +37,13 @@ import { MatInputModule } from '@angular/material/input';
       MatSnackBarModule,
       MatCardModule,
       MatFormFieldModule,
-      MatInputModule
+      MatInputModule,
+      MatTableModule,
+      MatTooltipModule,
+      MatDialogModule,
+      MatSelectModule,
+      MatExpansionModule,
+      MatPaginatorModule
     ],
   imports: [
     FlexLayoutModule,
@@ -49,7 +60,13 @@ import { MatInputModule } from '@angular/material/input';
     MatCardModule,
     MatFormFieldModule,
     MatInputModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    MatTableModule,
+    MatTooltipModule,
+    MatDialogModule,
+    MatSelectModule,
+    MatExpansionModule,
+    MatPaginatorModule
   ]
 })
 export class MaterialModule { }

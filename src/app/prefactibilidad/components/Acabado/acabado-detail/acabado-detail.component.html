@@ -1,0 +1,37 @@
+<h3 mat-dialog-title>{{title}} Acabado</h3>
+<div mat-dialog-content>
+    <form [formGroup]="acabadoForm" (ngSubmit)="save()" fxLayout="row wrap" fxLayoutAlign="space-between center">
+        <section class='section-form' fxFlex.xs="100%" fxFlex.sm="90%" fxFlex.md="96%" fxFlex.xl="96%" fxFlex.lg="96%">
+            <!-- Nombre -->
+            <mat-form-field appearance="standard" class="item-form">
+                <mat-label>Nombre</mat-label>
+                <input matInput [formControl]="nombre">
+                <mat-error *ngIf="nombre.hasError('required')">Nombre identificador es requerido</mat-error>
+                <mat-error *ngIf="nombre.hasError('maxLength')">Máximo 240 caracteres</mat-error>
+            </mat-form-field>
+        </section>
+        
+        <!-- Factor de Circulación de paredes -->
+        <section class='section-form' fxFlex.xs="100%" fxFlex.sm="90%" fxFlex.md="96%" fxFlex.xl="96%" fxFlex.lg="96%">    
+            <mat-form-field appearance="standard" class="item-form">
+                <mat-label>Costo de Acabado</mat-label>
+                <input matInput [formControl]="costoAcabadoVivienda" placeholder="Costo de acabado de vivienda" class="text-right-align">
+                <span matSuffix class="sufix">% x m<sup> <small>2</small></sup></span>
+                <mat-error *ngIf="costoAcabadoVivienda.hasError('required')">Costo de acabado de vivienda es requerido</mat-error>                
+                <mat-error *ngIf="costoAcabadoVivienda.hasError('pattern')">Ingrese un valor numérico, use 2 decimales y separador punto (.)</mat-error>
+                <mat-error *ngIf="costoAcabadoVivienda.hasError('min')">El valor mínimo es 0.00</mat-error>
+            </mat-form-field>
+        </section>                
+        
+        <section class='section-form'>
+            <mat-error class="item-form" *ngIf="prefactibilidadState$.error && (bSubmitted)">
+                <small> {{prefactibilidadState$.error.message}}</small>
+            </mat-error>            
+        </section>          
+
+        <section fxFlex='100%' fxLayoutAlign='end center'>
+            <button mat-button mat-dialog-close>Cerrar</button>
+            <button mat-raised-button color="primary" type="submit" [disabled]="!acabadoForm.valid">Guardar</button>            
+        </section>
+    </form>
+</div>

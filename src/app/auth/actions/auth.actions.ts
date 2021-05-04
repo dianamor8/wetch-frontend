@@ -3,11 +3,11 @@ import { createAction, props } from "@ngrx/store";
 import { User } from "../models/user";
 
 export const login = createAction(
-    '[AUTH] Login', props<{email:string; password:string}>()
+    '[AUTH] Login', props<{email:string; password:string, returnUrl:string}>()
 );
 
 export const loginSuccess = createAction(
-    '[AUTH] Login Success', props<{user:User, access_token:string, token_type:string}>()
+    '[AUTH] Login Success', props<{user:User, access_token:string, token_type:string, returnUrl:string}>()
 );
 
 export const loginError = createAction(
@@ -54,4 +54,28 @@ export const cookieAuthenticationError = createAction(
 
 export const logout = createAction(
     '[AUTH] Logout'
+);
+
+export const logoutSuccess = createAction(
+    '[AUTH] Logout Success'
+);
+
+export const logoutError = createAction(
+    '[AUTH] Logout Error', props<{payload: any}>()
+);
+
+export const changePassword = createAction(
+    '[AUTH] Change Password', props<{password: string}>()
+);
+
+export const changePasswordSuccess = createAction(
+    '[AUTH] Change Password Success'
+);
+
+export const changePasswordError = createAction(
+    '[AUTH] Change Password Error', props<{payload: any}>()
+);
+
+export const addToken = createAction(
+    '[AUTH] Add token store', props<{token:string}>()
 );

@@ -1,38 +1,48 @@
 import { Injectable } from '@angular/core';
 import { HttpEvent, HttpHandler, HttpInterceptor, HttpRequest, HttpXsrfTokenExtractor } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import { Store } from '@ngrx/store';
+import { AppState } from 'src/app/app.reducer';
 
 @Injectable()
 export class AuthInterceptor implements HttpInterceptor {
 
 headerName = 'X-XSRF-TOKEN';
-constructor(private tokenService: HttpXsrfTokenExtractor) {}
+auth_token =null;
+constructor(private tokenService: HttpXsrfTokenExtractor,
+            private store:Store<AppState>) {}
 
 intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
-    // const token = localStorage.getItem('auth_token');
-    // if (!token) {
-    //   return next.handle(req);
-    // }
-    
-    // const headers = req.clone({
-    //   headers: req.headers.set('Authorization', `Bearer ${token}`)
-    // });
-    // return next.handle(headers);
-    // ADDING X-XSRF-TOKEN
-
-    if (req.method === 'GET' || req.method === 'HEAD') {                
-        return next.handle(req);
-    }
-    
-    const token = this.tokenService.getToken();
-    
-    if (token !== null && !req.headers.has(this.headerName)) {
-      req = req.clone({headers: req.headers.set(this.headerName, token)});      
-    }
-
+  
+  this.store.select('authApp').subscribe((resp)=>{
+    this.auth_token = resp.access_token;
+  })  
+  
+  if (this.auth_token) {
     req = req.clone({
-      headers: req.headers.set('Access-Control-Allow-Credentials', 'true')
-    });
+      headers: req.headers.set('Authorization', `Bearer ${this.auth_token}`)
+    });  
+  }
+
+  if (req.method === 'GET' || req.method === 'HEAD') {
+    console.log(req.headers.keys() + '>>>headers +' +req.method)                
     return next.handle(req);
+  }
+  
+  // ADDING X-XSRF-TOKEN
+  const token = this.tokenService.getToken();
+    
+  if (token !== null && !req.headers.has(this.headerName)) {
+    req = req.clone({headers: req.headers.set(this.headerName, token)});      
+  }
+
+  req = req.clone({
+    headers: req.headers.set('Access-Control-Allow-Credentials', 'true')
+  });
+
+  console.log(req.headers.keys() + '>>>headers+'+req.method)
+
+  return next.handle(req);
+
   }
 }

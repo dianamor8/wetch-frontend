@@ -38,7 +38,7 @@ import { AuthInterceptor } from './auth/interceptors/auth.interceptor';
     StoreModule.forRoot(appReducers, {metaReducers}),
     EffectsModule.forRoot(EffectsArrayAuth),
     StoreDevtoolsModule.instrument({
-      maxAge:25,
+      maxAge:30,
       logOnly:environment.production
     })        
   ],

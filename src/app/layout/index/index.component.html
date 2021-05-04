@@ -1,4 +1,22 @@
-<div fxLayout="column" fxFill>
+<!-- SIDENAV SM -->
+<div fxShow fxHide.gt-xs>
+    <ng-container>
+        <mat-sidenav-container>
+            <mat-sidenav #sidenav role="navigation">
+                <app-sidebar-def (sidenavClose)='sidenav.close()'></app-sidebar-def>
+            </mat-sidenav>
+            <mat-sidenav-content>
+                <app-header (sidenavToggle)='sidenav.toggle()'></app-header>                
+                <main class="main">
+                    <router-outlet></router-outlet>
+                </main>
+                <app-footer></app-footer>
+            </mat-sidenav-content>
+        </mat-sidenav-container>
+    </ng-container>
+</div>
+
+<div fxHide fxShow.gt-xs fxLayout="column" fxFill>
     <app-header></app-header>
     <div fxFlex>
         <router-outlet></router-outlet>

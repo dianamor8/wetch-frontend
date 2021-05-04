@@ -57,11 +57,6 @@ export class RegisterComponent implements OnInit {
       const user = new User(this.registerForm.value);
       this.store.dispatch(siginup({user:user}));
     }
-    this.store.select('authApp').subscribe((response)=>
-      {if(response.userAuth){
-        this.router.navigate(['dashboard'])
-      }}
-    )
   }
 
 }

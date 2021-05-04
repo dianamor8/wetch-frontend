@@ -23,12 +23,15 @@ export class AuthGuard implements CanActivate, CanDeactivate<unknown> {
   // }
 
   //ACTIVA LA RUTA SI EL USUARIO ESTÁ LOGEADO
+
+
+
   canActivate(
     route: ActivatedRouteSnapshot,
     state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
       this.store.select("authApp").subscribe((resp)=>{
         if(resp.userAuth){          
-          return this.router.navigate(['/dashboard']).then(() => false);
+          return this.router.navigate(['/dashboard']); //.then(() => false);
         }else{
           return true;
         }

@@ -1,0 +1,73 @@
+.supercontainer {
+    margin: 10px;
+}
+
+.title{
+    margin-left: 10px;
+    margin-bottom: 0px;
+}
+
+.item-form {
+    width: 100%;
+}
+
+.section-form{
+    margin-left: 10px;
+    margin-right: 10px;
+}
+
+.btn-right{
+    justify-content: flex-end;
+}
+
+.text-right-align {
+    text-align: right;
+  }
+
+.sufix {
+    margin-left: 5px;
+}
+
+.align-center {        
+    margin-bottom: 0 !important;
+    align-items: center;
+}
+
+.card-header-align {
+    justify-content: space-between;
+}
+
+.margin-title {
+    margin: 0;
+    margin-right: 10px;
+}
+
+.areas{
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+
+.section-button {
+    display: flex;
+    align-items: center;
+}
+
+.section-button__form{
+    display: flex;
+    justify-content: flex-end;
+    padding-top: 15px;
+}
+
+::ng-deep .mat-card-header-text {
+    /* CSS styles go here */
+    margin: 0px !important; // for example to remove the margin
+}
+
+.header-card {
+    display: flex;    
+    width: 100%;
+    margin-left: 20px;
+    margin-right: 10px;
+    justify-content: space-between;
+    align-items: center;
+}

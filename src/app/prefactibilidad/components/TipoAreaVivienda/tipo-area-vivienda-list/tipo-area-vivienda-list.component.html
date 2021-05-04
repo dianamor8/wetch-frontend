@@ -1,0 +1,86 @@
+<div class="supercontainer">
+    <div fxLayout='row' fxLayoutAlign="center center">
+        <div fxFlex='100%'>
+            <div fxLayout fxLayoutAlign="end center">
+                <h2 fxFlex fxHide.lt-md>Áreas de vivienda</h2>
+                <h3 fxFlex fxShow.lt-md fxHide> <strong> Áreas de vivienda</strong></h3>
+                <!-- SAME BUTTONS FROM SMALL DEVICES -->
+                <button fxShow.lt-md fxHide class="button-table" mat-raised-button>
+                    <mat-icon>find_in_page</mat-icon>
+                </button>
+                <button fxShow.lt-md fxHide class="button-table" mat-raised-button color="primary"
+                    (click)="onSelectCreate()">
+                    <mat-icon>add</mat-icon>
+                </button>
+
+                <button fxHide.lt-md class="button-table" mat-raised-button>
+                    <mat-icon>find_in_page</mat-icon> Importar
+                </button>
+                <button fxHide.lt-md class="button-table" mat-raised-button color="primary" (click)="onSelectCreate()">
+                    <mat-icon>add</mat-icon>Nuevo
+                </button>
+            </div>
+            <ng-container *ngIf="tipoAreaViviendas.length > 0; else elseTemplate">
+                <mat-table [dataSource]="tipoAreaViviendas" class="mat-elevation-z8">
+                    <!-- Id Column -->
+                    <ng-container matColumnDef="id">
+                        <mat-header-cell *matHeaderCellDef ngClass="w-5 headerTableColor"> No. </mat-header-cell>
+                        <mat-cell *matCellDef="let element; let i=index" ngClass="w-5"> {{i+1}} </mat-cell>
+                    </ng-container>
+
+                    <!-- Tipo Column -->
+                    <ng-container matColumnDef="name">
+                        <mat-header-cell *matHeaderCellDef ngClass="headerTableColor"> Área de vivienda
+                        </mat-header-cell>
+                        <mat-cell *matCellDef="let element"> {{element.nombre}} </mat-cell>
+                    </ng-container>
+
+                    <!-- factorCirculacionParedes Column -->
+                    <ng-container matColumnDef="factorCirculacionParedes">
+                        <mat-header-cell *matHeaderCellDef class="th-center headerTableColor"> % FCP
+                            <mat-icon #tooltip="matTooltip" matTooltip="Factor de Circulación de Paredes"
+                                matTooltipPosition="above">help_outline</mat-icon>
+                        </mat-header-cell>
+
+                        <mat-cell *matCellDef="let element" class="th-center"> {{element.factorCirculacionParedes}}
+                        </mat-cell>
+                    </ng-container>
+
+                    <!-- factorDireccionTecnica Column -->
+                    <ng-container matColumnDef="factorDireccionTecnica">
+                        <mat-header-cell *matHeaderCellDef class="th-center headerTableColor"> % FDT
+                            <mat-icon #tooltip="matTooltip" matTooltip="Factor de Dirección Técnica"
+                                matTooltipPosition="above">help_outline</mat-icon>
+                        </mat-header-cell>
+                        <mat-cell *matCellDef="let element" class="th-center"> {{element.factorDireccionTecnica }}
+                        </mat-cell>
+                    </ng-container>
+
+                    <!-- Actions Column -->
+                    <ng-container matColumnDef="actions">
+                        <mat-header-cell *matHeaderCellDef class="th-left w-15 headerTableColor"> Acciones
+                        </mat-header-cell>
+                        <mat-cell *matCellDef="let element" class="th-left w-15">
+                            <button mat-button class="min-with-button" (click)="onSelectEdit(element)">
+                                <mat-icon>create</mat-icon>
+                            </button>
+                            <button mat-button color="warn" class="min-with-button" (click)="deleteElement(element)">
+                                <mat-icon>delete</mat-icon>
+                            </button>
+                        </mat-cell>
+                    </ng-container>
+
+                    <mat-header-row *matHeaderRowDef="displayedColumnsTable"></mat-header-row>
+                    <mat-row *matRowDef="let row; columns: displayedColumnsTable;"></mat-row>
+                </mat-table>
+            </ng-container>
+            <ng-template #elseTemplate>
+                <em>
+                    <p>Aún no se han agregado elementos</p>
+                </em>
+            </ng-template>
+
+        </div>
+    </div>
+</div>
+<br>

@@ -1,0 +1,9 @@
+<h3 mat-dialog-title> <strong>Áreas asociadas</strong></h3>
+<div mat-dialog-content>    
+    <div>
+        <p *ngFor="let area of areasVivienda" > <strong>{{area.tipoAreaVivienda.nombre}}:</strong> {{area.area.toFixed(2)}} m<sup>2</sup>  <br>  </p>
+    </div>
+</div>
+<div mat-dialog-actions class="btn-right">    
+    <button mat-button mat-dialog-close>Cerrar</button>    
+</div>

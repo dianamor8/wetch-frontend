@@ -1,0 +1,110 @@
+<div class="supercontainer">
+    <h2 class='title'>Nuevo Ambiente</h2>
+    <form [formGroup]="ambienteForm" (ngSubmit)="save()" fxLayout="row wrap" fxLayoutAlign="space-between center">
+        <!-- NOMBRE AMBIENTE -->
+        <section class='section-form' fxFlex.xs="100%" fxFlex.sm="90%" fxFlex.md="90%" fxFlex.xl="90%" fxFlex.lg="90%">
+            <mat-form-field appearance="fill" class="item-form">
+                <mat-label>Ambiente</mat-label>
+                <input matInput formControlName="nombre" placeholder="Ejemplo: Garaje" type="text">                
+                <mat-error *ngIf="nombre.hasError('maxlength')">Máximo 250 caracteres</mat-error>
+                <mat-error *ngIf="nombre.hasError('minlength')">Mínimo 4 caracteres</mat-error>
+                <mat-error *ngIf="nombre.hasError('required')">Nombre de ambiente es requerido</mat-error>
+            </mat-form-field>            
+        </section>
+
+        <!-- DESCRIPCIÓN -->
+        <section class='section-form' fxFlex.xs="100%" fxFlex.sm="90%" fxFlex.md="90%" fxFlex.xl="90%" fxFlex.lg="90%">
+            <mat-form-field appearance="fill" class="item-form">
+                <mat-label>Descripción</mat-label>
+                <textarea matInput formControlName="descripcion"
+                    placeholder="Ejemplo: Área de construcción en la que se guardan los vehiculos"></textarea>
+                <mat-error *ngIf="descripcion.hasError('required')">Descripción es requerido</mat-error>
+                <mat-error *ngIf="descripcion.hasError('maxlength')">Máximo 500 caracteres</mat-error>
+                <mat-error *ngIf="nombre.hasError('minlength')">Mínimo 4 caracteres</mat-error>
+            </mat-form-field>
+        </section>
+
+        <!-- FORMULARIO PARA LAS AREAS -->
+        <div class="section-form viewer-form" formArrayName="areas" fxFlex.xs="96%" fxFlex.sm="90%" fxFlex.md="90%"
+            fxFlex.xl="90%" fxFlex.lg="90%">
+            <div fxFlex='100%'>
+                <mat-card>
+                    <mat-card-header class="card-header-align">
+                        <div class='header-card'>
+                        <!-- SAME BUTTONS FROM SMALL DEVICES -->
+                        <h3 fxHide.lt-md class="margin-title"> Áreas mínimas de construcción </h3>
+                        <h4 fxShow.lt-md fxHide class="margin-title"> <strong> Áreas mínimas de
+                                construcción</strong></h4>
+                        <button fxShow.lt-md fxHide class="mat-card-header-text " mat-raised-button color="primary" type="button"
+                            (click)="addNewArea()">
+                            <mat-icon>add</mat-icon>
+                        </button>
+                        <button fxHide.lt-md class="mat-card-header-text" mat-raised-button color="primary" (click)="addNewArea()"
+                            type="button">
+                            <mat-icon>add</mat-icon>Agregar
+                        </button>
+                        </div>
+                    </mat-card-header>
+
+                    <mat-card-content>
+
+                    <div *ngFor="let areas of areas.controls; let i=index" class="areas">
+                        <div [formGroupName]="i" fxLayout="row wrap" >
+                            <!-- area -->
+                            <section class='section-form' fxFlex.xs="100%" fxFlex.sm="90%" fxFlex.md="43%"  fxFlex.xl="43%" fxFlex.lg="43%">
+                                <mat-form-field appearance="fill" class="item-form">
+                                    <mat-label>Área</mat-label>
+                                    <input matInput [formControlName]="'area'" placeholder="Area mínima de construcción"
+                                        class="text-right-align" >
+                                    <span matSuffix class="sufix">m<sup> <small>2</small></sup></span>
+                                    <mat-error *ngIf="areas.get('area').hasError('required')">El área de construcción es requerida
+                                    </mat-error>
+                                    <mat-error *ngIf="areas.get('area').hasError('min')">El valor mínimo es 0.1 <sup>
+                                            <small>2</small></sup>
+                                    </mat-error>
+                                    <mat-error *ngIf="areas.get('area').hasError('pattern')">Ingrese un valor numérico, use 2
+                                        decimales y
+                                        separador punto (.)</mat-error>
+                                </mat-form-field>
+
+
+                            </section>
+                            
+                            <!-- tipo -->
+                            <section class='section-form' fxFlex.xs="60%" fxFlex.sm="70%" fxFlex.md="43%" fxFlex.xl="43%" fxFlex.lg="43%">
+                                <mat-form-field appearance="fill" class="item-form">
+                                    <mat-label>Tipo de área</mat-label>
+                                    <mat-select [formControlName]="'TipoAreaVivienda'" [value]="areas.get('TipoAreaVivienda').value">                                         
+                                        <mat-option *ngFor="let tipo of tiposAreaVivienda" [value]="tipo.id">
+                                            {{tipo.nombre}}</mat-option>
+                                    </mat-select>
+                                    <mat-error *ngIf="areas.get('TipoAreaVivienda').hasError('required')">La seleccion es requerida
+                                    </mat-error> 
+                                </mat-form-field>
+                            </section>
+                            <section class='section-form section-button'  fxFlex.xs="10%" fxFlex.sm="10%" fxFlex.md="4%" fxFlex.xl="4%" fxFlex.lg="4%">
+                                <button mat-mini-fab color="warn" (click)="removeArea(i)">
+                                    <mat-icon>remove</mat-icon>
+                                </button>
+                            </section>
+                        </div>
+                    </div>
+                </mat-card-content>
+                </mat-card>
+            </div>            
+        </div>
+        <section class='section-form'>
+            <mat-error class="item-form" *ngIf="prefactibilidadState$.error && (bSubmitted)"> 
+                <small> {{prefactibilidadState$.error.message}}</small>
+            </mat-error>
+            <mat-error *ngIf="areas.hasError('MinLengthArray')">
+                <small>Agregue al menos un valor</small></mat-error>
+        </section>        
+
+        <section class='section-form section-button__form' fxFlex.xs="100%" fxFlex.sm="90%" fxFlex.md="90%" fxFlex.xl="90%" fxFlex.lg="90%"
+            fxFlexAlign='end center'>
+            <button mat-button routerLink="/prefactibilidad/ambiente-list" type="button">Regresar</button>
+            <button mat-raised-button color="primary" type="submit" [disabled]="!ambienteForm.valid">Guardar</button>
+        </section>        
+    </form>
+</div>

@@ -1,2 +1,16 @@
 <p>dashboard works!</p>
-<a [routerLink]="['/login']">LOGIN</a>
+<h2>{{user.name}}</h2>
+<h3>ROLES DE USUARIO</h3>
+<ul *ngFor="let rol of user.roles">    
+    <li> <strong> {{rol.name}} </strong><br>
+        <small *ngFor="let permission of rol.permissions"> {{permission.name}} <br> </small>
+    </li>    
+</ul>
+
+<p>El usuario es Adminsitrador {{user.isAdministrador()}}</p>
+<p>El usuario es Escritor {{user.isEscritor()}}</p>
+<p>El usuario es Planificador {{user.isPlanificador()}}</p>
+
+
+<!-- AGREGAR LOS PERMISOS DE ACABADOS  -->
+<!-- TipoAcabadoController change ambiente por acabado en los permisos -->

@@ -1,34 +1,33 @@
 <!-- SIDENAV SM -->
-<div fxShow fxHide.gt-xs>    
-    <ng-container>    
+<div fxShow fxHide.gt-xs>
+    <ng-container>
         <mat-sidenav-container>
             <mat-sidenav #sidenav role="navigation">
                 <app-sidebar-def (sidenavClose)='sidenav.close()'></app-sidebar-def>
-            </mat-sidenav>      
+            </mat-sidenav>
             <mat-sidenav-content>
-                <app-header (sidenavToggle)='sidenav.toggle()'></app-header>
+                <app-header (sidenavToggle)='sidenav.toggle()'></app-header>                
                 <main class="main">
-                    <app-messages></app-messages>
                     <router-outlet></router-outlet>
                 </main>
                 <app-footer-def></app-footer-def>
-            </mat-sidenav-content>        
+            </mat-sidenav-content>
         </mat-sidenav-container>
-    </ng-container>    
-</div>    
+    </ng-container>
+</div>
 
 <!-- SIDENAV > SM -->
 <div fxHide fxShow.gt-xs>
-    <ng-container >
+    <ng-container>
         <app-header (sidenavToggle)='print()'></app-header>
         <mat-drawer-container>
             <mat-drawer class="mat-drawer" mode="side" opened>
                 <app-sidebar-def></app-sidebar-def>
             </mat-drawer>
-            <mat-drawer-content>            
+            <mat-drawer-content>
                 <!-- <app-messages></app-messages> -->
-                <router-outlet>                    
-                </router-outlet>        
+                <router-outlet>
+                </router-outlet>
             </mat-drawer-content>
         </mat-drawer-container>
         <app-footer-def></app-footer-def>

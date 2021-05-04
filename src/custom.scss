@@ -161,3 +161,31 @@ small.warning{
 small.success{
   color: var(--wetch-green);  
 }
+
+
+//MEDIA QUERY PARA MAT-DIALOG
+@media screen and (max-width: 599px){
+  .widthDialog {
+    max-width: 85vw !important;
+  }  
+}
+@media screen and (min-width: 600px) and (max-width: 959px){
+  .widthDialog {
+    max-width: 60vw !important;
+  }  
+}
+@media screen and (min-width: 960px) and (max-width: 1279px){
+  .widthDialog {
+    max-width: 45vw !important;
+  }  
+}
+@media screen and (min-width: 1280px) and (max-width: 1919px){
+  .widthDialog {
+    max-width: 40vw !important;
+  }  
+}
+@media screen and (min-width: 1920px) and (max-width: 5000px){
+  .widthDialog {
+    max-width: 40vw !important;
+  }  
+}

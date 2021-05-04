@@ -1,10 +1,23 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { RedirectToLoginGuard } from '../auth/guard/redirect-to-login.guard';
-import { AreaViviendaComponent } from './area-vivienda/area-vivienda.component';
+import { AcabadoListComponent } from './components/Acabado/acabado-list/acabado-list.component';
+import { AmbienteAddComponent } from './components/Ambiente/ambiente-add/ambiente-add.component';
+import { AmbienteDetailComponent } from './components/Ambiente/ambiente-detail/ambiente-detail.component';
+import { AmbienteListComponent } from './components/Ambiente/ambiente-list/ambiente-list.component';
+import { AreaViviendaComponent } from './components/AreaVivienda/area-vivienda.component';
+import { TipoAreaViviendaDetailComponent } from './components/TipoAreaVivienda/tipo-area-vivienda-detail/tipo-area-vivienda-detail.component';
+import { TipoAreaViviendaListComponent } from './components/TipoAreaVivienda/tipo-area-vivienda-list/tipo-area-vivienda-list.component';
+
 
 const routes: Routes = [
-  { path: 'areaVivienda', component: AreaViviendaComponent, canActivate:[RedirectToLoginGuard] }
+  { path: 'areaVivienda', component: AreaViviendaComponent, canActivate:[RedirectToLoginGuard] },
+  { path: 'tipo-area-vivienda', component: TipoAreaViviendaListComponent, canActivate:[RedirectToLoginGuard] },
+  { path: 'tipo-area-vivienda/:id', component: TipoAreaViviendaDetailComponent, canActivate:[RedirectToLoginGuard]}, //OJO
+  { path: 'ambiente-list', component: AmbienteListComponent, canActivate:[RedirectToLoginGuard] },
+  { path: 'ambiente/:id', component: AmbienteDetailComponent, canActivate:[RedirectToLoginGuard]},
+  { path: 'ambiente-new', component: AmbienteAddComponent, canActivate:[RedirectToLoginGuard]},
+  { path: 'acabado-list', component: AcabadoListComponent, canActivate:[RedirectToLoginGuard] },
 ];
 
 @NgModule({
