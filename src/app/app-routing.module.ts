@@ -15,10 +15,10 @@ const routes: Routes = [
   { path: '', component: DefaultComponent, children:[
     { path: 'dashboard', component:DashboardComponent, canActivate:[RedirectToLoginGuard]},
     { path: 'prefactibilidad', loadChildren: () => import('./prefactibilidad/prefactibilidad.module').then(m => m.PrefactibilidadModule) },
+    { path: 'proyectos', loadChildren: () => import('./proyectos/proyectos.module').then(m => m.ProyectosModule) },
   ]},
-  { path: 'auth', loadChildren: () => import('./auth/auth.module').then(m => m.AuthModule)},
+  { path: 'auth', loadChildren: () => import('./auth/auth.module').then(m => m.AuthModule)},      
   { path: '', redirectTo: '', pathMatch: 'full'},
-  { path: 'proyectos', loadChildren: () => import('./proyectos/proyectos.module').then(m => m.ProyectosModule) }
 ];
 
 @NgModule({

@@ -2,9 +2,8 @@
 <mat-nav-list>
 
     <div *ngIf="user && user.isPlanificador()">
-        <h2 matSubheader> <small> Proyectos</small></h2>
-        <a mat-list-item href="/prefactibilidad/areaVivienda" (click)="onSidenavClose()"> Mis Proyectos </a>
-
+        <h2 matSubheader> <small>Proyectos</small></h2>
+        <a mat-list-item href="/proyectos/proyectos-list" (click)="onSidenavClose()"> Mis Proyectos </a>
         <mat-divider></mat-divider>
     </div>
 
