@@ -23,3 +23,23 @@
     margin-left: 5px;
     margin-right: 5px;
 }
+
+.rounded {
+    margin-right: 15px;
+    border-radius: 25px;
+    border: 2px solid;
+    padding-left: 12px;
+    padding-right: 12px;
+}
+
+.hover_rouded:hover{
+    color: var(--wetch-black);
+    font-weight: bold;
+}
+
+.rounded:hover{
+    border-color: aqua;
+    background-color: var(--wetch-black);
+    color: var(--wetch-white);
+
+}

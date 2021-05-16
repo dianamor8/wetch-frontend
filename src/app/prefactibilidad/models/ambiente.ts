@@ -5,6 +5,7 @@ export class Ambiente {
     id:number;
     nombre:string;
     descripcion:string;
+    cantidad:number;
     propietario:User=null;
     areas:AreaVivienda[]=[];    
 

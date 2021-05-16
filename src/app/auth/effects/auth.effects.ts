@@ -39,7 +39,7 @@ export class AuthEffects {
         mergeMap((resp)=>
             this.authService.register(resp.user, (environment.wetchUrl+'/validate-account')).pipe(                            
                 map((response)=>                                                
-                    {   this.messageService.showNotification(response.message, 'Éxito','Ok', 'success', 5000);                        
+                    {   this.messageService.showNotification(response.message, 'Éxito','Ok', 'success', 8000);                        
                         return authAccions.siginupSuccess({...response})}
                 ),                
                 catchError((err)=> of(authAccions.siginupError({payload:err}))),
@@ -108,6 +108,13 @@ export class AuthEffects {
         ofType(authAccions.loginSuccess),
         tap((x)=>{
             this.router.navigateByUrl(x.returnUrl);                
+        })
+    ), { dispatch: false });
+
+    $SigInRedirectTo = createEffect(()=>this.actions$.pipe(
+        ofType(authAccions.siginupSuccess),
+        tap((x)=>{
+            this.router.navigateByUrl('/');                
         })
     ), { dispatch: false });
 

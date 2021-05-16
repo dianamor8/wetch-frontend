@@ -31,7 +31,6 @@ const __proyectosReducer = createReducer(
         proyectos: [...state.proyectos, proyecto],
         error:null
     })),
-
     on(addProyectoError, (state, {payload})=>({
         ...state,
         loading:false,
@@ -43,7 +42,6 @@ const __proyectosReducer = createReducer(
             message:payload.error.message
         }
     })),
-
     on(getAllProyectos, (state) => ({
         ...state, 
         error:null, 
@@ -57,7 +55,6 @@ const __proyectosReducer = createReducer(
         proyectos: [...proyectos],
         error:null
     })),
-
     on(getAllProyectosError, (state, {payload})=>({
         ...state,
         loading:false,
@@ -69,7 +66,6 @@ const __proyectosReducer = createReducer(
             message:payload.error.message
         }
     })), 
-
     on(updateProyecto, (state) => ({
         ...state, 
         error:null, 
@@ -99,7 +95,6 @@ const __proyectosReducer = createReducer(
             message:payload.error.message
         }
     })),
-
     on(deleteProyecto, (state) => ({
         ...state, 
         error:null, 

@@ -1,0 +1,54 @@
+.supercontainer {
+    margin: 10px;
+}
+
+.title{
+    margin-left: 10px;
+    margin-bottom: 10px;
+}
+
+.item-form {
+    width: 100%;
+}
+
+.section-form{
+    margin-left: 10px;
+    margin-right: 10px;
+}
+
+.btn-right{
+    justify-content: flex-end;
+}
+
+.text-right-align {
+    text-align: right;
+  }
+
+.sufix {
+    margin-left: 5px;
+}
+
+.align-center {        
+    margin-bottom: 0 !important;
+    align-items: center;
+}
+
+.card-header-align {
+    justify-content: space-between;
+}
+
+.margin-title {
+    margin: 0;
+    margin-right: 10px;
+}
+
+.section-button {
+    display: flex;
+    align-items: center;
+}
+
+.section-button__form{
+    display: flex;
+    justify-content: flex-end;
+    padding-top: 15px;
+}

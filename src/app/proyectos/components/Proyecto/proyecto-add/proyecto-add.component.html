@@ -1,1 +1,127 @@
-<p>proyecto-add works!</p>
+<div class="supercontainer">
+    <h2 class='title'>Nuevo Proyecto</h2>
+    <form [formGroup]="proyectoForm" (ngSubmit)="save()" fxLayout="row wrap" fxLayoutAlign="start center">
+        <!-- TITULO -->
+        <section class='section-form' fxFlex.xs="100%" fxFlex.sm="90%" fxFlex.md="59%" fxFlex.xl="59%" fxFlex.lg="59%">
+            <mat-form-field appearance="fill" class="item-form">
+                <mat-label>Título</mat-label>
+                <input matInput [formControl]="titulo" placeholder="Nombre del proyecto " type="text">
+                <mat-error *ngIf="titulo.hasError('maxlength')">Máximo 250 caracteres</mat-error>
+                <mat-error *ngIf="titulo.hasError('minlength')">Mínimo 4 caracteres</mat-error>
+                <mat-error *ngIf="titulo.hasError('required')">El título del proyecto es requerido</mat-error>
+            </mat-form-field>
+        </section>
+
+        <!-- FECHA -->
+        <section class='section-form' fxFlex.xs="100%" fxFlex.sm="90%" fxFlex.md="26%" fxFlex.xl="59%" fxFlex.lg="26%">
+            <mat-form-field appearance="fill" class="item-form">
+                <mat-label>Seleccione una fecha</mat-label>
+                <input matInput [max]="maxDate" [matDatepicker]="picker" [formControl]="fecha" class="item-form">
+                <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                <mat-datepicker #picker></mat-datepicker>
+                <mat-error *ngIf="fecha.hasError('required')">Fecha es requerido</mat-error>
+            </mat-form-field>
+        </section>
+
+        <!-- SOLICITANTE -->
+        <section class='section-form' fxFlex.xs="100%" fxFlex.sm="90%" fxFlex.md="88%" fxFlex.xl="90%" fxFlex.lg="90%">
+            <mat-form-field appearance="fill" class="item-form">
+                <mat-label>Solicitante</mat-label>
+                <input matInput [formControl]="solicitante" placeholder="Persona o entidad que solicita el estudio"
+                    type="text">
+                <mat-error *ngIf="solicitante.hasError('maxlength')">Máximo 250 caracteres</mat-error>
+                <mat-error *ngIf="solicitante.hasError('minlength')">Mínimo 4 caracteres</mat-error>
+                <mat-error *ngIf="solicitante.hasError('required')">Descripción del proyecto es requerido</mat-error>
+            </mat-form-field>
+        </section>
+
+        <!-- DESCRIPCION -->
+        <section class='section-form' fxFlex.xs="100%" fxFlex.sm="90%" fxFlex.md="88%" fxFlex.xl="90%" fxFlex.lg="90%">
+            <mat-form-field appearance="fill" class="item-form">
+                <mat-label>Descripción</mat-label>
+                <textarea matInput [formControl]="descripcion" placeholder="Breve descripción del proyecto "
+                    type="text"></textarea>
+                <mat-error *ngIf="descripcion.hasError('maxlength')">Máximo 250 caracteres</mat-error>
+                <mat-error *ngIf="descripcion.hasError('minlength')">Mínimo 4 caracteres</mat-error>
+                <mat-error *ngIf="descripcion.hasError('required')">Descripción del proyecto es requerido</mat-error>
+            </mat-form-field>
+        </section>
+
+        <section fxFlex.xs="100%" fxFlex.sm="90%" fxFlex.md="90%" fxFlex.xl="90%" fxFlex.lg="90%">
+            <h3 class="title"> <strong> Ubicación</strong></h3>
+        </section>
+
+        <div [formGroup]="direccionForm" fxLayout='column'  fxFlex.xs="100%" fxFlex.sm="100%" fxFlex.md="92%" fxFlex.xl="92%" fxFlex.lg="92%">
+            <div fxLayout="row wrap" fxLayoutAlign="start center" fxFlex="100%">
+                <section class='section-form' fxFlex.xs="100%" fxFlex.sm="90%" fxFlex.md="30%" fxFlex.xl="31%"
+                    fxFlex.lg="31%">
+                    <mat-form-field appearance="fill" class="item-form">
+                        <mat-label>Provincia</mat-label>
+                        <mat-select [formControl]="provincia" (valueChange)="onSelectProvincia($event)">
+                            <mat-option *ngFor="let prov of provincias" value="{{prov.codigo}}">
+                                {{prov.provincia}}</mat-option>
+                        </mat-select>
+                        <mat-error *ngIf="provincia.hasError('required')">La seleccion es requerida
+                        </mat-error>
+                    </mat-form-field>
+                </section>
+
+                <!-- CANTON -->
+                <section class='section-form' fxFlex.xs="100%" fxFlex.sm="90%" fxFlex.md="30%" fxFlex.xl="31%"
+                    fxFlex.lg="31%">
+                    <mat-form-field appearance="fill" class="item-form">
+                        <mat-label>Canton</mat-label>
+                        <mat-select [formControl]="canton" (valueChange)="onSelectCanton($event)">
+                            <mat-option *ngFor="let canton of cantones" value="{{canton.codigo}}">
+                                {{canton.canton}}</mat-option>
+                        </mat-select>
+                        <mat-error *ngIf="canton.hasError('required')">La seleccion es requerida
+                        </mat-error>
+                    </mat-form-field>
+                </section>
+
+                <!-- PARROQUIA -->
+                <section class='section-form' fxFlex.xs="100%" fxFlex.sm="90%" fxFlex.md="30%" fxFlex.xl="31%"
+                    fxFlex.lg="31%">
+                    <mat-form-field appearance="fill" class="item-form">
+                        <mat-label>Parroquia</mat-label>
+                        <mat-select [formControl]="parroquia">
+                            <mat-option *ngFor="let parroquia of parroquias" value="{{parroquia.codigo}}">
+                                {{parroquia.nombre}}</mat-option>
+                        </mat-select>
+                        <mat-error *ngIf="parroquia.hasError('required')">La seleccion es requerida
+                        </mat-error>
+                    </mat-form-field>
+                </section>
+
+            </div>
+            <div>
+                <!-- DIRECCION  -->
+                <section class='section-form' fxFlex.xs="100%" fxFlex.sm="90%" fxFlex.md="100%" fxFlex.xl="100%"
+                    fxFlex.lg="100%">
+                    <mat-form-field appearance="fill" class="item-form">
+                        <mat-label>Dirección</mat-label>
+                        <textarea matInput [formControl]="direccion" placeholder="Dirección referencial"
+                            type="text"></textarea>
+                        <mat-error *ngIf="direccion.hasError('maxlength')">Máximo 250 caracteres</mat-error>
+                        <mat-error *ngIf="direccion.hasError('minlength')">Mínimo 4 caracteres</mat-error>
+                        <mat-error *ngIf="direccion.hasError('required')">Descripción del proyecto es requerido
+                        </mat-error>
+                    </mat-form-field>
+                </section>
+            </div>
+        </div>
+        
+        <section class='section-form'>
+            <mat-error class="item-form" *ngIf="proyectoState$.error && (bSubmitted)">
+                <small> {{proyectoState$.error.message}}</small>
+            </mat-error>
+        </section>
+
+        <section class='section-form section-button__form' fxFlex.xs="100%" fxFlex.sm="90%" fxFlex.md="90%"
+            fxFlex.xl="90%" fxFlex.lg="90%" fxFlexAlign='end center'>            
+            <button mat-button routerLink="/proyectos/proyectos-list" type="button">Regresar</button>
+            <button mat-raised-button color="primary" type="submit" [disabled]="!proyectoForm.valid">Guardar</button>
+        </section>
+    </form>
+</div>

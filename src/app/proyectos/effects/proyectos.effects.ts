@@ -89,14 +89,14 @@ export class ProyectosEffects {
     $addProyectoRedirectTo = createEffect(()=>this.actions$.pipe(
         ofType(proyectosAccions.addProyectoSuccess),
         tap((x)=>{
-            this.router.navigateByUrl('/proyectos/proyecto-list');
+            this.router.navigateByUrl('/proyectos/proyectos-list');
         })
     ), { dispatch: false });
 
     $updateProyectoRedirectTo = createEffect(()=>this.actions$.pipe(
         ofType(proyectosAccions.updateProyectoSuccess),
         tap((x)=>{
-            this.router.navigateByUrl('/proyectos/proyecto-list');
+            this.router.navigateByUrl('/proyectos/proyectos-list');
         })
     ), { dispatch: false });
 }

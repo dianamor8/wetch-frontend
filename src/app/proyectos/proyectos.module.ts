@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { CUSTOM_ELEMENTS_SCHEMA, NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 import { ProyectosRoutingModule } from './proyectos-routing.module';
@@ -7,15 +7,26 @@ import { ProyectoAddComponent } from './components/Proyecto/proyecto-add/proyect
 import { ProyectoDetailComponent } from './components/Proyecto/proyecto-detail/proyecto-detail.component';
 import { ProyectoDeleteComponent } from './components/Proyecto/proyecto-delete/proyecto-delete.component';
 import { MaterialModule } from '../material.module';
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { ProyectoEstudiosComponent } from './components/Proyecto/proyecto-estudios/proyecto-estudios.component';
+import { PrefactibilidadDeleteComponent } from './components/Prefactibilidad/prefactibilidad-delete/prefactibilidad-delete.component';
+import { PrefactibilidadAddComponent } from './components/Prefactibilidad/prefactibilidad-add/prefactibilidad-add.component';
+import { PrefactibilidadDetailComponent } from './components/Prefactibilidad/prefactibilidad-detail/prefactibilidad-detail.component';
+import { RouterModule } from '@angular/router';
 
 
 @NgModule({
-  declarations: [ProyectoListComponent, ProyectoAddComponent, ProyectoDetailComponent, ProyectoDeleteComponent],
+  declarations: [ProyectoListComponent, ProyectoAddComponent, ProyectoDetailComponent, ProyectoDeleteComponent, ProyectoEstudiosComponent, PrefactibilidadDeleteComponent, PrefactibilidadAddComponent, PrefactibilidadDetailComponent],
   imports: [
     CommonModule,
     ProyectosRoutingModule,
-    MaterialModule
+    MaterialModule,
+    RouterModule,
+  ],  
+  providers:[
+    MatDatepickerModule
   ],
   entryComponents:[ProyectoDeleteComponent],
+  // schemas: [ CUSTOM_ELEMENTS_SCHEMA ]
 })
 export class ProyectosModule { }

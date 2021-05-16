@@ -1,0 +1,95 @@
+<!-- <button routerLink='../../prefactibilidad-update'>
+    Cambiar 
+</button> -->
+<div class="supercontainer">
+    <div fxLayout='row' fxLayoutAlign="center center">
+        <div fxFlex='100%'>
+            <div fxLayout fxLayoutAlign="end center">
+                <h2 fxFlex fxHide.lt-md>Estudios de Prefactibilidad</h2>
+                <h3 fxFlex fxShow.lt-md fxHide> <strong> Estudios de Prefactibilidad</strong></h3>
+                <button fxShow.lt-md fxHide class="button-table" mat-raised-button color="primary"                    
+                [routerLink]="['../../prefactibilidad-new', proyecto.id]" >
+                    <mat-icon>add</mat-icon>
+                </button>
+                <button fxHide.lt-md class="button-table" mat-raised-button color="primary"
+                [routerLink]="['../../prefactibilidad-new', proyecto.id]"   >
+                    <mat-icon>add</mat-icon>Nuevo
+                </button>
+            </div>
+            <ng-container *ngIf="proyecto.prefactibilidads.length > 0; else elseTemplate">
+
+                <mat-form-field>
+                    <mat-label>Buscar</mat-label>
+                    <input matInput (keyup)="applyFilter($event)" placeholder="Informacion" #input>
+                </mat-form-field>
+
+                <div class="mat-elevation-z8">
+                    <table mat-table [dataSource]="dataSource" matSort>
+                        <!-- Nro. Column -->
+                        <ng-container matColumnDef="id" class="w-5">
+                            <th mat-header-cell *matHeaderCellDef mat-sort-header ngClass="w-5 headerTableColor"> Id.
+                            </th>
+                            <td mat-cell *matCellDef="let row; let i=index" ngClass="w-5"> {{row.id}} </td>
+                        </ng-container>
+
+                        <!-- Fecha Column -->
+                        <ng-container matColumnDef="fecha" class="w-30">
+                            <th mat-header-cell *matHeaderCellDef mat-sort-header ngClass="headerTableColor"> Fecha
+                            </th>
+                            <td mat-cell *matCellDef="let row"> {{row.fecha}} </td>
+                        </ng-container>
+
+                        <!-- Subtotal Area Construccion Column -->
+                        <ng-container matColumnDef="subtotalAreaConstruccion">
+                            <th mat-header-cell *matHeaderCellDef mat-sort-header ngClass="headerTableColor"> Subt. Area
+                                Construcción </th>
+                            <td mat-cell *matCellDef="let row"> {{ row.subtotalAreaConstruccion }} </td>
+                        </ng-container>
+
+
+                        <!-- Area Total Column -->
+                        <ng-container matColumnDef="areaTotalConstruccion">
+                            <th mat-header-cell *matHeaderCellDef mat-sort-header ngClass="headerTableColor"> Subt. Area
+                                Construcción </th>
+                            <td mat-cell *matCellDef="let row"> {{ row.areaTotalConstruccion }} </td>
+                        </ng-container>
+
+
+
+                        <!-- Actions Column -->
+                        <ng-container matColumnDef="actions" class="w-15">
+                            <th mat-header-cell *matHeaderCellDef
+                                class="th-left w-15 headerTableColor text-align-center"> Acciones </th>
+                            <td mat-cell *matCellDef="let row" class="th-left w-15 text-align-center">
+                                <button mat-button class="min-with-button" (click)="onSelectEdit(row)">
+                                    <mat-icon>create</mat-icon>
+                                </button>
+                                <button mat-button color="warn" class="min-with-button" (click)="deleteElement(row)">
+                                    <mat-icon>delete</mat-icon>
+                                </button>
+                            </td>
+                        </ng-container>
+
+                        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+
+                        <!-- Fila que se muestra cuando no hay datos coincidentes. -->
+                        <tr class="mat-row" *matNoDataRow>
+                            <td class="mat-cell" colspan="4">No hay datos que coincidan con la búsqueda
+                                "{{input.value}}"</td>
+                        </tr>
+                    </table>
+
+                    <mat-paginator [pageSizeOptions]="[5, 10]"></mat-paginator>
+                </div>
+            </ng-container>
+            <ng-template #elseTemplate>
+                <em>
+                    <p>Aún no se han agregado elementos</p>
+                </em>
+            </ng-template>
+        </div>
+    </div>
+</div>
+
+<br>

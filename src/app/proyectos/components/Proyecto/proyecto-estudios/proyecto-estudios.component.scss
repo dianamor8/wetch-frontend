@@ -1,0 +1,59 @@
+.container-table {
+    max-width: 90%;
+}
+
+.supercontainer {
+    margin: 10px;
+}
+
+.button-table {
+    margin-left: 10px;
+    margin-bottom: 10px;
+}
+
+.w-5{
+    max-width: 5%;
+}
+
+.w-15{
+    max-width: 15%;
+}
+
+.w-30{
+    max-width: 15%;
+}
+
+.th-center{    
+    justify-content: center;
+}
+.th-left{    
+    justify-content: end;
+}
+.th-right{
+    justify-content: flex-end;
+}
+
+.min-with-button {
+    min-width: 35px;
+    padding: 0;
+}
+
+.headerTableColor {
+    background-color: var(--wetch-gray);
+}
+
+table {
+    width: 100%;
+}
+  
+.mat-form-field {
+    font-size: 14px;
+    width: 100%;
+}
+
+.text-align-center {
+    text-align: center;
+}
+// td, th {
+//     width: 25%;
+// }

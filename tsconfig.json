@@ -8,6 +8,7 @@
     "strict": true,
     "noImplicitReturns": false,
     "noImplicitAny": false,
+    "resolveJsonModule": true,
     "strictNullChecks": false,   
     "strictPropertyInitialization": false,
     "noFallthroughCasesInSwitch": true,
@@ -30,6 +31,7 @@
     "strictInputAccessModifiers": true,
     "strictTemplates": true,
     "strictNullChecks": false,
-    "enableIvy": false
+    "enableIvy": false,
+    "disableHostCheck": true
   }
 }

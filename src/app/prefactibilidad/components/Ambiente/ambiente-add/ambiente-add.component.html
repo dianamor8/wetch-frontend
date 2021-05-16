@@ -1,14 +1,26 @@
 <div class="supercontainer">
     <h2 class='title'>Nuevo Ambiente</h2>
-    <form [formGroup]="ambienteForm" (ngSubmit)="save()" fxLayout="row wrap" fxLayoutAlign="space-between center">
+    <form [formGroup]="ambienteForm" (ngSubmit)="save()" fxLayout="row wrap" >
         <!-- NOMBRE AMBIENTE -->
-        <section class='section-form' fxFlex.xs="100%" fxFlex.sm="90%" fxFlex.md="90%" fxFlex.xl="90%" fxFlex.lg="90%">
+        <section class='section-form' fxFlex.xs="100%" fxFlex.sm="90%" fxFlex.md="60%" fxFlex.xl="60%" fxFlex.lg="60%">
             <mat-form-field appearance="fill" class="item-form">
                 <mat-label>Ambiente</mat-label>
                 <input matInput formControlName="nombre" placeholder="Ejemplo: Garaje" type="text">                
                 <mat-error *ngIf="nombre.hasError('maxlength')">Máximo 250 caracteres</mat-error>
                 <mat-error *ngIf="nombre.hasError('minlength')">Mínimo 4 caracteres</mat-error>
                 <mat-error *ngIf="nombre.hasError('required')">Nombre de ambiente es requerido</mat-error>
+            </mat-form-field>            
+        </section>
+
+        <!-- CANTIDAD POR UNIDAD DE CONSTRUCCIÓN -->
+        <section class='section-form' fxFlex.xs="100%" fxFlex.sm="90%" fxFlex.md="28%" fxFlex.xl="28%" fxFlex.lg="28%">
+            <mat-form-field appearance="fill" class="item-form">
+                <mat-label>Cantidad</mat-label>
+                <input matInput formControlName="cantidad" placeholder="Ejemplo: Garaje" type="number" min='1'>
+                <span matSuffix> por unidad de vivienda</span>                                
+                <mat-error *ngIf="cantidad.hasError('required')">Cantidad es requerido</mat-error>
+                <mat-error *ngIf="cantidad.hasError('min')">La cantidad mínima es 1</mat-error>
+                <mat-error *ngIf="cantidad.hasError('max')">La cantidad máxima es 20</mat-error>
             </mat-form-field>            
         </section>
 

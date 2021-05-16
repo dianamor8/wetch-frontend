@@ -1,0 +1,44 @@
+.content {
+    padding: 16px;
+}
+
+.example-card {
+    min-width: 200px;
+    margin-bottom: 20px;    
+}
+
+.example-header-image {
+    background-image: url('https://material.angular.io/assets/img/examples/shiba1.jpg');
+    background-size: cover;
+  }
+
+.card-content {
+    margin-left: 16px;
+    margin-right: 16px;
+    margin-bottom: 8px;
+}
+
+.margin-cero{
+    margin: 0px;
+}
+
+.button-card {
+    display: flex;
+    justify-content: center;
+    margin-left: 16px;
+    margin-right: 16px;
+    margin-bottom: 5px !important;
+}
+
+.supercontainer {
+    margin: 10px;
+}
+
+.button-table {
+    margin-left: 10px;
+    margin-bottom: 10px;
+}
+
+.points{
+    margin-bottom: 15px;
+}

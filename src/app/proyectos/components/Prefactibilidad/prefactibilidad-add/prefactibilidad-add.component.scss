@@ -1,0 +1,140 @@
+.mat-tab-group {
+  margin-bottom: 48px;
+}
+
+.supercontainer {
+  margin: 10px;
+}
+
+.title{
+  margin-left: 10px;
+  margin-bottom: 0px;
+}
+
+.item-form {
+  width: 100%;
+}
+
+.section-form{
+  margin-left: 10px;
+  margin-right: 10px;
+}
+
+.btn-right{
+  justify-content: flex-end;
+}
+
+.text-right-align {
+  text-align: right;
+}
+
+.sufix {
+  margin-left: 5px;
+}
+
+.margin-title {
+  margin: 0;
+  margin-right: 10px;
+}
+
+.section-button {
+  display: flex;
+  align-items: center;
+}
+
+.section-button__form{
+  display: flex;
+  justify-content: flex-end;
+  padding-top: 15px;
+}
+
+.align-center {
+  align-self: center;
+}
+
+.remove__margin-bottom {
+  margin-bottom: 0;
+}
+
+.margin__option {
+  margin-top: 16px;
+  margin-bottom: 16px;
+}
+
+.card-title {
+  text-align: center;
+}
+
+
+// pruebas
+.example-container { 
+  overflow: auto;
+}
+
+table {
+  width: 100%;
+}
+
+tr.mat-footer-row {
+  font-weight: bold;
+}
+
+.mat-table-sticky {
+  border-top: 1px solid #e0e0e0;
+}
+
+.w-5{
+  max-width: 5%;
+}
+
+.th-left{    
+    justify-content: end;
+}
+
+
+.action-cell {
+  text-align: right;
+  max-width: 15px;
+  // padding-right: 15px !important;
+}
+
+.header-table{
+  padding-left: 10px;
+  padding-right: 10px;
+  padding-top: 3px;
+  padding-bottom: 3px;
+}
+
+.cant-cell {
+  text-align: left;
+  max-width: 20px;
+  min-width: 20px;
+}
+
+.cant-item-form {
+  max-width: 70%;
+}
+
+.ambiente-cell {
+  text-align: left;  
+  width: 50%;
+  padding-left: 10px
+}
+
+.headerTableColor {
+  background-color: var(--wetch-gray);
+}
+
+.footerTableColor {
+  background-color: white;
+  border:white;
+}
+
+.footerTableColors {
+  background-color: #E3DDC8;
+  border:#E3DDC8;
+}
+
+.padding-rigth {
+  padding-right: 10px;
+}

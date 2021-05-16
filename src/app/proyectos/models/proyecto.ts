@@ -4,9 +4,13 @@ import { TipoAcabado } from "src/app/prefactibilidad/models/acabado";
 export class Proyecto {
   id: number;
   titulo: string;
-  fecha: string;
+  fecha: Date;
+  updated_at: Date;
+  solicitante:string;
+  descripcion:string;
   prefactibilidads: Prefactibilidad[];
   ubicacion: Ubicacion;
+  propietario:User;
   constructor(){}
 }
 
@@ -14,7 +18,8 @@ export class Ubicacion {
   id: number;
   provincia: string;
   canton: string;
-  sector: string;
+  parroquia: string;
+  direccion:string;
   propietario: User;
   constructor(){}
 }
@@ -33,10 +38,7 @@ export class Prefactibilidad {
 }
 
 export class AreaConstruccion {
-  id: number;
-  propietarioVivienda: string;
-  callePrincipal: string;
-  calleSecundaria: string;
+  id: number;    
   retiroFrontal: number;
   retiroPosterior: number;
   retiroLateralIzquierdo: number;
@@ -47,3 +49,27 @@ export class AreaConstruccion {
   propietario: User;
   constructor(){}
 }
+
+export class Provincia{
+  id:string;
+  codigo:string;
+  provincia:string;
+  cantones: Canton[] =[];
+  constructor(){}
+}
+
+export class Canton{
+  id:string;
+  codigo:string;
+  canton:string;
+  parroquias: Parroquia[]=[];  
+  constructor(){}
+}
+
+export class Parroquia{
+  id:string;
+  codigo:string;
+  nombre:string;  
+  constructor(){}
+}
+

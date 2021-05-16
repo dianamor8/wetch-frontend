@@ -1,11 +1,11 @@
 <!-- https://www.youtube.com/watch?v=FP7Hs8lTy1k MENÚ DE ITEMS -->
 <mat-nav-list>
 
-    <div *ngIf="user && user.isPlanificador()">
+    <!-- <div *ngIf="user && user.isPlanificador()">
         <h2 matSubheader> <small>Proyectos</small></h2>
         <a mat-list-item href="/proyectos/proyectos-list" (click)="onSidenavClose()"> Mis Proyectos </a>
         <mat-divider></mat-divider>
-    </div>
+    </div> -->
 
     <div *ngIf="user && user.isPlanificador()">
         <h2 matSubheader><small>Prefactibilidad</small></h2>        
@@ -24,8 +24,7 @@
 
     <div *ngIf="user && user.isPlanificador()">
         <h2 matSubheader><small>Configuraciones</small></h2>
-        <a mat-list-item href='/prefact/areaVivienda' (click)="onSidenavClose()">Info Prefactibilidad</a>
-        <a mat-list-item href='/prefact/areaVivienda' (click)="onSidenavClose()">Info Presupuestos</a>
+        <a mat-list-item href='/prefact/areaVivienda' (click)="onSidenavClose()">Configuraciones</a>        
         <mat-divider></mat-divider>
     </div>
     <h2 matSubheader><small>Nosotros</small></h2>

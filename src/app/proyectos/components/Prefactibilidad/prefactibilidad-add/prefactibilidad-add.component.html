@@ -1,0 +1,406 @@
+<h2 class="title">Estudio de Prefactbilidad</h2>
+<mat-tab-group mat-align-tabs="end" [selectedIndex]='activeTab' (selectedIndexChange)='changeTest($event)'>
+    <mat-tab label="Área de construcción ">
+        <div>
+            <!--  AGREGAR LEYENDA, VALIDADOR DE FRENTE O FONDO -->
+            <mat-card>
+                <mat-card-content fxLayout='row wrap' fxLayoutAlign='space-between center'>
+                    <div fxFlex.xs="100%" fxFlex.sm="40%" fxFlex.md="45%" fxFlex.xl="20%" fxFlex.lg="20%"><strong> Área
+                            registrada: </strong> {{calcAreaTotal | number:'1.2-2'}}
+                        m<sup><small>2</small></sup> </div>
+                    <div fxFlex.xs="100%" fxFlex.sm="40%" fxFlex.md="45%" fxFlex.xl="20%" fxFlex.lg="20%">
+                        <strong>Área de retiros:</strong> {{calcAreaRetiros | number:'1.2-2'}}
+                        m<sup><small>2</small></sup>
+                    </div>
+                    <div fxFlex.xs="100%" fxFlex.sm="40%" fxFlex.md="45%" fxFlex.xl="20%" fxFlex.lg="20%">
+                        <strong>Área COS:</strong> {{calcAreaCos | number:'1.2-2'}} m<sup><small>2</small></sup>
+                    </div>
+                    <div fxFlex.xs="100%" fxFlex.sm="40%" fxFlex.md="45%" fxFlex.xl="20%" fxFlex.lg="20%">
+                        <strong>% COS:</strong> {{calcPorcentajeArea | number:'1.2-2'}} %
+                    </div>
+                </mat-card-content>
+
+            </mat-card>
+        </div>
+
+        <div class="supercontainer">
+            <form [formGroup]="areaConstruccionForm" (ngSubmit)="saveAreaConstruccion()" fxLayout="row wrap"
+                fxLayoutAlign="start center">
+                <section class='section-form' fxFlex.xs="100%" fxFlex.sm="90%" fxFlex.md="90%" fxFlex.xl="90%"
+                    fxFlex.lg="90%">
+                    <div fxLayout='row' class='margin__option'>
+                        <h3 class='remove__margin-bottom'> Área de terreno </h3>
+                        <mat-radio-group class="align-center" aria-label="El área de construcción es: "
+                            (change)="changeCombo($event)">
+                            <mat-radio-button value="1" checked="true" class="section-form">Regular
+                            </mat-radio-button>
+                            <mat-radio-button value="2" class="section-form">Irregular</mat-radio-button>
+                        </mat-radio-group>
+
+                    </div>
+                </section>
+
+
+                <ng-container *ngIf="aRegular; then thenTemplate; else elseTemplate"></ng-container>
+                <ng-template #thenTemplate>
+                    <!-- ÁREA REGULAR -->
+                    <!-- Frente -->
+                    <section class='section-form' fxFlex.xs="100%" fxFlex.sm="90%" fxFlex.md="45%" fxFlex.xl="45%"
+                        fxFlex.lg="45%">
+                        <mat-form-field appearance="fill" class="item-form">
+                            <mat-label>Frente</mat-label>
+                            <input matInput [formControl]="medidaFrente" placeholder="Medida de frente"
+                                class="text-right-align" (ngModelChange)="retiros_event($event)">
+                            <span matSuffix class="sufix">m</span>
+                            <mat-error *ngIf="medidaFrente.hasError('required')">Frente de terreno es requerido
+                            </mat-error>
+                            <mat-error *ngIf="medidaFrente.hasError('min')">El valor mínimo es 0.00</mat-error>
+                            <mat-error *ngIf="medidaFrente.hasError('incorrect')">El área de retiros es mayor al área
+                                total</mat-error>
+                            <mat-error *ngIf="medidaFrente.hasError('pattern')">Ingrese un valor numérico, use 2
+                                decimales y separador punto (.)</mat-error>
+                        </mat-form-field>
+                    </section>
+
+                    <!-- Fondo -->
+                    <section class='section-form' fxFlex.xs="100%" fxFlex.sm="90%" fxFlex.md="45%" fxFlex.xl="45%"
+                        fxFlex.lg="45%">
+                        <mat-form-field appearance="fill" class="item-form">
+                            <mat-label>Fondo</mat-label>
+                            <input matInput [formControl]="medidaFondo" placeholder="Medida de fondo"
+                                class="text-right-align" (ngModelChange)="retiros_event($event)">
+                            <span matSuffix class="sufix">m</span>
+                            <mat-error *ngIf="medidaFondo.hasError('required')">Fondo de terreno es requerido
+                            </mat-error>
+                            <mat-error *ngIf="medidaFondo.hasError('min')">El valor mínimo es 0.00</mat-error>
+                            <mat-error *ngIf="medidaFondo.hasError('pattern')">Ingrese un valor numérico, use 2
+                                decimales y separador punto (.)</mat-error>
+                        </mat-form-field>
+                    </section>
+                </ng-template>
+                <ng-template #elseTemplate>
+                    <!-- ÁREA IRREGULAR -->
+
+
+                    <!-- Frente o fondo -->
+                    <section class='section-form' fxFlex.xs="100%" fxFlex.sm="90%" fxFlex.md="45%" fxFlex.xl="45%"
+                        fxFlex.lg="45%">
+                        <mat-form-field appearance="fill" class="item-form">
+                            <mat-label>Frente o Fondo</mat-label>
+                            <input matInput [formControl]="frente_o_fondo" placeholder="Frente o fondo del terreno"
+                                class="text-right-align" (ngModelChange)="retiros_irregular_event($event)">
+                            <span matSuffix class="sufix">m</span>
+                            <mat-error *ngIf="frente_o_fondo.hasError('required')">Frente o fondo es requerido
+                            </mat-error>
+                            <mat-error *ngIf="frente_o_fondo.hasError('min')">El valor mínimo es 0.00</mat-error>
+                            <mat-error *ngIf="frente_o_fondo.hasError('pattern')">Ingrese un valor numérico, use 2
+                                decimales
+                                y separador punto (.)</mat-error>
+                        </mat-form-field>
+                    </section>
+                    <!-- Área total -->
+                    <section class='section-form' fxFlex.xs="100%" fxFlex.sm="90%" fxFlex.md="45%" fxFlex.xl="45%"
+                        fxFlex.lg="45%">
+                        <mat-form-field appearance="fill" class="item-form">
+                            <mat-label>Área del terreno</mat-label>
+                            <input matInput [formControl]="areaTotal" placeholder="Área total del terreno"
+                                class="text-right-align" (ngModelChange)="retiros_irregular_event($event)">
+                            <span matSuffix class="sufix">m<sup> <small>2</small></sup></span>
+                            <mat-error *ngIf="areaTotal.hasError('required')">El área del terreno es requerido
+                            </mat-error>
+                            <mat-error *ngIf="areaTotal.hasError('incorrect')">El área de retiros es mayor al área total
+                            </mat-error>
+                            <mat-error *ngIf="areaTotal.hasError('min')">El valor mínimo es 0.00</mat-error>
+                            <mat-error *ngIf="areaTotal.hasError('pattern')">Ingrese un valor numérico, use 2 decimales
+                                y
+                                separador punto (.)</mat-error>
+                        </mat-form-field>
+                    </section>
+
+
+
+
+
+                </ng-template>
+
+
+
+                <!-- Retiro frontal -->
+                <section class='section-form' fxFlex.xs="100%" fxFlex.sm="90%" fxFlex.md="45%" fxFlex.xl="45%"
+                    fxFlex.lg="45%">
+                    <mat-form-field appearance="fill" class="item-form">
+                        <mat-label>Retiro frontal </mat-label>
+                        <input matInput [formControl]="retiroFrontal" placeholder="Retiro Frontal"
+                            class="text-right-align" (ngModelChange)="calcularAreaRetiros($event)">
+                        <span matSuffix class="sufix">m</span>
+                        <mat-error *ngIf="retiroFrontal.hasError('required')">Retiro frontal</mat-error>
+                        <mat-error *ngIf="retiroFrontal.hasError('min')">El valor mínimo es 0.00</mat-error>
+                        <mat-error *ngIf="retiroFrontal.hasError('pattern')">Ingrese un valor numérico, use 2 decimales
+                            y separador punto (.)</mat-error>
+                        <mat-error *ngIf="retiroFrontal.hasError('errorFondo')">El retiro es mayor que el Fondo
+                        </mat-error>
+                    </mat-form-field>
+                </section>
+
+                <!-- Retiro posterior -->
+                <section class='section-form' fxFlex.xs="100%" fxFlex.sm="90%" fxFlex.md="45%" fxFlex.xl="45%"
+                    fxFlex.lg="45%">
+                    <mat-form-field appearance="fill" class="item-form">
+                        <mat-label>Retiro posterior </mat-label>
+                        <input matInput [formControl]="retiroPosterior" placeholder="Retiro Posterior"
+                            class="text-right-align" (ngModelChange)="calcularAreaRetiros($event)">
+                        <span matSuffix class="sufix">m</span>
+                        <mat-error *ngIf="retiroPosterior.hasError('required')">Retiro frontal</mat-error>
+                        <mat-error *ngIf="retiroPosterior.hasError('min')">El valor mínimo es 0.00</mat-error>
+                        <mat-error *ngIf="retiroPosterior.hasError('pattern')">Ingrese un valor numérico, use 2
+                            decimales
+                            y separador punto (.)</mat-error>
+                        <mat-error *ngIf="retiroPosterior.hasError('errorFondo')">El retiro es mayor que el Fondo
+                        </mat-error>
+                    </mat-form-field>
+                </section>
+
+                <!-- Retiro Lateral Izquierdo -->
+                <section class='section-form' fxFlex.xs="100%" fxFlex.sm="90%" fxFlex.md="45%" fxFlex.xl="45%"
+                    fxFlex.lg="45%">
+                    <mat-form-field appearance="fill" class="item-form">
+                        <mat-label>Retiro Lateral Izquierdo </mat-label>
+                        <input matInput [formControl]="retiroLateralIzquierdo" placeholder="Retiro Lateral Izquierdo"
+                            class="text-right-align" (ngModelChange)="calcularAreaRetiros($event)">
+                        <span matSuffix class="sufix">m</span>
+                        <mat-error *ngIf="retiroLateralIzquierdo.hasError('required')">Retiro Lateral Izquierdo
+                        </mat-error>
+                        <mat-error *ngIf="retiroLateralIzquierdo.hasError('min')">El valor mínimo es 0.00</mat-error>
+                        <mat-error *ngIf="retiroLateralIzquierdo.hasError('pattern')">Ingrese un valor numérico, use 2
+                            decimales
+                            y separador punto (.)</mat-error>
+                        <mat-error *ngIf="retiroLateralIzquierdo.hasError('errorFondo')">El retiro es mayor que el
+                            Frente</mat-error>
+                    </mat-form-field>
+                </section>
+
+                <!-- Retiro Lateral Izquierdo -->
+                <section class='section-form' fxFlex.xs="100%" fxFlex.sm="90%" fxFlex.md="45%" fxFlex.xl="45%"
+                    fxFlex.lg="45%">
+                    <mat-form-field appearance="fill" class="item-form">
+                        <mat-label>Retiro Lateral Derecho </mat-label>
+                        <input matInput [formControl]="retiroLateralDerecho" placeholder="Retiro Lateral Derecho"
+                            class="text-right-align" (ngModelChange)="calcularAreaRetiros($event)">
+                        <span matSuffix class="sufix">m</span>
+                        <mat-error *ngIf="retiroLateralDerecho.hasError('required')">Retiro Lateral Derecho
+                        </mat-error>
+                        <mat-error *ngIf="retiroLateralDerecho.hasError('min')">El valor mínimo es 0.00</mat-error>
+                        <mat-error *ngIf="retiroLateralDerecho.hasError('pattern')">Ingrese un valor numérico, use 2
+                            decimales
+                            y separador punto (.)</mat-error>
+                        <mat-error *ngIf="retiroLateralDerecho.hasError('errorFondo')">El retiro es mayor que el Frente
+                        </mat-error>
+                    </mat-form-field>
+                </section>
+
+                <section class='section-form'>
+                    <mat-error class="item-form" *ngIf='message'>
+                        <small>
+                            <p>
+                                <mat-icon>warning</mat-icon> El % de COS es menor al 60% y puede presentar conflicto con
+                                las regulaciones municipales de la localidad
+                            </p>
+                        </small>
+                    </mat-error>
+
+                    <mat-error class="item-form" *ngIf="proyectoState$.error && (bSubmitted)">
+                        <small> {{proyectoState$.error.message}}</small>
+                    </mat-error>
+                </section>
+
+                <section class='section-form section-button__form' fxFlex.xs="100%" fxFlex.sm="90%" fxFlex.md="90%"
+                    fxFlex.xl="90%" fxFlex.lg="90%" fxFlexAlign='end center'>
+                    <button mat-button [routerLink]="['/proyectos/proyecto-estudios', proyecto.id]"
+                        type="button">Regresar</button>
+                    <button mat-raised-button color="primary" type="submit"
+                        [disabled]="!areaConstruccionForm.valid">Continuar</button>
+                </section>
+            </form>
+        </div>
+    </mat-tab>
+    <mat-tab #tab label="Plan de necesidades" [disabled]="activeTabPlan">
+
+    </mat-tab>
+    <mat-tab label="Prueba Plan Necesidades">
+        <div class="supercontainer">
+            <form [formGroup]="prefactibilidadForm" (ngSubmit)="savePrefactibilidad()" fxLayout="row wrap"
+                fxLayoutAlign="space-between center">
+
+                <!-- Costo del suelo -->
+                <section class='section-form' fxFlex.xs="100%" fxFlex.sm="90%" fxFlex.md="30%" fxFlex.xl="30%"
+                    fxFlex.lg="30%">
+                    <mat-form-field appearance="fill" class="item-form">
+                        <mat-label>Valor del suelo </mat-label>
+                        <input matInput [formControl]="valorSueloUrbano" placeholder="Valor del suelo urbano"
+                            class="text-right-align">
+                        <span matSuffix class="sufix">usd/m<sup><small>2</small></sup></span>
+                        <mat-hint>Valor del suelo urbano dado por usd/m<sup><small>2</small></sup></mat-hint>
+                        <mat-error *ngIf="valorSueloUrbano.hasError('required')">Valor del suelo urbano es requerido
+                        </mat-error>
+                        <mat-error *ngIf="valorSueloUrbano.hasError('min')">El valor mínimo es 0.10</mat-error>
+                        <mat-error *ngIf="valorSueloUrbano.hasError('pattern')">Ingrese un valor numérico, use 2
+                            decimales
+                            y separador punto (.)</mat-error>
+                    </mat-form-field>
+                </section>
+
+                <!-- TIPO AREA VIVENDA -->
+                <section class='section-form' fxFlex.xs="100%" fxFlex.sm="90%" fxFlex.md="30%" fxFlex.xl="30%"
+                    fxFlex.lg="30%">
+                    <mat-form-field appearance="fill" class="item-form">
+                        <mat-label>Tipo de área</mat-label>
+                        <mat-select [formControl]="tipoAreaVivenda">
+                            <mat-option *ngFor="let tipo of tiposAreaVivienda" value="{{tipo.id}}">
+                                {{tipo.nombre}}</mat-option>
+                        </mat-select>
+                        <mat-error *ngIf="tipoAreaVivenda.hasError('required')">La seleccion es requerida
+                        </mat-error>
+                    </mat-form-field>
+                </section>
+
+                <!-- TIPO ACABADO DE VIVIENDA -->
+                <section class='section-form' fxFlex.xs="100%" fxFlex.sm="90%" fxFlex.md="30%" fxFlex.xl="30%"
+                    fxFlex.lg="30%">
+                    <mat-form-field appearance="fill" class="item-form">
+                        <mat-label>Acabado de vivienda</mat-label>
+                        <mat-select [formControl]="tipoAcabado">
+                            <mat-option *ngFor="let tipo of tiposAcabado" value="{{tipo.id}}">
+                                {{tipo.nombre}}</mat-option>
+                        </mat-select>
+                        <mat-error *ngIf="tipoAcabado.hasError('required')">La seleccion es requerida
+                        </mat-error>
+                    </mat-form-field>
+                </section>
+
+                <!-- BUSCAR AMBIENTES -->
+                <!-- <section class='section-form' fxFlex.xs="100%" fxFlex.sm="90%" fxFlex.md="90%" fxFlex.xl="90%"
+                    fxFlex.lg="90%">
+                    <mat-form-field appearance="fill" class="item-form">
+                        <mat-label>Buscar Ambiente </mat-label>
+                        <input matInput [formControl]="busqueda" placeholder="Ejemplo: Garaje" type="text"
+                            [matAutocomplete]="auto">
+                        <mat-autocomplete autoActiveFirstOption #auto='matAutocomplete'
+                            (optionSelected)='addElementTable($event)'>
+                            <mat-option *ngFor="let ambiente of fillAmbientes | async" [value]="ambiente.id">
+                                {{ambiente.nombre}}</mat-option>
+                        </mat-autocomplete>
+                    </mat-form-field>
+                </section> -->
+
+                <br><br>
+                <section class='section-form margin__option' fxFlex.xs="100%" fxFlex.sm="100%" fxFlex.md="100%" fxFlex.xl="100%"
+                    fxFlex.lg="100%">
+
+                    <div class="example-container mat-elevation-z8">
+                        <div fxLayout='row' class="header-table"  fxLayoutAlign='space-between center'>
+                            <span></span> 
+                            <h3 class="card-title remove__margin-bottom"> <strong>Ambientes por unidad de vivienda</strong></h3>
+                            <button mat-raised-button color="primary" type="button">Agregar</button>
+                        </div>
+                        
+                        <table mat-table [dataSource]="transactions" formArrayName='itemsPrefactibilidad'>
+                            <!-- Cantidad -->
+                            <ng-container matColumnDef="cantidad">
+                                <th mat-header-cell *matHeaderCellDef class='cant-cell headerTableColor'> Cantidad </th>
+                                <td mat-cell *matCellDef="let transaction ;let index = index" [formGroupName]="index" class='cant-cell'> 
+                                    <mat-form-field appearance="standard" class="cant-item-form" [style.fontSize]="'12px'">                                        
+                                        <input  matInput type="number" placeholder="1" min="1" [max]="transaction.cant" [value]="transaction.cant" [formControlName]="'cantidad'">                                                                                                                                                                
+                                        
+                                        <mat-error *ngIf="itemsPrefactibilidad.controls[index].get('cantidad').hasError('required')">Requerido
+                                        </mat-error>
+                                    </mat-form-field>
+                                </td>
+                                <td mat-footer-cell *matFooterCellDef class='cant-cell footerTableColor'></td>                                                                                            
+                            </ng-container>
+
+                            <!-- Ambiente-->
+                            <ng-container matColumnDef="ambiente">
+                                <th mat-header-cell *matHeaderCellDef class='ambiente-cell headerTableColor'> Ambiente </th>
+                                <td mat-cell *matCellDef="let transaction" class='ambiente-cell'> {{transaction.item}} </td>
+                                <td mat-footer-cell *matFooterCellDef class='ambiente-cell footerTableColor'></td>                              
+                            </ng-container>                           
+
+                            <!-- Área m2 -->
+                            <ng-container matColumnDef="area">
+                                <th mat-header-cell *matHeaderCellDef class='headerTableColor'> Área </th>
+                                <td mat-cell *matCellDef="let transaction"> {{transaction.cost | number : '1.2-2'}} </td>
+                                <td mat-footer-cell *matFooterCellDef class='footerTableColors text-right-align padding-rigth '>Área Subtotal</td>                                
+                            </ng-container>
+
+                            <!-- Subtotal -->
+                            <ng-container matColumnDef="subtotal">
+                                <th mat-header-cell *matHeaderCellDef class='headerTableColor'> Subtotal m2</th>
+                                <td mat-cell *matCellDef="let transaction"> {{ getSubtotalArea(transaction) | number : '1.2-2'}} </td>
+                                <td mat-footer-cell *matFooterCellDef class='footerTableColors'>  {{getTotalCost() | number : '1.2-2'}}</td>                                
+                            </ng-container>
+
+                            <!-- Acciones-->
+                            <ng-container matColumnDef="acciones">                                
+                                <th mat-header-cell *matHeaderCellDef class=" headerTableColor action-cell"> Acciones </th>
+                                <td mat-cell *matCellDef="let transaction" class=" action-cell">                                                            
+                                    <button mat-icon-button color="warn" (click)="deleteElement(transaction)">
+                                        <mat-icon>delete</mat-icon>
+                                    </button>
+                                </td>
+                                <td mat-footer-cell *matFooterCellDef class='footerTableColors'></td>                                                                
+                            </ng-container>
+
+                            <ng-container matColumnDef="emptyFooter" class="borders">
+                                <th mat-header-cell *matHeaderCellDef></th>
+                                <td mat-cell *matCellDef="let transaction"></td>
+                                <td mat-footer-cell *matFooterCellDef class='footerTableColor'></td>                                
+                            </ng-container>
+
+                            <ng-container matColumnDef="emptyColorFooter" class="borders">
+                                <th mat-header-cell *matHeaderCellDef></th>
+                                <td mat-cell *matCellDef="let transaction"></td>
+                                <td mat-footer-cell *matFooterCellDef class='footerTableColors'></td>                                
+                            </ng-container>
+
+                            <ng-container matColumnDef="areaParedes">                                                                
+                                <td mat-footer-cell *matFooterCellDef class='footerTableColors text-right-align padding-rigth ' > Área de circulación</td>                                
+                                <td mat-footer-cell *matFooterCellDef></td>    
+                            </ng-container>
+
+                            <ng-container matColumnDef="subtotalParedes">                                                                
+                                <td mat-footer-cell *matFooterCellDef class='footerTableColors'> {{getTotalCost() | number : '1.2-2'}} </td>                                
+                            </ng-container>
+
+                            <ng-container matColumnDef="areaTotal">                                                                
+                                <td mat-footer-cell *matFooterCellDef class='footerTableColors text-right-align padding-rigth  '> Área Total </td>                                
+                            </ng-container>
+
+                            <ng-container matColumnDef="totalArea">                                                                
+                                <td mat-footer-cell *matFooterCellDef class='footerTableColors'> {{getTotalCost()| number : '1.2-2'}} </td>                                
+                            </ng-container>
+                          
+                            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                            <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+                            <tr mat-footer-row *matFooterRowDef="displayedColumns; sticky: true"></tr>                            
+                            <tr mat-footer-row *matFooterRowDef="displayedColumnsAreas; sticky: true"></tr>
+                            <tr mat-footer-row *matFooterRowDef="displayedColumnsTotal; sticky: true"></tr>
+                        </table>
+
+                    </div>
+
+                </section>
+
+
+
+
+
+                <section class='section-form'>
+                    <mat-error class="item-form" *ngIf="proyectoState$.error && (bSubmitted)">
+                        <small> {{proyectoState$.error.message}}</small>
+                    </mat-error>
+                </section>
+            </form>
+        </div>
+    </mat-tab>
+    <mat-tab label="Resultados" [disabled]="true">Content 3</mat-tab>
+</mat-tab-group>

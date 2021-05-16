@@ -27,6 +27,7 @@ export class AmbienteDetailComponent implements OnInit {
 
   nombre:FormControl;
   descripcion:FormControl;
+  cantidad:FormControl;
   ambienteForm: FormGroup;
 
   // areasForms:FormArray;
@@ -67,9 +68,11 @@ export class AmbienteDetailComponent implements OnInit {
     }
     this.nombre = new FormControl(this.ambiente.nombre, [Validators.required, Validators.maxLength(250), Validators.minLength(4)]);
     this.descripcion = new FormControl(this.ambiente.descripcion, [Validators.required, Validators.maxLength(500), Validators.minLength(4)]);    
+    this.cantidad = new FormControl(this.ambiente.cantidad, [Validators.required, Validators.min(1), Validators.max(20)]);    
     this.ambienteForm = this.formBuilder.group({
       nombre: this.nombre,
       descripcion:this.descripcion,
+      cantidad:this.cantidad,
       areas: this.formBuilder.array([], minLengthArray(1))
     });
     this.createFormArrayAreas(this.ambiente.areas)

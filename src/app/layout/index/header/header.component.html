@@ -14,20 +14,20 @@
           <li *ngIf="!user"><a class="item" routerLink='/empresa/info'>Empresa</a></li>
           <li *ngIf="!user"><a class="item" routerLink='/empresa/info'>Proyectos</a></li>
           <li *ngIf="!user"><a class="item" routerLink='/empresa/info'>Contacto</a></li>      
-          <li *ngIf="user && user.isPlanificador()"><a class="item" routerLink='/empresa/info'>Proyectos</a></li>      
-          <li *ngIf="user"><a class="item" routerLink='/empresa/info'>Mi perfil</a></li>      
+          <li *ngIf="!user" ><a class="item hover_rouded" [routerLink]="['register']">Regístrate</a></li>      
+          <li *ngIf="!user" class="rounded"><a class="item" [routerLink]="['login']">Iniciar Sesión</a></li>      
+          <li *ngIf="user && user.isPlanificador()"><a class="item" routerLink='/proyectos/proyectos-list'> Mis Proyectos</a></li>      
+          <li *ngIf="user"><a class="item" routerLink='/empresa/info'>Mi perfil</a></li>                
         </ul>       
     </div>  
-    <div>
-      <button mat-button [matMenuTriggerFor]="menu"><mat-icon>account_circle</mat-icon></button>
-      <mat-menu #menu="matMenu" xPosition="before">
-        <ng-container *ngIf="user; else elseTemplate">
-          <button mat-menu-item (click)="logOut()">Cerrar Sesión</button>
-        </ng-container>
-        <ng-template #elseTemplate>
-          <button mat-menu-item [routerLink]="['login']">Iniciar Sesión</button>
-          <button mat-menu-item [routerLink]="['register']">Regístrate</button>
-        </ng-template>              
+
+    
+    <!-- <button mat-menu-item [routerLink]="['register']">Regístrate</button> -->
+
+    <div *ngIf="user">      
+      <button   mat-button [matMenuTriggerFor]="menu"><mat-icon>account_circle</mat-icon></button>
+      <mat-menu #menu="matMenu" xPosition="before">        
+          <button mat-menu-item (click)="logOut()">Cerrar Sesión</button>        
       </mat-menu>       
     </div>
 </mat-toolbar>
