@@ -1,5 +1,6 @@
 import { User } from "src/app/auth/models/user";
 import { TipoAcabado } from "src/app/prefactibilidad/models/acabado";
+import { Ambiente, AreaVivienda } from "src/app/prefactibilidad/models/ambiente";
 
 export class Proyecto {
   id: number;
@@ -31,9 +32,19 @@ export class Prefactibilidad {
   typeArea: string;
   areaConstruccion: AreaConstruccion;
   acabado: TipoAcabado;
+  items:ItemPrefactibilidad[];
   subtotalAreaConstruccion: number;
   areaCirculacionParedes: number;
   areaTotalConstruccion: number;
+  constructor(){}
+}
+
+export class ItemPrefactibilidad {
+  id: number;
+  cantidad:number;
+  subtotal:number;
+  ambiente: Ambiente;  
+  areaVivienda: AreaVivienda;  
   constructor(){}
 }
 

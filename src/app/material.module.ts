@@ -25,6 +25,7 @@ import {MatNativeDateModule} from '@angular/material/core';
 import {MatTabsModule} from '@angular/material/tabs';
 import {MatRadioModule} from '@angular/material/radio';
 import {MatAutocompleteModule} from '@angular/material/autocomplete';
+import {MatCheckboxModule} from '@angular/material/checkbox';
 
 @NgModule({
   exports: [
@@ -53,7 +54,8 @@ import {MatAutocompleteModule} from '@angular/material/autocomplete';
       MatNativeDateModule,
       MatTabsModule,
       MatRadioModule,
-      MatAutocompleteModule
+      MatAutocompleteModule,
+      MatCheckboxModule
     ],
   imports: [
     FlexLayoutModule,
@@ -81,7 +83,8 @@ import {MatAutocompleteModule} from '@angular/material/autocomplete';
     MatNativeDateModule,
     MatTabsModule,
     MatRadioModule,
-    MatAutocompleteModule
+    MatAutocompleteModule,
+    MatCheckboxModule
   ]
 })
 export class MaterialModule { }
