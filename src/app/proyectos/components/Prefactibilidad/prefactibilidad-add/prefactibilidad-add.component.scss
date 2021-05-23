@@ -46,6 +46,7 @@
   display: flex;
   justify-content: flex-end;
   padding-top: 15px;
+  padding-right: 16px;
 }
 
 .align-center {
@@ -137,4 +138,14 @@ tr.mat-footer-row {
 
 .padding-rigth {
   padding-right: 10px;
+}
+
+.title-results{
+  text-align: center;
+  margin: 20px;
+  font-size: 24px;
+}
+
+.container-panel-results{
+  margin-top: 16px;  
 }

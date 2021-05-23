@@ -26,6 +26,7 @@ import {MatTabsModule} from '@angular/material/tabs';
 import {MatRadioModule} from '@angular/material/radio';
 import {MatAutocompleteModule} from '@angular/material/autocomplete';
 import {MatCheckboxModule} from '@angular/material/checkbox';
+import {MatProgressBarModule} from '@angular/material/progress-bar';
 
 @NgModule({
   exports: [
@@ -55,7 +56,8 @@ import {MatCheckboxModule} from '@angular/material/checkbox';
       MatTabsModule,
       MatRadioModule,
       MatAutocompleteModule,
-      MatCheckboxModule
+      MatCheckboxModule,
+      MatProgressBarModule
     ],
   imports: [
     FlexLayoutModule,
@@ -84,7 +86,8 @@ import {MatCheckboxModule} from '@angular/material/checkbox';
     MatTabsModule,
     MatRadioModule,
     MatAutocompleteModule,
-    MatCheckboxModule
+    MatCheckboxModule,
+    MatProgressBarModule
   ]
 })
 export class MaterialModule { }

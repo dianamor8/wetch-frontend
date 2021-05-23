@@ -1,1 +1,8 @@
-<p>prefactibilidad-delete works!</p>
+<h3 mat-dialog-title>Eliminar Estudio de Prefactibilidad</h3>
+<div mat-dialog-content>    
+    <p>Está seguro de eliminar el estudio del proyecto ID: <strong> <em> {{prefactibilidad.id}} </em></strong></p>          
+</div>
+<div mat-dialog-actions class="btn-right">    
+    <button mat-button mat-dialog-close>Cerrar</button>
+    <button mat-raised-button (click)="delete()" color="warn" type="submit">Eliminar</button>
+</div>

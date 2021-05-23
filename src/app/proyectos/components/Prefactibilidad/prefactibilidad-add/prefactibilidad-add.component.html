@@ -1,6 +1,9 @@
-<h2 class="title">Estudio de Prefactbilidad</h2>
+
+<h2 class="title"> {{tipoAccion}} Estudio de Prefactbilidad</h2>
+
 <mat-tab-group mat-align-tabs="end" [selectedIndex]='activeTab' (selectedIndexChange)='changeTest($event)'>
-    <mat-tab label="Área de construcción ">
+    
+    <mat-tab label="Área de construcción ">        
         <div>
             <!--  AGREGAR LEYENDA, VALIDADOR DE FRENTE O FONDO -->
             <mat-card>
@@ -213,8 +216,8 @@
                     </mat-error>
                 </section>
 
-                <section class='section-form section-button__form' fxFlex.xs="100%" fxFlex.sm="90%" fxFlex.md="90%"
-                    fxFlex.xl="90%" fxFlex.lg="90%" fxFlexAlign='end center'>
+                <section class='section-button__form' fxFlex.xs="100%" fxFlex.sm="95%" fxFlex.md="95%" fxFlex.xl="95%"
+                    fxFlex.lg="95%" fxFlexAlign='end center'>
                     <button mat-button [routerLink]="['/proyectos/proyecto-estudios', proyecto.id]"
                         type="button">Regresar</button>
                     <button mat-raised-button color="primary" type="submit"
@@ -223,10 +226,10 @@
             </form>
         </div>
     </mat-tab>
-    <mat-tab #tab label="Plan de necesidades" [disabled]="activeTabPlan">
+    <mat-tab #tab label="Plan Necesidades" [disabled]="activeTabPlan || !areaConstruccionForm.valid">
 
-    </mat-tab>
-    <mat-tab label="Prueba Plan Necesidades">
+        <mat-progress-bar mode="indeterminate" *ngIf="proyectoState$.loading"></mat-progress-bar>     
+
         <div class="supercontainer">
             <form [formGroup]="prefactibilidadForm" (ngSubmit)="savePrefactibilidad()" fxLayout="row wrap"
                 fxLayoutAlign="space-between center">
@@ -255,7 +258,7 @@
                     <mat-form-field appearance="fill" class="item-form">
                         <mat-label>Tipo de área</mat-label>
                         <mat-select [formControl]="tipoAreaVivenda" (valueChange)="onChangeTipoArea($event)">
-                            <mat-option *ngFor="let tipo of tiposAreaVivienda" value="{{tipo.id}}">
+                            <mat-option *ngFor="let tipo of tiposAreaVivienda" [value]="tipo.id">
                                 {{tipo.nombre}}</mat-option>
                         </mat-select>
                         <mat-error *ngIf="tipoAreaVivenda.hasError('required')">La seleccion es requerida
@@ -269,122 +272,136 @@
                     <mat-form-field appearance="fill" class="item-form">
                         <mat-label>Acabado de vivienda</mat-label>
                         <mat-select [formControl]="tipoAcabado">
-                            <mat-option *ngFor="let tipo of tiposAcabado" value="{{tipo.id}}">
+                            <mat-option *ngFor="let tipo of tiposAcabado" [value]="tipo.id">
                                 {{tipo.nombre}}</mat-option>
                         </mat-select>
                         <mat-error *ngIf="tipoAcabado.hasError('required')">La seleccion es requerida
                         </mat-error>
                     </mat-form-field>
                 </section>
-
-                <!-- BUSCAR AMBIENTES -->
-                <!-- <section class='section-form' fxFlex.xs="100%" fxFlex.sm="90%" fxFlex.md="90%" fxFlex.xl="90%"
-                    fxFlex.lg="90%">
-                    <mat-form-field appearance="fill" class="item-form">
-                        <mat-label>Buscar Ambiente </mat-label>
-                        <input matInput [formControl]="busqueda" placeholder="Ejemplo: Garaje" type="text"
-                            [matAutocomplete]="auto">
-                        <mat-autocomplete autoActiveFirstOption #auto='matAutocomplete'
-                            (optionSelected)='addElementTable($event)'>
-                            <mat-option *ngFor="let ambiente of fillAmbientes | async" [value]="ambiente.id">
-                                {{ambiente.nombre}}</mat-option>
-                        </mat-autocomplete>
-                    </mat-form-field>
-                </section> -->
-
                 <br><br>
-                <section class='section-form margin__option' fxFlex.xs="100%" fxFlex.sm="100%" fxFlex.md="100%" fxFlex.xl="100%"
-                    fxFlex.lg="100%">
+                <section class='section-form margin__option' fxFlex.xs="100%" fxFlex.sm="100%" fxFlex.md="100%"
+                    fxFlex.xl="100%" fxFlex.lg="100%">
 
                     <div class="example-container mat-elevation-z8">
-                        <div fxLayout='row' class="header-table"  fxLayoutAlign='space-between center'>
-                            <span></span> 
-                            <h3 class="card-title remove__margin-bottom"> <strong>Ambientes por unidad de vivienda</strong></h3>
-                            <button mat-raised-button color="primary" type="button" [disabled]="!prefactibilidadForm.controls['valorSueloUrbano'].valid || !prefactibilidadForm.controls['tipoAreaVivienda'].valid || !prefactibilidadForm.controls['tipoAcabado'].valid" (click)="bucarItem()">Agregar</button>
+                        <div fxLayout='row' class="header-table" fxLayoutAlign='space-between center'>
+                            <span></span>
+                            <h3 class="card-title remove__margin-bottom"> <strong>Ambientes por unidad de
+                                    vivienda</strong></h3>
+                            <button mat-raised-button color="accent" type="button"
+                                [disabled]="!prefactibilidadForm.controls['valorSueloUrbano'].valid || !prefactibilidadForm.controls['tipoAreaVivienda'].valid || !prefactibilidadForm.controls['tipoAcabado'].valid"
+                                (click)="bucarItem()">Agregar</button>
                         </div>
 
                         <table mat-table [dataSource]="itemsPrefactibilidadTable" formArrayName='itemsPrefactibilidad'>
                             <!-- Cantidad -->
                             <ng-container matColumnDef="cantidad">
                                 <th mat-header-cell *matHeaderCellDef class='cant-cell headerTableColor'> Cantidad </th>
-                                <td mat-cell *matCellDef="let transaction ;let index = index" [formGroupName]="index" class='cant-cell'> 
-                                    <mat-form-field appearance="standard" class="cant-item-form" [style.fontSize]="'12px'" >                                        
-                                        <input  matInput type="number" placeholder="1" min="1" [max]="transaction.ambiente.cantidad" [value]="transaction.cantidad" [formControlName]="'cantidad'" (ngModelChange)="onChangeCantity($event, transaction, index)">                                                                                                                                                                                                        
-                                        
-                                            <mat-error *ngIf="itemsPrefactibilidad.controls[index].get('cantidad').hasError('required')">Requerido
-                                            </mat-error>
-                                            <mat-error *ngIf="itemsPrefactibilidad.controls[index].get('cantidad').hasError('errorCantidad')">Máx: {{transaction.ambiente.cantidad}}
-                                            </mat-error>
-                                        
+                                <td mat-cell *matCellDef="let transaction ;let index = index" [formGroupName]="index"
+                                    class='cant-cell'>
+                                    <mat-form-field appearance="standard" class="cant-item-form"
+                                        [style.fontSize]="'12px'">
+                                        <input matInput type="number" placeholder="1" min="1"
+                                            [max]="transaction.ambiente.cantidad" [value]="transaction.cantidad"
+                                            [formControlName]="'cantidad'"
+                                            (ngModelChange)="onChangeCantity($event, transaction, index)">
+
+                                        <mat-error
+                                            *ngIf="itemsPrefactibilidad.controls[index].get('cantidad').hasError('required')">
+                                            Requerido
+                                        </mat-error>
+                                        <mat-error
+                                            *ngIf="itemsPrefactibilidad.controls[index].get('cantidad').hasError('errorCantidad')">
+                                            Máx: {{transaction.ambiente.cantidad}}
+                                        </mat-error>
+
                                     </mat-form-field>
                                 </td>
-                                <td mat-footer-cell *matFooterCellDef class='cant-cell footerTableColor'></td>                                                                                            
+                                <td mat-footer-cell *matFooterCellDef class='cant-cell footerTableColor'></td>
                             </ng-container>
 
                             <!-- Ambiente-->
                             <ng-container matColumnDef="ambiente">
-                                <th mat-header-cell *matHeaderCellDef class='ambiente-cell headerTableColor'> Ambiente </th>
-                                <td mat-cell *matCellDef="let transaction" class='ambiente-cell'> {{transaction.ambiente.nombre }} </td>
-                                <td mat-footer-cell *matFooterCellDef class='ambiente-cell footerTableColor'></td>                              
-                            </ng-container>                           
+                                <th mat-header-cell *matHeaderCellDef class='ambiente-cell headerTableColor'> Ambiente
+                                </th>
+                                <td mat-cell *matCellDef="let transaction" class='ambiente-cell'>
+                                    {{transaction.ambiente.nombre }} </td>
+                                <td mat-footer-cell *matFooterCellDef class='ambiente-cell footerTableColor'></td>
+                            </ng-container>
 
                             <!-- Área m2 -->
                             <ng-container matColumnDef="area">
                                 <th mat-header-cell *matHeaderCellDef class='headerTableColor'> Área </th>
-                                <td mat-cell *matCellDef="let transaction"> {{transaction.areaVivienda.area | number : '1.2-2'}} </td>
-                                <td mat-footer-cell *matFooterCellDef class='footerTableColors text-right-align padding-rigth '>Área Subtotal</td>                                
+                                <td mat-cell *matCellDef="let transaction"> {{transaction.areaVivienda.area | number :
+                                    '1.2-2'}} </td>
+                                <td mat-footer-cell *matFooterCellDef
+                                    class='footerTableColors text-right-align padding-rigth '>Área Subtotal</td>
                             </ng-container>
 
                             <!-- Subtotal -->
+                            <!-- <ng-container matColumnDef="subtotal">
+                                <th mat-header-cell *matHeaderCellDef class='headerTableColor text-right-align'> Subtotal m2</th>
+                                <td mat-cell *matCellDef="let transaction" class="text-right-align"> {{ getSubtotalArea(transaction) | number : '1.2-2'}} m<sup><small>2</small></sup></td>
+                                <td mat-footer-cell *matFooterCellDef class='footerTableColors text-right-align'>  {{ getTotalSubtotalArea() | number : '1.2-2'}} m<sup><small>2</small></sup></td>                                
+                            </ng-container> -->
+
                             <ng-container matColumnDef="subtotal">
-                                <th mat-header-cell *matHeaderCellDef class='headerTableColor'> Subtotal m2</th>
-                                <td mat-cell *matCellDef="let transaction"> {{ getSubtotalArea(transaction) | number : '1.2-2'}} </td>
-                                <td mat-footer-cell *matFooterCellDef class='footerTableColors'>  {{ getTotalCost() | number : '1.2-2'}}</td>                                
+                                <th mat-header-cell *matHeaderCellDef class='headerTableColor text-right-align'>
+                                    Subtotal m2</th>
+                                <td mat-cell *matCellDef="let transaction" class="text-right-align"> {{
+                                    transaction.subtotal | number : '1.2-2'}} m<sup><small>2</small></sup></td>
+                                <td mat-footer-cell *matFooterCellDef class='footerTableColors text-right-align'> {{
+                                    getTotalSubtotalArea() | number : '1.2-2'}} m<sup><small>2</small></sup></td>
                             </ng-container>
 
                             <!-- Acciones-->
-                            <ng-container matColumnDef="acciones">                                
-                                <th mat-header-cell *matHeaderCellDef class=" headerTableColor action-cell"> Acciones </th>
-                                <td mat-cell *matCellDef="let transaction; let indice = index" class=" action-cell">                                                            
-                                    <button mat-icon-button color="warn" type="button" (click)="deleteElement(transaction, indice)">
+                            <ng-container matColumnDef="acciones">
+                                <th mat-header-cell *matHeaderCellDef class=" headerTableColor action-cell"></th>
+                                <td mat-cell *matCellDef="let transaction; let indice = index" class=" action-cell">
+                                    <button mat-icon-button color="warn" type="button"
+                                        (click)="deleteElement(transaction, indice)">
                                         <mat-icon>delete</mat-icon>
                                     </button>
                                 </td>
-                                <td mat-footer-cell *matFooterCellDef class='footerTableColors'></td>                                                                
+                                <td mat-footer-cell *matFooterCellDef class='footerTableColors'></td>
                             </ng-container>
 
                             <ng-container matColumnDef="emptyFooter" class="borders">
                                 <th mat-header-cell *matHeaderCellDef></th>
                                 <td mat-cell *matCellDef="let transaction"></td>
-                                <td mat-footer-cell *matFooterCellDef class='footerTableColor'></td>                                
+                                <td mat-footer-cell *matFooterCellDef class='footerTableColor'></td>
                             </ng-container>
 
                             <ng-container matColumnDef="emptyColorFooter" class="borders">
                                 <th mat-header-cell *matHeaderCellDef></th>
                                 <td mat-cell *matCellDef="let transaction"></td>
-                                <td mat-footer-cell *matFooterCellDef class='footerTableColors'></td>                                
+                                <td mat-footer-cell *matFooterCellDef class='footerTableColors'></td>
                             </ng-container>
 
-                            <ng-container matColumnDef="areaParedes">                                                                
-                                <td mat-footer-cell *matFooterCellDef class='footerTableColors text-right-align padding-rigth ' > Área de circulación</td>                                
-                                <td mat-footer-cell *matFooterCellDef></td>    
+                            <ng-container matColumnDef="areaParedes">
+                                <td mat-footer-cell *matFooterCellDef
+                                    class='footerTableColors text-right-align padding-rigth '> Área de circulación</td>
+                                <td mat-footer-cell *matFooterCellDef></td>
                             </ng-container>
 
-                            <ng-container matColumnDef="subtotalParedes">                                                                
-                                <td mat-footer-cell *matFooterCellDef class='footerTableColors'> {{ getTotalCost() | number : '1.2-2'}} </td>                                
+                            <ng-container matColumnDef="subtotalParedes">
+                                <td mat-footer-cell *matFooterCellDef class='footerTableColors text-right-align'> {{
+                                    getAreaCirculacion() | number : '1.2-2'}} m<sup><small>2</small></sup></td>
                             </ng-container>
 
-                            <ng-container matColumnDef="areaTotal">                                                                
-                                <td mat-footer-cell *matFooterCellDef class='footerTableColors text-right-align padding-rigth  '> Área Total </td>                                
+                            <ng-container matColumnDef="areaTotal">
+                                <td mat-footer-cell *matFooterCellDef
+                                    class='footerTableColors text-right-align padding-rigth  '> Área Total </td>
                             </ng-container>
 
-                            <ng-container matColumnDef="totalArea">                                                                
-                                <td mat-footer-cell *matFooterCellDef class='footerTableColors'> {{getTotalCost()| number : '1.2-2'}} </td>                                
+                            <ng-container matColumnDef="totalArea">
+                                <td mat-footer-cell *matFooterCellDef class='footerTableColors text-right-align'>
+                                    {{getAreaTotal()| number : '1.2-2'}} m<sup><small>2</small></sup> </td>
                             </ng-container>
-                          
+
                             <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
                             <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-                            <tr mat-footer-row *matFooterRowDef="displayedColumns; sticky: true"></tr>                            
+                            <tr mat-footer-row *matFooterRowDef="displayedColumns; sticky: true"></tr>
                             <tr mat-footer-row *matFooterRowDef="displayedColumnsAreas; sticky: true"></tr>
                             <tr mat-footer-row *matFooterRowDef="displayedColumnsTotal; sticky: true"></tr>
                         </table>
@@ -393,10 +410,6 @@
 
                 </section>
 
-
-
-
-
                 <section class='section-form'>
                     <mat-error class="item-form" *ngIf="proyectoState$.error && (bSubmitted)">
                         <small> {{proyectoState$.error.message}}</small>
@@ -404,6 +417,14 @@
                 </section>
             </form>
         </div>
+
+        <section class='section-button__form' fxFlex.xs="100%" fxFlex.sm="100%" fxFlex.md="100%" fxFlex.xl="100%"
+            fxFlex.lg="100%" fxFlexAlign='end center'>
+            <button mat-button type="button" (click)="changeTabOne()">Regresar</button>
+            <button mat-raised-button color="primary" type="button" [disabled]="!prefactibilidadForm.valid"
+                (click)="guardarDatos()">Guardar</button>
+        </section>
+    
     </mat-tab>
-    <mat-tab label="Resultados" [disabled]="true">Content 3</mat-tab>
+    
 </mat-tab-group>

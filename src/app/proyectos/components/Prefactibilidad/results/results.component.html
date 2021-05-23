@@ -1,0 +1,179 @@
+    <div fxLayout="row wrap" fxLayoutAlign="space-between start" *ngIf="prefactibilidad">
+        <div fxFlex="100%" fxLayout="row wrap" fxLayoutAlign="space-between center">    
+            <button mat-raised-button routerLink='/proyectos/proyecto-estudios/{{proyecto.id}}'>
+                <mat-icon>reply</mat-icon>
+                Regresar
+            </button>        
+            <h3 class="title-results"><strong>{{ proyecto.titulo | uppercase }}</strong> </h3> 
+            <button mat-raised-button routerLink='/proyectos/proyecto-estudios/{{proyecto.id}}'>
+                <mat-icon>print</mat-icon>
+                Imprimir
+            </button>        
+        </div>
+        <div fxFlex="100%">
+            <p><strong>Fecha: </strong> {{proyecto.fecha | date:'d/MM/yyyy'}}  </p>
+            <!-- <p> <strong>Ubicación: </strong> {{proyecto.ubicacion.provincia.provincia}}/{{proyecto.ubicacion.canton}}/{{proyecto.ubicacion.parroquia}} </p> -->
+            <mat-accordion class="example-headers-align" multi fxLayout="row wrap" fxLayoutAlign="space-around none">
+                <!-- DATOS GENERALES -->
+                <mat-expansion-panel [expanded]='true' fxFlex.xs="100%" fxFlex.sm="100%" fxFlex.md="48%" fxFlex.xl="48%" fxFlex.lg="48%"> 
+                  <mat-expansion-panel-header>
+                    <mat-panel-title>
+                       <strong>A. DATOS GENERALES</strong>
+                    </mat-panel-title>                        
+                  </mat-expansion-panel-header>
+                  <div class="container-panel-results" fxLayout="row wrap" fxLayoutAlign="space-between center">
+
+                    <table style="width:100%">  
+                        <tr>
+                          <td>Cliente</td>
+                          <td>{{proyecto.solicitante}}</td>    
+                        </tr>
+                        <tr>
+                          <td>Direccion:</td>
+                          <td>{{proyecto.ubicacion.direccion}}</td>    
+                        </tr>
+                        <tr>
+                          <td>Cálculo realizado con área: </td>
+                          <td>{{prefactibilidad.typeArea.nombre}}</td>    
+                        </tr>
+                      </table>
+
+                      <div fxFlex.xs="100%" fxFlex.sm="100%" fxFlex.md="100%" fxFlex.xl="100%" fxFlex.lg="100%" fxLayout="row wrap" fxLayoutAlign="space-between center">                          
+                          <div>
+                              <p><strong>Cliente: </strong></p>
+                          </div>
+                          <div>
+                            <p>{{proyecto.solicitante}}</p>    
+                          </div>
+                      </div>                      
+                      <div fxFlex.xs="100%" fxFlex.sm="100%" fxFlex.md="100%" fxFlex.xl="100%" fxFlex.lg="100%" fxLayout="row wrap" fxLayoutAlign="space-between center">
+
+                        <div>
+                            <p><strong>Direccion: </strong></p>
+                        </div>
+                        <div>
+                          <p>{{proyecto.ubicacion.direccion}}</p>    
+                        </div>                        
+                    </div>
+                    <div fxFlex.xs="100%" fxFlex.sm="100%" fxFlex.md="45%" fxFlex.xl="45%" fxFlex.lg="45%" fxLayout="row wrap" fxLayoutAlign="space-between center">
+                        <p> <strong>Cálculo realizado con área: </strong> {{prefactibilidad.typeArea.nombre}} </p>
+                    </div>
+                    <div fxFlex.xs="100%" fxFlex.sm="100%" fxFlex.md="45%" fxFlex.xl="45%" fxFlex.lg="45%">
+                        <p> <strong>Acabados: </strong> {{prefactibilidad.acabado.nombre}} </p>
+                    </div>
+                 </div>
+                </mat-expansion-panel>
+
+                <!-- TERRENO -->
+                <mat-expansion-panel [expanded]='true'  fxFlex.xs="100%" fxFlex.sm="100%" fxFlex.md="48%" fxFlex.xl="48%" fxFlex.lg="48%"> 
+                    <mat-expansion-panel-header>
+                      <mat-panel-title>
+                        <strong>B. TERRENO </strong>
+                      </mat-panel-title>
+                      
+                    </mat-expansion-panel-header>
+                    <div class="container-panel-results" fxLayout="row wrap" fxLayoutAlign="space-between center">
+                        <div fxFlex.xs="100%" fxFlex.sm="100%" fxFlex.md="45%" fxFlex.xl="45%" fxFlex.lg="45%">
+                            <p> <strong>Área total de terreno: </strong> {{prefactibilidad.areaConstruccion.areaTotal}} m<sup><small>2</small></sup></p>
+                        </div>
+                        <div fxFlex.xs="100%" fxFlex.sm="100%" fxFlex.md="45%" fxFlex.xl="45%" fxFlex.lg="45%">
+                            <p> <strong>Costo del terreno por m<sup><small>2</small></sup>: </strong> ${{prefactibilidad.areaConstruccion.valorSueloUrbano}}</p>
+                        </div>
+                        <div fxFlex.xs="100%" fxFlex.sm="100%" fxFlex.md="45%" fxFlex.xl="45%" fxFlex.lg="45%">
+                            <p> <strong>Área de ocupación del suelo: </strong> {{prefactibilidad.areaConstruccion.areaCOS}}m<sup><small>2</small></sup></p>
+                        </div>
+                        <div fxFlex.xs="100%" fxFlex.sm="100%" fxFlex.md="45%" fxFlex.xl="45%" fxFlex.lg="45%">
+                            <p> <strong>Coeficiente de ocupación del suelo: </strong> {{prefactibilidad.areaConstruccion.cos | number:'1.2-2'}}%</p>
+                        </div>
+                        <div fxFlex.xs="100%" fxFlex.sm="100%" fxFlex.md="45%" fxFlex.xl="45%" fxFlex.lg="45%">
+                            <p> <strong>Costo total del terreno: </strong> ${{prefactibilidad.areaConstruccion.costoTotalTerreno}}</p>
+                        </div>
+                    </div>                        
+                  </mat-expansion-panel>
+
+                  <!-- CONSTRUCCION -->
+                <mat-expansion-panel [expanded]='true' fxFlex.xs="100%" fxFlex.sm="100%" fxFlex.md="48%" fxFlex.xl="48%" fxFlex.lg="48%"> 
+                    <mat-expansion-panel-header>
+                      <mat-panel-title>
+                        <strong>C. CONSTRUCCION </strong>
+                      </mat-panel-title>
+                      
+                    </mat-expansion-panel-header>
+                    <div class="container-panel-results" fxLayout="row wrap" fxLayoutAlign="space-between center">
+                        <div fxFlex.xs="100%" fxFlex.sm="100%" fxFlex.md="45%" fxFlex.xl="45%" fxFlex.lg="45%">
+                            <p> <strong>Área de construcción: </strong> {{prefactibilidad.areaTotalConstruccion}} m<sup><small>2</small></sup> </p>
+                        </div>
+                        <div fxFlex.xs="100%" fxFlex.sm="100%" fxFlex.md="45%" fxFlex.xl="45%" fxFlex.lg="45%">
+                            <p> <strong>Número de plantas de la edificación: </strong> {{prefactibilidad.nroPlantas | number:'1.2-2'}}</p>
+                        </div>
+                        <div fxFlex.xs="100%" fxFlex.sm="100%" fxFlex.md="45%" fxFlex.xl="45%" fxFlex.lg="45%">
+                            <p> <strong>Costo de construcción: </strong> ${{prefactibilidad.costoConstruccion}}</p>
+                        </div>
+                        <div fxFlex.xs="100%" fxFlex.sm="100%" fxFlex.md="45%" fxFlex.xl="45%" fxFlex.lg="45%">
+                            <p> <strong>Costo de Dirección Técnica: </strong> ${{prefactibilidad.costoDireccionTecnica}}</p>
+                        </div>
+                        <div fxFlex.xs="100%" fxFlex.sm="100%" fxFlex.md="45%" fxFlex.xl="45%" fxFlex.lg="45%">
+                            <p> <strong>Costo Total de Construccion: </strong> ${{prefactibilidad.costoTotalConstruccion }}</p>
+                        </div>
+                    </div>                        
+                  </mat-expansion-panel>
+
+                  <!-- ESTUDIOS -->
+                <mat-expansion-panel [expanded]='true' fxFlex.xs="100%" fxFlex.sm="100%" fxFlex.md="48%" fxFlex.xl="48%" fxFlex.lg="48%"> 
+                    <mat-expansion-panel-header>
+                      <mat-panel-title>
+                        <strong>D. ESTUDIOS </strong>
+                      </mat-panel-title>
+                      
+                    </mat-expansion-panel-header>
+                    <div class="container-panel-results" fxLayout="row wrap" fxLayoutAlign="space-between center">
+                        <div fxFlex.xs="100%" fxFlex.sm="100%" fxFlex.md="45%" fxFlex.xl="45%" fxFlex.lg="45%">
+                            <p> <strong>Estudios Técnicos requeridos: </strong> Arquitectónico, Estructural, Suelos </p>
+                        </div>
+                        <div fxFlex.xs="100%" fxFlex.sm="100%" fxFlex.md="45%" fxFlex.xl="45%" fxFlex.lg="45%">
+                            <p> <strong>Costo de los estudios en función del área de construcción: </strong> ${{prefactibilidad.costoEstudioPorMetro}}</p>
+                        </div>                        
+                        <div fxFlex.xs="100%" fxFlex.sm="100%" fxFlex.md="45%" fxFlex.xl="45%" fxFlex.lg="45%">
+                            <p> <strong>Costo total de los estudios: </strong> ${{prefactibilidad.costoEstudios}}</p>
+                        </div>                        
+                    </div>                        
+                  </mat-expansion-panel>
+
+                     <!-- INVERSIÓN TOTAL -->
+                     <mat-expansion-panel [expanded]='true' fxFlex.xs="100%" fxFlex.sm="100%" fxFlex.md="48%" fxFlex.xl="48%" fxFlex.lg="48%"> 
+                        <mat-expansion-panel-header>
+                          <mat-panel-title>
+                            <strong>E. INVERSIÓN TOTAL </strong>
+                          </mat-panel-title>
+                          
+                        </mat-expansion-panel-header>
+                        <div class="container-panel-results" fxLayout="row wrap" fxLayoutAlign="space-between center">
+                            <div fxFlex.xs="100%" fxFlex.sm="100%" fxFlex.md="45%" fxFlex.xl="45%" fxFlex.lg="45%">
+                                <p> <strong>La inversión total es de: </strong> ${{prefactibilidad.inversionTotal}}</p>
+                            </div>
+                        </div>                        
+                      </mat-expansion-panel>
+
+                       <!-- DIAGRAMA DE INVERSION -->
+                     <mat-expansion-panel [expanded]='true' fxFlex.xs="100%" fxFlex.sm="100%" fxFlex.md="48%" fxFlex.xl="48%" fxFlex.lg="48%"> 
+                        <mat-expansion-panel-header>
+                          <mat-panel-title>
+                            <strong>DIAGRAMA </strong>
+                          </mat-panel-title>
+                          
+                        </mat-expansion-panel-header>
+                        <div class="container-panel-results" fxLayout="row wrap" fxLayoutAlign="space-between center">
+                            <div fxFlex.xs="100%" fxFlex.sm="100%" fxFlex.md="45%" fxFlex.xl="45%" fxFlex.lg="45%">
+                                
+                                <p>DIBUJO DEL DIAGRAMA</p>
+
+
+                            </div>
+                        </div>                        
+                      </mat-expansion-panel>
+
+
+
+            </mat-accordion>
+        </div>
+    </div>

@@ -15,6 +15,7 @@ export class PrefactibilidadService {
   tipoAreaVivienda_url= environment.apiUrl+"/api/tipoAreaVivienda";  
   ambiente_url= environment.apiUrl+"/api/ambiente";  
   acabado_url= environment.apiUrl+"/api/tipoAcabado";  
+  
 
   httpOptions = {
     headers: new HttpHeaders({ 'Content-Type': 'application/json' })

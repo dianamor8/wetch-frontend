@@ -64,6 +64,9 @@ export class ProyectoEstudiosComponent implements AfterViewInit, OnInit {
     this.route.paramMap.subscribe((route)=>{
       this.id = +route.get('id');
     });
+    
+    //Si la lista de proyectos está vacía disparar get allproyects
+
     this.store.select(getProyectoById(this.id)).subscribe((proy:Proyecto)=>{
       this.proyecto = proy
       this.dataSource = new MatTableDataSource(this.proyecto.prefactibilidads);
@@ -81,7 +84,7 @@ export class ProyectoEstudiosComponent implements AfterViewInit, OnInit {
 
   onSelectEdit(prefactibilidad: Prefactibilidad): void {
     this.prefactibilidadSelected = prefactibilidad;    
-    this.router.navigate(['proyectos/prefactibilidad', this.prefactibilidadSelected.id])
+    this.router.navigate(['proyectos/prefactibilidad-update',this.proyecto.id , this.prefactibilidadSelected.id])
   }
 
   deleteElement(prefactibilidad: Prefactibilidad){

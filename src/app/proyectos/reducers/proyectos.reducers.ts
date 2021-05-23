@@ -1,5 +1,5 @@
 import { createReducer, on } from "@ngrx/store";
-import { addProyecto, addProyectoError, addProyectoSuccess, deleteProyecto, deleteProyectoError, deleteProyectoSuccess, getAllProyectos, getAllProyectosError, getAllProyectosSuccess, updateProyecto, updateProyectoError, updateProyectoSuccess } from "../actions";
+import { addPrefactibilidad, addPrefactibilidadError, addPrefactibilidadSuccess, addProyecto, addProyectoError, addProyectoSuccess, deletePrefactibilidad, deletePrefactibilidadError, deletePrefactibilidadSuccess, deleteProyecto, deleteProyectoError, deleteProyectoSuccess, getAllProyectos, getAllProyectosError, getAllProyectosSuccess, updatePrefactibilidad, updatePrefactibilidadError, updatePrefactibilidadSuccess, updateProyecto, updateProyectoError, updateProyectoSuccess } from "../actions";
 import { Proyecto } from "../models/proyecto";
 
 export interface ProyectosState{
@@ -109,6 +109,110 @@ const __proyectosReducer = createReducer(
         error:null
     })),
     on(deleteProyectoError, (state, {payload})=>({
+        ...state,
+        loading:false,
+        loaded:false,        
+        error:{
+            url:payload.url,
+            status:payload.status,
+            statusText:payload.statusText,            
+            message:payload.error.message
+        }
+    })),  
+
+    on(addPrefactibilidad, (state) => ({
+        ...state, 
+        error:null, 
+        loading:true,
+        loaded:false
+    })),
+    on(addPrefactibilidadSuccess, (state, {prefactibilidad})=>({
+        ...state,
+        loading:false,
+        loaded:true,
+        proyectos: state.proyectos.map((proyecto:Proyecto)=>{            
+            if(proyecto.id === prefactibilidad.proyecto){
+                const clone_proyecto = {...proyecto};
+                clone_proyecto.prefactibilidads = [...proyecto.prefactibilidads, prefactibilidad]
+                return clone_proyecto                
+            }else{
+                return proyecto;
+            }            
+        }),
+        error:null
+    })),
+    on(addPrefactibilidadError, (state, {payload})=>({
+        ...state,
+        loading:false,
+        loaded:false,        
+        error:{
+            url:payload.url,
+            status:payload.status,
+            statusText:payload.statusText,            
+            message:payload.error.message
+        }
+    })),
+    
+    on(updatePrefactibilidad, (state) => ({
+        ...state, 
+        error:null, 
+        loading:true,
+        loaded:false
+    })),
+    on(updatePrefactibilidadSuccess, (state, {prefactibilidad})=>({
+        ...state,
+        loading:false,
+        loaded:true,
+        proyectos: state.proyectos.map((proyecto:Proyecto)=>{            
+            if(proyecto.id === prefactibilidad.proyecto){
+                const clone_proyecto = {...proyecto};
+                clone_proyecto.prefactibilidads = proyecto.prefactibilidads.map((prefact)=>{
+                    if(prefact.id === prefactibilidad.id){
+                        return {...prefact, ...prefactibilidad}
+                    }else{
+                        return prefact;
+                    }
+                });
+                return clone_proyecto                
+            }else{
+                return proyecto;
+            }            
+        }),
+        error:null
+    })),
+    on(updatePrefactibilidadError, (state, {payload})=>({
+        ...state,
+        loading:false,
+        loaded:false,        
+        error:{
+            url:payload.url,
+            status:payload.status,
+            statusText:payload.statusText,            
+            message:payload.error.message
+        }
+    })),
+    on(deletePrefactibilidad, (state) => ({
+        ...state, 
+        error:null, 
+        loading:true,
+        loaded:false
+    })),
+    on(deletePrefactibilidadSuccess, (state, {prefactibilidad})=>({
+        ...state,
+        loading:false,
+        loaded:true,
+        proyectos: state.proyectos.map((proyecto:Proyecto)=>{            
+            if(proyecto.id === prefactibilidad.proyecto){
+                const clone_proyecto = {...proyecto};
+                clone_proyecto.prefactibilidads = [...proyecto.prefactibilidads.filter((prefact)=>prefact.id !== prefactibilidad.id)]                
+                return clone_proyecto                
+            }else{
+                return proyecto;
+            }            
+        }),
+        error:null
+    })),
+    on(deletePrefactibilidadError, (state, {payload})=>({
         ...state,
         loading:false,
         loaded:false,        

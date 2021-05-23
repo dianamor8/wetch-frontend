@@ -6,6 +6,7 @@ import { mergeMap, map, catchError, find, tap, filter, exhaustMap, switchMap, de
 import { MessageService } from 'src/app/utilitarios/messages/services/message.service';
 import { Router } from '@angular/router';
 import { ProyectosService } from '../service/proyectos.service';
+import { Prefactibilidad } from '../models/proyecto';
 
 
 @Injectable({
@@ -84,7 +85,61 @@ export class ProyectosEffects {
                 }
                 ),
             ))
-        ));        
+        ));   
+        
+    addPrefactibilidad$ = createEffect(()=>this.actions$.pipe(
+        ofType(proyectosAccions.addPrefactibilidad),
+        mergeMap((resp)=>
+            this.proyectoService.addPrefactibilidad(resp.prefactibilidad).pipe(                                 
+                map((response)=>                                                
+                    {   
+                        this.messageService.showNotification('Agregado con éxito', 'Éxito','Ok', 'success', 4000);                                     
+                        return proyectosAccions.addPrefactibilidadSuccess({prefactibilidad:response})}
+                ),                
+                catchError((err)=> 
+                {
+                    this.messageService.showNotification('No se pudo agregar', 'Error','Ok', 'error', 4000);
+                    return of(proyectosAccions.addPrefactibilidadError({payload:err}))
+                }
+                ),
+            ))
+        ));
+    
+    updatePrefactibilidad$ = createEffect(()=>this.actions$.pipe(
+        ofType(proyectosAccions.updatePrefactibilidad),
+        mergeMap((resp)=>
+            this.proyectoService.updatePrefactibilidad(resp.prefactibilidad).pipe(                                 
+                map((response)=>                                                
+                    {   
+                        this.messageService.showNotification('Actualizado con éxito', 'Éxito','Ok', 'success', 4000);                                     
+                        return proyectosAccions.updatePrefactibilidadSuccess({prefactibilidad:response})}
+                ),                
+                catchError((err)=> 
+                {
+                    this.messageService.showNotification('No se pudo agregar', 'Error','Ok', 'error', 4000);
+                    return of(proyectosAccions.updatePrefactibilidadError({payload:err}))
+                }
+                ),
+            ))
+        ));
+    
+    deletePrefactibilidad$ = createEffect(()=>this.actions$.pipe(
+        ofType(proyectosAccions.deletePrefactibilidad),
+        mergeMap((resp)=>
+            this.proyectoService.deletePrefactibilidad(resp.prefactibilidad).pipe(                                 
+                map((response)=>                                                
+                    {   
+                        this.messageService.showNotification(response.message, 'Éxito','Ok', 'success', 4000);                                     
+                        return proyectosAccions.deletePrefactibilidadSuccess({prefactibilidad:resp.prefactibilidad})}
+                ),                
+                catchError((err)=> 
+                {
+                    this.messageService.showNotification(err.error.message, 'Error','Ok', 'error', 4000);
+                    return of(proyectosAccions.deletePrefactibilidadError({payload:err}))
+                }
+                ),
+            ))
+        ));   
 
     $addProyectoRedirectTo = createEffect(()=>this.actions$.pipe(
         ofType(proyectosAccions.addProyectoSuccess),
@@ -97,6 +152,20 @@ export class ProyectosEffects {
         ofType(proyectosAccions.updateProyectoSuccess),
         tap((x)=>{
             this.router.navigateByUrl('/proyectos/proyectos-list');
+        })
+    ), { dispatch: false });
+
+    $addPrefactibilidadRedirectTo = createEffect(()=>this.actions$.pipe(
+        ofType(proyectosAccions.addPrefactibilidadSuccess),
+        tap((x)=>{
+            this.router.navigateByUrl(`/proyectos/prefactibilidad-results/${x.prefactibilidad.proyecto}/${x.prefactibilidad.id}`);
+        })
+    ), { dispatch: false });
+
+    $updatePrefactibilidadRedirectTo = createEffect(()=>this.actions$.pipe(
+        ofType(proyectosAccions.updatePrefactibilidadSuccess),
+        tap((x)=>{
+            this.router.navigateByUrl(`/proyectos/prefactibilidad-results/${x.prefactibilidad.proyecto}/${x.prefactibilidad.id}`);
         })
     ), { dispatch: false });
 }

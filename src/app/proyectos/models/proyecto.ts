@@ -1,6 +1,7 @@
 import { User } from "src/app/auth/models/user";
 import { TipoAcabado } from "src/app/prefactibilidad/models/acabado";
 import { Ambiente, AreaVivienda } from "src/app/prefactibilidad/models/ambiente";
+import { TipoAreaVivienda } from "src/app/prefactibilidad/models/tipo-area-vivienda";
 
 export class Proyecto {
   id: number;
@@ -27,15 +28,23 @@ export class Ubicacion {
 
 export class Prefactibilidad {
   id: number;
-  fecha: string;
+  fecha: Date;
   propietario: User;
-  typeArea: string;
+  typeArea: TipoAreaVivienda;
   areaConstruccion: AreaConstruccion;
   acabado: TipoAcabado;
-  items:ItemPrefactibilidad[];
+  items:ItemPrefactibilidad[];  
   subtotalAreaConstruccion: number;
   areaCirculacionParedes: number;
   areaTotalConstruccion: number;
+  proyecto:number;
+  nroPlantas:number;
+  costoConstruccion:number;
+  costoDireccionTecnica:number;
+  costoTotalConstruccion:number;
+  costoEstudioPorMetro:number;
+  costoEstudios:number;
+  inversionTotal:number;
   constructor(){}
 }
 
@@ -57,6 +66,10 @@ export class AreaConstruccion {
   medidaFrente: number;
   medidaFondo: number;
   areaTotal: number;
+  cos: number;
+  areaCOS: number;
+  costoTotalTerreno:number;
+  valorSueloUrbano:number;
   propietario: User;
   constructor(){}
 }

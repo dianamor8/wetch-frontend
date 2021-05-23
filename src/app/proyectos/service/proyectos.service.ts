@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { map, tap } from 'rxjs/operators';
 import { environment } from 'src/environments/environment';
-import { Parroquia, Provincia, Proyecto } from '../models/proyecto';
+import { Parroquia, Prefactibilidad, Provincia, Proyecto } from '../models/proyecto';
 
 @Injectable({
   providedIn: 'root'
@@ -13,6 +13,7 @@ export class ProyectosService {
   private _ubicacionURL = environment.wetchUrl+'/assets/ubicacion.json';
 
   proyecto_url= environment.apiUrl+"/api/proyecto";  
+  prefactibilidad_url= environment.apiUrl+"/api/prefactibilidad";  
   
   constructor(
     private http: HttpClient
@@ -44,6 +45,20 @@ export class ProyectosService {
 
   public getJSON(): Observable<Provincia[]> {
     return this.http.get<Provincia[]>(this._ubicacionURL, this.httpOptions);
+  }
+
+  //AGREGAR PREFACTIBILIDAD
+  addPrefactibilidad(prefactibilidad:Prefactibilidad):Observable<Prefactibilidad>{
+    return this.http.post<Prefactibilidad>(this.prefactibilidad_url, prefactibilidad, { withCredentials:true});    
+  }
+
+  //ACTUALIZAR PREFACTIBILIDAD
+  updatePrefactibilidad(prefactibilidad:Prefactibilidad):Observable<Prefactibilidad>{
+    return this.http.put<Prefactibilidad>(this.prefactibilidad_url+`/${prefactibilidad.id}`, prefactibilidad, { withCredentials:true});    
+  }
+
+  deletePrefactibilidad(prefactibilidad:Prefactibilidad):Observable<any>{
+    return this.http.delete<any>(this.prefactibilidad_url+`/${prefactibilidad.id}`, { withCredentials:true});    
   }
 
   // public getyJSON(): Observable<Prov[]> {
