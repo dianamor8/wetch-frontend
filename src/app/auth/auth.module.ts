@@ -11,10 +11,11 @@ import { ResetPasswordComponent } from './components/reset-password/reset-passwo
 import { UserAsyncValidator } from './validators/user.async.validator';
 import { ChangePasswordComponent } from './components/change-password/change-password.component';
 import { ValidateAccountComponent } from './components/validate-account/validate-account.component';
+import { ProfileComponent } from './components/profile/profile.component';
 
 
 @NgModule({
-  declarations: [ LoginComponent, RegisterComponent, MyAsyncValidator, ResetPasswordComponent, UserAsyncValidator, ChangePasswordComponent, ValidateAccountComponent],
+  declarations: [ LoginComponent, RegisterComponent, MyAsyncValidator, ResetPasswordComponent, UserAsyncValidator, ChangePasswordComponent, ValidateAccountComponent, ProfileComponent],
   imports: [
     CommonModule,
     AuthRoutingModule,

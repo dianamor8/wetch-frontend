@@ -2,7 +2,6 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { RedirectToLoginGuard } from '../auth/guard/redirect-to-login.guard';
 import { PrefactibilidadAddComponent } from './components/Prefactibilidad/prefactibilidad-add/prefactibilidad-add.component';
-import { PrefactibilidadDetailComponent } from './components/Prefactibilidad/prefactibilidad-detail/prefactibilidad-detail.component';
 import { ResultsComponent } from './components/Prefactibilidad/results/results.component';
 import { ProyectoAddComponent } from './components/Proyecto/proyecto-add/proyecto-add.component';
 import { ProyectoDetailComponent } from './components/Proyecto/proyecto-detail/proyecto-detail.component';

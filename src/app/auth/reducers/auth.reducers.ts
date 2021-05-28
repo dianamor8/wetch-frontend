@@ -1,5 +1,5 @@
 import { createReducer, on } from "@ngrx/store";
-import { login, loginError, loginSuccess, resetPassword, resetPasswordError, resetPasswordSuccess, siginup, siginupError, siginupSuccess, cookieAuthentication, cookieAuthenticationError, cookieAuthenticationSuccess, logout, logoutSuccess, logoutError, changePassword, changePasswordSuccess, changePasswordError, addToken } from "../actions";
+import { login, loginError, loginSuccess, resetPassword, resetPasswordError, resetPasswordSuccess, siginup, siginupError, siginupSuccess, cookieAuthentication, cookieAuthenticationError, cookieAuthenticationSuccess, logout, logoutSuccess, logoutError, changePassword, changePasswordSuccess, changePasswordError, addToken, updateProfile, updateProfileSuccess, updateProfileError } from "../actions";
 import { User  } from "../models/user";
 
 export interface AuthState{
@@ -206,6 +206,31 @@ const __authReducer = createReducer(
         access_token:token,        
     })),
 
+
+    on(updateProfile, (state) => ({
+        ...state, 
+        error:null, 
+        loading:true,
+        loaded:false
+    })),
+    on(updateProfileSuccess, (state, {profile})=>({
+        ...state,
+        loading:false,
+        loaded:true,
+        userAuth: changeProfile(profile, state.userAuth)
+    })),
+    on(updateProfileError, (state, {payload})=>({
+        ...state,
+        loading:false,
+        loaded:false,        
+        error:{
+            url:payload.url,
+            status:payload.status,
+            statusText:payload.statusText,            
+            message:payload.error.message
+        }
+    })),
+
 );
 
 export function displayMessageErrors(errors:any):string{
@@ -218,6 +243,12 @@ export function displayMessageErrors(errors:any):string{
                   "\n"
     }    
     return message;
+}
+
+export function changeProfile(profile, user):User{
+    let userTemp = {...user};
+    userTemp.profile = profile;
+    return userTemp;
 }
 
 export function authReducer(state, action){

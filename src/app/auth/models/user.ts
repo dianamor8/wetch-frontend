@@ -1,3 +1,5 @@
+import { Profile } from "./profile";
+
 export class User {
     private _id: number|null;
     private _name: string;
@@ -6,6 +8,7 @@ export class User {
     private _email_verified_at: string;
     private _permissions: Permission[];
     private _roles: Role[];
+    private _profile: Profile;
 
     get id() {
       return this._id
@@ -63,9 +66,19 @@ export class User {
       this._roles = val
     }
 
+    set profile(val: Profile) {
+      this._profile = val
+    }
+    
+    get profile() {
+      return this._profile
+    }
+    
+
     public constructor(init?: Partial<User>) {
         Object.assign(this, init);        
     }
+
 
     isAdministrador():boolean{
         if(!this.roles){

@@ -1,0 +1,99 @@
+<div class="supercontainer">
+    <h1 class="title title__pages">Perfil de usuario</h1>
+    <h2 class='title'>Datos personales</h2>
+    <form [formGroup]="profileForm"  fxLayout="row wrap" fxLayoutAlign="start center">
+        <!-- NOMBRES -->
+        <section class='section-form' fxFlex.xs="100%" fxFlex.sm="90%" fxFlex.md="45%" fxFlex.xl="45%" fxFlex.lg="45%">
+            <mat-form-field appearance="fill" class="item-form">
+                <mat-label>Nombres</mat-label>
+                <input matInput [formControl]="nombres" placeholder="Nombres de usuario " type="text">
+                <mat-error *ngIf="nombres.hasError('maxlength')">Máximo 250 caracteres</mat-error>
+                <mat-error *ngIf="nombres.hasError('minlength')">Mínimo 4 caracteres</mat-error>
+                <mat-error *ngIf="nombres.hasError('required')">Nombres de usuario requerido</mat-error>
+            </mat-form-field>
+        </section>
+
+        <!-- APELLIDOS -->
+        <section class='section-form' fxFlex.xs="100%" fxFlex.sm="90%" fxFlex.md="45%" fxFlex.xl="45%" fxFlex.lg="45%">
+            <mat-form-field appearance="fill" class="item-form">
+                <mat-label>Apellidos</mat-label>
+                <input matInput [formControl]="apellidos" placeholder="Apellidos de usuario " type="text">
+                <mat-error *ngIf="apellidos.hasError('maxlength')">Máximo 250 caracteres</mat-error>
+                <mat-error *ngIf="apellidos.hasError('minlength')">Mínimo 4 caracteres</mat-error>
+                <mat-error *ngIf="apellidos.hasError('required')">Apellidos de usuario requerido</mat-error>
+            </mat-form-field>
+        </section>
+
+        <!-- TELEFONO -->
+        <section class='section-form' fxFlex.xs="100%" fxFlex.sm="90%" fxFlex.md="45%" fxFlex.xl="45%" fxFlex.lg="45%">
+            <mat-form-field appearance="fill" class="item-form">
+                <mat-label>Teléfono</mat-label>
+                <input matInput [formControl]="telefono" placeholder="Teléfono de usuario " type="text">
+                <mat-error *ngIf="telefono.hasError('maxlength')">Máximo 250 caracteres</mat-error>
+                <mat-error *ngIf="telefono.hasError('minlength')">Mínimo 4 caracteres</mat-error>
+                <mat-error *ngIf="telefono.hasError('required')">Teléfono de usuario requerido</mat-error>
+            </mat-form-field>
+        </section>
+
+
+        <!-- DIRECCIÓN -->
+        <section class='section-form' fxFlex.xs="100%" fxFlex.sm="90%" fxFlex.md="45%" fxFlex.xl="45%" fxFlex.lg="45%">
+            <mat-form-field appearance="fill" class="item-form">
+                <mat-label>Dirección</mat-label>
+                <input matInput [formControl]="direccion" placeholder="Dirección de domicilio "
+                    type="text">
+                <mat-error *ngIf="direccion.hasError('maxlength')">Máximo 250 caracteres</mat-error>
+                <mat-error *ngIf="direccion.hasError('minlength')">Mínimo 4 caracteres</mat-error>
+                <mat-error *ngIf="direccion.hasError('required')">Dirección de usuario es requerido</mat-error>
+            </mat-form-field>
+        </section>
+
+        <section class='section-form section-button__form' fxFlex.xs="100%" fxFlex.sm="90%" fxFlex.md="90%"
+            fxFlex.xl="90%" fxFlex.lg="90%" fxFlexAlign='end center'>                        
+            <button mat-raised-button color="primary" type="button" (click)="save()" [disabled]="!profileForm.valid">Actualizar Datos</button>
+        </section>
+    </form>
+</div>
+
+<div class="supercontainer">
+    <h2 class='title'>Cambiar contraseña</h2>
+    <form [formGroup]="changePasswordForm" fxLayout="row wrap" fxLayoutAlign="start center" >
+                
+        <section class='section-form' fxFlex.xs="100%" fxFlex.sm="90%" fxFlex.md="45%" fxFlex.xl="45%" fxFlex.lg="45%">
+            <!-- Password -->
+            <mat-form-field appearance="fill" class="item-form">
+                <mat-label>Nueva Contraseña</mat-label>
+                <input matInput [type]="hide ? 'password' : 'text'" [formControl]="password" >
+                <button type='button' mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Esconder contraseña'" [attr.aria-pressed]="hide">
+                <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon></button>
+                <mat-hint>La contraseña debe tener entre 8 y 16 caracteres y, al menos: un dígito, una minúscula, una mayúscula.</mat-hint>                        
+                <mat-error *ngIf="password.hasError('required')">Contraseña de usuario requerida</mat-error>
+                <mat-error *ngIf="password.hasError('pattern')">Formato de contraseña no válida</mat-error>                        
+            </mat-form-field>
+        </section>
+        <br>
+
+        <section class='section-form' fxFlex.xs="100%" fxFlex.sm="90%" fxFlex.md="45%" fxFlex.xl="45%" fxFlex.lg="45%">
+            <!-- Repeat Password -->
+            <mat-form-field appearance="fill" class="item-form">
+                <mat-label>Confirmación de contraseña</mat-label>
+                <input matInput [type]="hidecp ? 'password' : 'text'" [formControl]="confirm_password">
+                <button type='button'  mat-icon-button matSuffix (click)="hidecp = !hidecp" [attr.aria-label]="'Esconder contraseña'" [attr.aria-pressed]="hidecp">
+                    <mat-icon>{{hidecp ? 'visibility_off' : 'visibility'}}</mat-icon></button>
+                <mat-error *ngIf="confirm_password.hasError('required')">Confirmación de contraseña requerida</mat-error>                        
+            </mat-form-field>
+        </section>
+
+        <section class='section-form' fxFlex.xs="100%" fxFlex.sm="90%" fxFlex.md="90%" fxFlex.xl="90%" fxFlex.lg="90%">            
+            <mat-error *ngIf="changePasswordForm.hasError('noEquals') && (confirm_password.dirty && password.dirty)">
+                <small>Las contraseñas no coinciden</small> </mat-error>
+        </section>                
+
+        <section class='section-form section-button__form' fxFlex.xs="100%" fxFlex.sm="90%" fxFlex.md="90%"
+            fxFlex.xl="90%" fxFlex.lg="90%" fxFlexAlign='end center'>                        
+            <button mat-raised-button color="primary" type="button" (click)="change()" [disabled]="!changePasswordForm.valid">Cambiar contraseña</button>
+        </section>
+        
+        
+    </form>
+</div>

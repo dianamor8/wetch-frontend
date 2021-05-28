@@ -1,5 +1,6 @@
 <div class="supercontainer">
-    <h2 class='title'>Nuevo Proyecto</h2>
+    <h1 class="title title__pages">Nuevo Proyecto</h1>
+    <h2 class='title'>Datos Generales</h2>
     <form [formGroup]="proyectoForm" (ngSubmit)="save()" fxLayout="row wrap" fxLayoutAlign="start center">
         <!-- TITULO -->
         <section class='section-form' fxFlex.xs="100%" fxFlex.sm="90%" fxFlex.md="59%" fxFlex.xl="59%" fxFlex.lg="59%">
@@ -48,7 +49,7 @@
         </section>
 
         <section fxFlex.xs="100%" fxFlex.sm="90%" fxFlex.md="90%" fxFlex.xl="90%" fxFlex.lg="90%">
-            <h3 class="title"> <strong> Ubicación</strong></h3>
+            <h2 class="title"> <strong> Ubicación</strong></h2>
         </section>
 
         <div [formGroup]="direccionForm" fxLayout='column'  fxFlex.xs="100%" fxFlex.sm="100%" fxFlex.md="92%" fxFlex.xl="92%" fxFlex.lg="92%">

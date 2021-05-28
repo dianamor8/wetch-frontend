@@ -21,6 +21,7 @@ export class AuthService {
   logout_url= environment.apiUrl+"/api/logout";
   changePassword_url = environment.apiUrl+'/api/change-password';
   validateNewUser_url = environment.apiUrl+'/api/validateAccount';
+  profile_url = environment.apiUrl+'/api/profile';
 
   httpOptions = {
     headers: new HttpHeaders({ 'Content-Type': 'application/json' })
@@ -108,4 +109,10 @@ export class AuthService {
     }
     return this.http.post(this.validateNewUser_url, this.httpOptions, {headers:header,  withCredentials:true});
   }
+
+  //ACTUALIZAR PROFILE
+  updateProfile(profile:Profile):Observable<Profile>{        
+    return this.http.put<Profile>(this.profile_url+`/${profile.id}`, profile, {withCredentials:true});    
+  }
+
 }

@@ -1,1 +1,80 @@
-<p>contacto works!</p>
+<div class="supercontainer">
+    
+
+    <div fxLayout="row wrap" fxLayoutAlign='space-between center'>
+        <div fxFlex='50'  fxFlexAlign.lt-sm='100' fxLayout='column' fxLayoutAlign='space-evently start'>
+            <h2 class='subtitle'>Dirección</h2>
+            <div class="subtitle">                
+                <p>LOJA - ECUADOR. San Cayetano Bajo. Leningrado entre Bucarest y París </p>
+                <p>+593 - 990493445</p>
+            </div>
+
+            <div fxFlex='100'>
+                <h2 class="subtitle">Escríbenos</h2>
+                <form [formGroup]="contactoForm" (ngSubmit)="save()" fxLayout="row wrap" >
+                    <!-- REMITENTE -->
+                    <section class='section-form' fxFlex.xs="100%" fxFl9x.sm="90%" fxFlex.md="90%" fxFlex.xl="90%" fxFlex.lg="90%">
+                        <mat-form-field appearance="fill" class="item-form">
+                            <mat-label>Nombre</mat-label>
+                            <input matInput [formControl]="nombre" placeholder="Nombres" type="text">                
+                            <mat-error *ngIf="nombre.hasError('maxlength')">Máximo 250 caracteres</mat-error>
+                            <mat-error *ngIf="nombre.hasError('minlength')">Mínimo 10 caracteres</mat-error>
+                            <mat-error *ngIf="nombre.hasError('required')">Nombre es requerido</mat-error>
+                        </mat-form-field>            
+                    </section>
+            
+                    <!-- EMAIL -->
+                    <section class='section-form' fxFlex.xs="100%" fxFl9x.sm="90%" fxFlex.md="90%" fxFlex.xl="90%" fxFlex.lg="90%">            
+                        <mat-form-field appearance="fill" class="item-form">
+                            <mat-label>Email</mat-label>
+                            <input matInput type="email" [formControl]="email" placeholder="Correo electrónico">
+                            <mat-error *ngIf="email.hasError('required')">Email es requerido</mat-error>
+                            <mat-error *ngIf="email.hasError('email')">Email no tiene el formato correcto</mat-error>
+                        </mat-form-field>
+                    </section>
+            
+                    <!-- ASUNTO -->
+                    <section class='section-form' fxFlex.xs="100%" fxFl9x.sm="90%" fxFlex.md="90%" fxFlex.xl="90%" fxFlex.lg="90%">
+                        <mat-form-field appearance="fill" class="item-form">
+                            <mat-label>Asunto</mat-label>
+                            <input matInput [formControl]="asunto" placeholder="Asunto" type="text">                
+                            <mat-error *ngIf="asunto.hasError('maxlength')">Máximo 250 caracteres</mat-error>
+                            <mat-error *ngIf="asunto.hasError('minlength')">Mínimo 10 caracteres</mat-error>
+                            <mat-error *ngIf="asunto.hasError('required')">Asunto es requerido</mat-error>
+                        </mat-form-field>            
+                    </section>
+            
+            
+                    <!-- MESSAGE -->
+                    <section class='section-form' fxFlex.xs="100%" fxFl9x.sm="90%" fxFlex.md="90%" fxFlex.xl="90%" fxFlex.lg="90%">
+                        <mat-form-field appearance="fill" class="item-form">
+                            <mat-label>Mensaje</mat-label>
+                            <textarea matInput [formControl]="message" placeholder="Escribe tu mensaje y pronto nos contactaremos contigo. " type="text"></textarea>               
+                            <mat-error *ngIf="message.hasError('maxlength')">Máximo 500 caracteres</mat-error>
+                            <mat-error *ngIf="message.hasError('minlength')">Mínimo 10 caracteres</mat-error>
+                            <mat-error *ngIf="message.hasError('required')">Message es requerido</mat-error>
+                        </mat-form-field>            
+                    </section>        
+            
+                    <section class='section-form section-button__form' fxFlex.xs="100%" fxFlex.sm="90%" fxFlex.md="90%" fxFlex.xl="90%" fxFlex.lg="90%"
+                        fxFlexAlign='end center'>
+                        <button mat-button routerLink="/" type="button">Regresar</button>
+                        <button mat-raised-button color="primary" type="submit" [disabled]="!contactoForm.valid">Enviar</button>
+                    </section>        
+                </form>
+            </div>
+
+        </div>
+        <div fxFlex='50' fxFlexAlign.lt-sm='100'>
+            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d995.0466870527304!2d-79.19674298470093!3d-3.9819615901377485!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x91cb47e16596cf41%3A0x42e6f3c08efb9623!2sLeningrado%2C%20Loja!5e0!3m2!1ses-419!2sec!4v1622134464918!5m2!1ses-419!2sec" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+        </div>
+        
+    </div>
+
+    <div fxLayout='column' fxLayoutAlign='center center' class='div-title'>
+        <p class="title animate__animated animate__backInUp" > [ Wetch ] </p>
+        <small> <em> La solución arquitectónica eficaz para usted</em></small>
+    </div>
+
+    
+</div>

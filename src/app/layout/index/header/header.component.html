@@ -10,14 +10,12 @@
     </div>
     <span class="space-menu"></span>
     <div fxHide fxShow.gt-xs>
-        <ul fxLayout fxLayoutGap='15px' class="navigation-items">      
-          <li *ngIf="!user"><a class="item" routerLink='/empresa/info'>Empresa</a></li>
-          <li *ngIf="!user"><a class="item" routerLink='/empresa/info'>Proyectos</a></li>
-          <li *ngIf="!user"><a class="item" routerLink='/empresa/info'>Contacto</a></li>      
-          <li *ngIf="!user" ><a class="item hover_rouded" [routerLink]="['register']">Regístrate</a></li>      
+        <ul fxLayout fxLayoutGap='20px' class="navigation-items"  >      
+          <li *ngIf="!user"><a class="item secondary" routerLink='/quienes-somos'>Empresa</a></li>          
+          <li *ngIf="!user"><a class="item secondary" routerLink='/contacto'>Contáctanos</a></li>      
+          <!-- <li *ngIf="!user" ><a class="item hover_rouded secondary" [routerLink]="['register']">Regístrate</a></li>       -->
           <li *ngIf="!user" class="rounded"><a class="item" [routerLink]="['login']">Iniciar Sesión</a></li>      
-          <li *ngIf="user && user.isPlanificador()"><a class="item" routerLink='/proyectos/proyectos-list'> Mis Proyectos</a></li>      
-          <li *ngIf="user"><a class="item" routerLink='/empresa/info'>Mi perfil</a></li>                
+          <li *ngIf="user && user.isPlanificador()"><a class="item" routerLink='/proyectos/proyectos-list'> Mis Proyectos</a></li>                
         </ul>       
     </div>  
 
@@ -25,8 +23,10 @@
     <!-- <button mat-menu-item [routerLink]="['register']">Regístrate</button> -->
 
     <div *ngIf="user">      
-      <button   mat-button [matMenuTriggerFor]="menu"><mat-icon>account_circle</mat-icon></button>
+      <button class="item"  mat-button [matMenuTriggerFor]="menu"><mat-icon>account_circle</mat-icon>{{user.name}}</button>
       <mat-menu #menu="matMenu" xPosition="before">        
+          <button mat-menu-item (click)="profile()">Mi perfil</button>  
+          <button mat-menu-item (click)="logOut()">Configuraciones</button>
           <button mat-menu-item (click)="logOut()">Cerrar Sesión</button>        
       </mat-menu>       
     </div>

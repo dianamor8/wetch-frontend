@@ -2,20 +2,20 @@
     <div fxLayout='row' fxLayoutAlign="center center">
         <div fxFlex='100%'>
             <div fxLayout fxLayoutAlign="end center">
-                <h2 fxFlex fxHide.lt-md>Áreas de vivienda</h2>
-                <h3 fxFlex fxShow.lt-md fxHide> <strong> Áreas de vivienda</strong></h3>
+                <h2 fxFlex fxHide.lt-md class="title__pages">Áreas de vivienda</h2>
+                <h3 fxFlex fxShow.lt-md fxHide class="title__pages"> <strong> Áreas de vivienda</strong></h3>
                 <!-- SAME BUTTONS FROM SMALL DEVICES -->
-                <button fxShow.lt-md fxHide class="button-table" mat-raised-button>
+                <!-- <button fxShow.lt-md fxHide class="button-table" mat-raised-button>
                     <mat-icon>find_in_page</mat-icon>
-                </button>
+                </button> -->
                 <button fxShow.lt-md fxHide class="button-table" mat-raised-button color="primary"
                     (click)="onSelectCreate()">
                     <mat-icon>add</mat-icon>
                 </button>
-
+<!-- 
                 <button fxHide.lt-md class="button-table" mat-raised-button>
                     <mat-icon>find_in_page</mat-icon> Importar
-                </button>
+                </button> -->
                 <button fxHide.lt-md class="button-table" mat-raised-button color="primary" (click)="onSelectCreate()">
                     <mat-icon>add</mat-icon>Nuevo
                 </button>

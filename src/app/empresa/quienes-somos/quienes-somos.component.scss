@@ -1,0 +1,85 @@
+.div-title {
+    margin-top: 25px;
+    margin-bottom: 50px;
+  }
+  
+.title {
+    font-size: 5.5rem;
+    margin: 40px;
+    margin-bottom: 20px;
+    color: var(--wetch-black);
+    font-family: "Bauhaus";
+  }
+
+.title-page{
+    & h2 {
+        font-size: 2rem;
+        font-family: 'gothic';
+    }
+    &__page {
+        margin-top: 30px;        
+    }
+}
+
+.justify{
+text-align: justify;
+}
+
+.organizacion{
+    margin:  1%;
+
+    &__card{
+     background-color: var(--wetch-white);   
+     margin: 2%;
+    }
+
+    &__header {
+        justify-content: center;
+        // background-image: url('/assets/images/borde2.png');
+        background-repeat: round;
+        background-size: cover;
+        // filter: grayscale(1);
+    }
+
+    &__title{
+        text-align: center;        
+        font-weight: bold;
+        
+    }
+    &__content{
+        margin: 3%;
+        text-align: center;
+    }
+    &__subtitle{
+        font-family: 'gothic';
+        font-size: 2rem;
+        text-align: center;
+        margin: 20px;
+    }
+}
+
+@media screen and (max-width: 599px){
+    .title {
+        font-size: 2.8rem;
+    }
+}
+@media screen and (min-width: 600px) and (max-width: 959px){
+    .title {
+        font-size: 4rem;
+      }
+}
+@media screen and (min-width: 960px) and (max-width: 1279px){
+    .title {
+        font-size: 5.5rem;
+      }
+}
+@media screen and (min-width: 1280px) and (max-width: 1919px){
+    .title {
+        font-size: 5.5rem;
+      }
+}
+@media screen and (min-width: 1920px) and (max-width: 5000px){
+    .title {
+        font-size: 5.5rem;
+      }
+}

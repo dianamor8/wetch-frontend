@@ -1,0 +1,36 @@
+.supercontainer {
+    margin: 10px;
+}
+
+.subtitle{
+    margin-left: 10px;
+    margin-bottom: 10px;
+}
+
+.title {
+    font-size: 5.5rem;
+    margin: 40px;
+    margin-bottom: 20px;
+    color: var(--wetch-black);
+    font-family: "Bauhaus";
+  }
+  
+  .div-title {
+    margin-top: 25px;
+    margin-bottom: 50px;
+  }
+
+.item-form {
+    width: 100%;
+}
+
+.section-form{
+    margin-left: 10px;
+    margin-right: 10px;
+}
+
+.section-button__form{
+    display: flex;
+    justify-content: flex-end;
+    padding-top: 15px;
+}

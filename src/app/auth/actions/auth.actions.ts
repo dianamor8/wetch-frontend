@@ -1,5 +1,6 @@
 import { HttpHeaders } from "@angular/common/http";
 import { createAction, props } from "@ngrx/store";
+import { Profile } from "../models/profile";
 import { User } from "../models/user";
 
 export const login = createAction(
@@ -78,4 +79,16 @@ export const changePasswordError = createAction(
 
 export const addToken = createAction(
     '[AUTH] Add token store', props<{token:string}>()
+);
+
+export const updateProfile = createAction(
+    '[AUTH] Update Profile', props<{profile:Profile}>()
+);
+
+export const updateProfileSuccess = createAction(
+    '[AUTH] Update Profile Success', props<{profile:Profile}>()
+);
+
+export const updateProfileError  = createAction(
+    '[AUTH] Update Profile Error', props<{payload: any}>()
 );

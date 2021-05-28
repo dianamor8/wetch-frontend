@@ -13,15 +13,21 @@
     font-family: 'Lexend', sans-serif;
     color: azure;
     text-decoration: none;
+    font-family: 'gothic';
+    font-size: 1.1rem;
 }
 
 .titulo {
-    font-family: 'Lexend', sans-serif;
+    font-family: 'gothic';
     text-decoration: none;
-    color: aliceblue;
-    font-weight: bold;
+    color: var(--wetch-white);
+    font-size: 1.5rem;
     margin-left: 5px;
     margin-right: 5px;
+}
+
+.titulo:hover{
+    color: var(--wetch-black);
 }
 
 .rounded {
@@ -42,4 +48,9 @@
     background-color: var(--wetch-black);
     color: var(--wetch-white);
 
+}
+
+.secondary:hover{
+    border-bottom: 2px solid;
+    font-size: 1.5rem;
 }

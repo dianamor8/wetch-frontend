@@ -21,7 +21,7 @@ export class InicializationGuard implements CanActivate {
 
   canActivate(
     route: ActivatedRouteSnapshot,
-    state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
+    state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {     
       this.store.select("authApp").subscribe((resp)=>{
         if(resp.userAuth){          
           return this.router.navigate(['/dashboard']); //.then(() => false);

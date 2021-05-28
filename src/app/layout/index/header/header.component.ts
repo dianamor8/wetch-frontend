@@ -1,4 +1,6 @@
+
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
+import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { AppState } from 'src/app/app.reducer';
 import { logout } from 'src/app/auth/actions';
@@ -16,7 +18,8 @@ export class HeaderComponent implements OnInit {
   user:User;
 
   constructor(
-    private store: Store<AppState>
+    private store: Store<AppState>,
+    private route:Router
   ) { }
 
   ngOnInit(): void {
@@ -39,5 +42,9 @@ export class HeaderComponent implements OnInit {
 
   logOut():void{
     this.store.dispatch(logout());   
+  }
+
+  profile():void{    
+    this.route.navigateByUrl('/profile')
   }
 }

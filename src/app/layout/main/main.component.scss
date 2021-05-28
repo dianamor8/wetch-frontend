@@ -1,5 +1,302 @@
 .title {
-    font-size: 80px;
-    margin:40px;    
-    color: var(--wetch-gray);
+  font-size: 5.5rem;
+  margin: 40px;
+  margin-bottom: 20px;
+  color: var(--wetch-black);
+  font-family: "Bauhaus";
+}
+
+.div-title {
+  margin-top: 25px;
+  margin-bottom: 50px;
+}
+.content-about {
+  max-width: 100%;
+  padding-left: 10%;
+  padding-right: 10%;
+  margin-bottom: 30px;
+  padding-top: 2%;
+  padding-bottom: 2%;
+  background-color: #eeeeee;
+}
+
+.content-services {
+  min-width: 100%;
+  padding-left: 5%;
+  padding-right: 5%;
+  margin-bottom: 30px;
+  padding-top: 2%;
+  padding-bottom: 2%;
+}
+
+.card-header-image {
+  background-image: url("/assets/images/proyecto1.png");
+  background-size: cover;
+}
+
+.image-wrapper {
+  width: 600px;
+  height: 350px;
+  position: relative;
+  margin: 0px;
+}
+
+.image-wrapper img {
+  position: absolute;
+  top: 0;
+  left: 0;
+  transform-origin: left;
+  max-width: 100%;
+}
+
+.section {
+  &-title {
+    font-size: 1.5rem;
+  }
+  &-text {
+    font-size: 1.3rem;
+  }
+}
+
+.round-image {
+  border-radius: 100%;
+  height: 100px;
+  margin: 0 auto;
+  width: 100px;
+  overflow: hidden;
+  transition: top 0.2s ease-in-out, width 0.5s, height 0.5s;
+}
+.round-image:hover {
+  width: 120px;
+  height: 120px;
+}
+
+.container-image {
+  width: 100%;
+  height: 400px;
+  &__img {
+    height: 100%;
+    width: 100%;
+  }
+}
+
+@media screen and (max-width: 599px) {
+  .container-image {
+    height: 200px;
+  }
+  .title {
+    font-size: 2.8rem;
+  }
+  .div-title {
+    margin-top: 10px;
+    margin-bottom: 30px;
+  }
+  .section {
+    &-title {
+      font-size: 1.2rem;
+    }
+    &-text {
+      font-size: 1rem;
+    }
+  }
+  .image-1 {
+    display: none;
+  }
+  .image-2 {
+    display: none;
+  }
+  .image-3 {
+    display: none;
+  }
+  .image-wrapper {
+    width: 300px;
+    height: 180px;
+    position: relative;
+    margin: 0px;
+  }
+}
+@media screen and (min-width: 600px) and (max-width: 959px) {
+  .container-image {
+    height: 300px;
+  }
+  .title {
+    font-size: 4rem;
+  }
+  .section {
+    &-title {
+      font-size: 1.2rem;
+    }
+    &-text {
+      font-size: 0.9rem;
+    }
+  }
+  .image-1 {
+    display: none;
+  }
+  .image-2 {
+    display: none;
+  }
+  .image-3 {
+    display: none;
+  }
+  .image-wrapper {
+    width: 98%;
+    height: 200px;
+    position: relative;
+    margin: 0px;
+  }
+}
+@media screen and (min-width: 960px) and (max-width: 1279px) {
+  .container-image {
+    height: 400px;
+  }
+  .title {
+    font-size: 5.5rem;
+  }
+
+  .image-1 {
+    clip-path: polygon(0 0, 0 32%, 28% 0);
+    transform: translate(-10px, -6px);
+    transition: transform 300ms ease;
+    transform-origin: top;
+    .image-wrapper:hover & {
+      transform: translate(0, 0);
+    }
+  }
+
+  .image-2 {
+    clip-path: polygon(28% 0, 0 32%, 0 100%, 17% 100%, 90% 0);
+    transform: translate(-30px, 5px);
+    transition: transform 300ms ease;
+    .image-wrapper:hover & {
+      transform: translate(0, 0);
+    }
+  }
+
+  .image-3 {
+    clip-path: polygon(100% 0, 100% 65%, 74% 100%, 17% 100%, 90% 0);
+    transform: translate(-15px, -6px);
+    transition: transform 300ms ease;
+    .image-wrapper:hover & {
+      transform: translate(0, 0);
+    }
+  }
+
+  .image-4 {
+    clip-path: polygon(100% 65%, 74% 100%, 100% 100%);
+    transform: translate(-32px, 5px);
+    transition: transform 300ms ease;
+    transform-origin: top;
+    .image-wrapper:hover & {
+      transform: translate(0, 0);
+    }
+  }
+  .image-wrapper {
+    width: 100%;
+    height: 280px;
+    position: relative;
+    margin: 0px;
+  }
+}
+@media screen and (min-width: 1280px) and (max-width: 1919px) {
+  .container-image {
+    height: 420px;
+  }
+  .title {
+    font-size: 5.5rem;
+  }
+  .image-1 {
+    clip-path: polygon(0 0, 0 32%, 28% 0);
+    transform: translate(-10px, -6px);
+    transition: transform 300ms ease;
+    transform-origin: top;
+    .image-wrapper:hover & {
+      transform: translate(0, 0);
+    }
+  }
+
+  .image-2 {
+    clip-path: polygon(28% 0, 0 32%, 0 100%, 17% 100%, 90% 0);
+    transform: translate(-30px, 5px);
+    transition: transform 300ms ease;
+    .image-wrapper:hover & {
+      transform: translate(0, 0);
+    }
+  }
+
+  .image-3 {
+    clip-path: polygon(100% 0, 100% 65%, 74% 100%, 17% 100%, 90% 0);
+    transform: translate(-15px, -6px);
+    transition: transform 300ms ease;
+    .image-wrapper:hover & {
+      transform: translate(0, 0);
+    }
+  }
+
+  .image-4 {
+    clip-path: polygon(100% 65%, 74% 100%, 100% 100%);
+    transform: translate(-32px, 5px);
+    transition: transform 300ms ease;
+    transform-origin: top;
+    .image-wrapper:hover & {
+      transform: translate(0, 0);
+    }
+  }
+  .image-wrapper {
+    width: 100%;
+    height: 280px;
+    position: relative;
+    margin: 0px;
+  }
+}
+@media screen and (min-width: 1920px) and (max-width: 5000px) {
+  .container-image {
+    height: 420px;
+  }
+  .title {
+    font-size: 5.5rem;
+  }
+  .image-1 {
+    clip-path: polygon(0 0, 0 32%, 28% 0);
+    transform: translate(-10px, -6px);
+    transition: transform 300ms ease;
+    transform-origin: top;
+    .image-wrapper:hover & {
+      transform: translate(0, 0);
+    }
+  }
+
+  .image-2 {
+    clip-path: polygon(28% 0, 0 32%, 0 100%, 17% 100%, 90% 0);
+    transform: translate(-30px, 5px);
+    transition: transform 300ms ease;
+    .image-wrapper:hover & {
+      transform: translate(0, 0);
+    }
+  }
+
+  .image-3 {
+    clip-path: polygon(100% 0, 100% 65%, 74% 100%, 17% 100%, 90% 0);
+    transform: translate(-15px, -6px);
+    transition: transform 300ms ease;
+    .image-wrapper:hover & {
+      transform: translate(0, 0);
+    }
+  }
+
+  .image-4 {
+    clip-path: polygon(100% 65%, 74% 100%, 100% 100%);
+    transform: translate(-32px, 5px);
+    transition: transform 300ms ease;
+    transform-origin: top;
+    .image-wrapper:hover & {
+      transform: translate(0, 0);
+    }
+  }
+  .image-wrapper {
+    width: 100%;
+    height: 280px;
+    position: relative;
+    margin: 0px;
+  }
 }

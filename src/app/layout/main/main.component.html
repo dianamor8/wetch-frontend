@@ -1,8 +1,70 @@
-<div fxLayout='column' fxLayoutAlign='center center'>
-    <br>
-    <br>
-    <br>
-    <br>
-<p class="title">Wetch</p>
-<small>Contenido pendiente</small>
+<div fxLayout="column" fxLayoutAlign="center center">
+<div class="container-image">
+        <img class="container-image__img animate__slideInDown" src="/assets/images/proyecto2.png" alt="home">
+</div>
+
+
+<div fxLayout='column' fxLayoutAlign='center center' class='div-title'>
+    <p class="title animate__animated animate__backInUp" > [ Wetch ]  </p>
+    <small> <em> La solución arquitectónica eficaz para usted</em></small>
+</div>
+
+<div fxLayout.lt-sm='column' fxLayout="row wrap"  fxLayoutAlign="space-between center" class="content-about">
+    <div fxFlex="40" fxFlex.lt-sm='80'>
+        <h2 class="section-title"> <strong> NOSOTROS</strong> </h2>
+        <p class="section-text">Somos una empresa con años de experiencia, que ha participado en múltiples proyectos, 
+             lo que nos permite planificar y construir proyectos arquitectónicos de vanguardia
+             para el austro del Ecuador.
+        </p>        
+    </div>
+    <span></span>
+    <div fxFlex="50">
+        <div class="image-wrapper">
+            <img class="image-1" src="./assets/images/proyecto9.jpg" />
+            <img class="image-2" src="./assets/images/proyecto9.jpg" />
+            <img class="image-3" src="./assets/images/proyecto9.jpg" />
+            <img class="image-4" src="./assets/images/proyecto9.jpg" />
+          </div>       
+    </div>
+</div>
+
+<div fxLayout="row wrap"  fxLayout.lt-sm='column' fxLayoutGap='5px' fxLayoutAlign="space-around none" class="content-services">
+    <mat-card fxFlex='30'>
+        <mat-card-header>
+            <mat-card-title>  <br>                              
+            TECNOLOGÍAS </mat-card-title>
+        </mat-card-header>
+        <mat-card-content>
+        <p>El desarrollo tecnológico actual permite utilizar la tecnología constructiva más conveniente. Cada uno de estos aporta su nivel de seguridad y confort en los espacios planificados.</p>
+    </mat-card-content>
+    </mat-card>
+    <mat-card fxFlex='30'>
+        <mat-card-header>
+           <mat-card-title> <br> PROYECTOS</mat-card-title>
+        </mat-card-header>
+        <mat-card-content>
+        <p>Estudios preliminares, levantamiento de necesidades y programación del proyecto a diseñar. Contamos con personal responsable.</p>
+        </mat-card-content>
+    </mat-card>
+    <mat-card fxFlex='30'>
+        <mat-card-header>
+            <mat-card-title> <br> EXPERIENCIAS</mat-card-title>
+            </mat-card-header>
+        <mat-card-content>
+            <p>El proceso de dirección y construcción de la obra, es supervisada permanentemente para su desarrollo de calidad.  </p>
+        </mat-card-content>        
+    </mat-card>    
+</div>
+
+<div class="content-about">
+    <h2 class="section-title"> <strong> PROYECTOS EJECUTADOS </strong> </h2>
+    <div class="container-fluid px-0">
+        <div class="row bg-dark h-100">
+            <div class="col-12 px-0">
+                <app-carousel [items]='carouselDATA'></app-carousel>
+            </div>
+        </div>
+    </div>
+</div>
+     
 </div>

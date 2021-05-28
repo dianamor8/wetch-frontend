@@ -11,11 +11,12 @@ import { MaterialModule } from '../material.module';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { MainComponent } from './main/main.component';
 import { UtilitariosModule } from '../utilitarios/utilitarios.module';
+import { CarouselComponent } from './carousel/carousel.component';
 
 
 
 @NgModule({
-  declarations: [IndexComponent, DefaultComponent, HeaderComponent, FooterComponent, FooterDefComponent, SidebarDefComponent, DashboardComponent, MainComponent],
+  declarations: [IndexComponent, DefaultComponent, HeaderComponent, FooterComponent, FooterDefComponent, SidebarDefComponent, DashboardComponent, MainComponent, CarouselComponent],
   imports: [
     CommonModule,
     MaterialModule,

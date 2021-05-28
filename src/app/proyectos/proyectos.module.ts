@@ -11,14 +11,13 @@ import { MatDatepickerModule } from '@angular/material/datepicker';
 import { ProyectoEstudiosComponent } from './components/Proyecto/proyecto-estudios/proyecto-estudios.component';
 import { PrefactibilidadDeleteComponent } from './components/Prefactibilidad/prefactibilidad-delete/prefactibilidad-delete.component';
 import { PrefactibilidadAddComponent } from './components/Prefactibilidad/prefactibilidad-add/prefactibilidad-add.component';
-import { PrefactibilidadDetailComponent } from './components/Prefactibilidad/prefactibilidad-detail/prefactibilidad-detail.component';
 import { RouterModule } from '@angular/router';
 import { FindAmbienteComponent } from './components/Prefactibilidad/find-ambiente/find-ambiente.component';
 import { ResultsComponent } from './components/Prefactibilidad/results/results.component';
 
 
 @NgModule({
-  declarations: [ProyectoListComponent, ProyectoAddComponent, ProyectoDetailComponent, ProyectoDeleteComponent, ProyectoEstudiosComponent, PrefactibilidadDeleteComponent, PrefactibilidadAddComponent, PrefactibilidadDetailComponent, FindAmbienteComponent, ResultsComponent],
+  declarations: [ProyectoListComponent, ProyectoAddComponent, ProyectoDetailComponent, ProyectoDeleteComponent, ProyectoEstudiosComponent, PrefactibilidadDeleteComponent, PrefactibilidadAddComponent, FindAmbienteComponent, ResultsComponent],
   imports: [
     CommonModule,
     ProyectosRoutingModule,

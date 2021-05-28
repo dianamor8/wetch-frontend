@@ -2,11 +2,13 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { ChangePasswordComponent } from './components/change-password/change-password.component';
 import { LoginComponent } from './components/login/login.component';
+import { ProfileComponent } from './components/profile/profile.component';
 import { RegisterComponent } from './components/register/register.component';
 import { ResetPasswordComponent } from './components/reset-password/reset-password.component';
 import { ValidateAccountComponent } from './components/validate-account/validate-account.component';
 import { AuthGuard } from './guard/auth.guard';
 import { HasTokenGuard } from './guard/has-token.guard';
+import { RedirectToLoginGuard } from './guard/redirect-to-login.guard';
 import { ValidateAccountGuard } from './guard/validate-account.guard';
 
 const routes: Routes = [  
@@ -14,7 +16,7 @@ const routes: Routes = [
   { path: 'register', component: RegisterComponent, canActivate: [AuthGuard] },
   { path: 'reset-password', component: ResetPasswordComponent},
   { path: 'change-password', component: ChangePasswordComponent, canActivate:[HasTokenGuard]},
-  { path: 'validate-account', component: ValidateAccountComponent, canActivate:[ValidateAccountGuard]},
+  { path: 'validate-account', component: ValidateAccountComponent, canActivate:[ValidateAccountGuard]},  
 ];
 
 @NgModule({

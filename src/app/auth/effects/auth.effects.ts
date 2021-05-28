@@ -102,6 +102,23 @@ export class AuthEffects {
             )})
         ));
 
+        updateProfile$ = createEffect(()=>this.actions$.pipe(
+            ofType(authAccions.updateProfile),
+            mergeMap((resp)=>
+                this.authService.updateProfile(resp.profile).pipe(                                 
+                    map((response)=>                                                
+                        {   this.messageService.showNotification('Actualizado con éxito', 'Éxito','Ok', 'success', 4000);                                     
+                            return authAccions.updateProfileSuccess({profile:response})}
+                    ),                
+                    catchError((err)=> 
+                    {
+                        this.messageService.showNotification('No fue posible actualizar', 'Error','Ok', 'error', 4000);
+                        return of(authAccions.updateProfileError({payload:err}))
+                    }
+                    ),
+                ))
+            ));
+        
     //EFECTS TO REDIRECT
 
     $LoginRedirectTo = createEffect(()=>this.actions$.pipe(
@@ -128,6 +145,7 @@ export class AuthEffects {
     $ChangePasswordRedirectTo = createEffect(()=>this.actions$.pipe(
         ofType(authAccions.changePasswordSuccess),
         tap((x)=>{
+            
             this.router.navigateByUrl('/login');
         })
     ), { dispatch: false });  

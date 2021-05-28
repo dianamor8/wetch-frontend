@@ -1,0 +1,29 @@
+.supercontainer {
+    margin: 10px;
+}
+
+.title{
+    margin-left: 10px;
+    margin-bottom: 10px;
+}
+
+.th-left{    
+    justify-content: end;
+}
+
+.headerTableColor {
+    background-color: var(--wetch-gray);
+}
+
+.w-15{
+    max-width: 15%;
+}
+
+.min-with-button {
+    min-width: 35px;
+    padding: 0;
+}
+
+.item-form {
+    width: 100%;
+}

@@ -1,32 +1,28 @@
 <!-- https://www.youtube.com/watch?v=FP7Hs8lTy1k MENÚ DE ITEMS -->
 <mat-nav-list>
 
-    <!-- <div *ngIf="user && user.isPlanificador()">
-        <h2 matSubheader> <small>Proyectos</small></h2>
-        <a mat-list-item href="/proyectos/proyectos-list" (click)="onSidenavClose()"> Mis Proyectos </a>
+    <div *ngIf="user">
+        <div fxLayout='row wrap' fxLayoutAlign='center center'>
+            <img class="image_wetch" fxflex="100" src="/assets/images/wetch3.png" alt="">            
+        </div>
         <mat-divider></mat-divider>
-    </div> -->
+    </div>
 
     <div *ngIf="user && user.isPlanificador()">
         <h2 matSubheader><small>Prefactibilidad</small></h2>        
         <a mat-list-item href='/prefactibilidad/tipo-area-vivienda' (click)="onSidenavClose()"> Área de Vivienda </a>
         <a mat-list-item href='/prefactibilidad/ambiente-list' (click)="onSidenavClose()"> Ambientes </a>
-        <small> <a mat-list-item href='/prefactibilidad/acabado-list' (click)="onSidenavClose()"> Acabados </a></small>
+        <small> <a mat-list-item href='/prefactibilidad/acabado-list' (click)="onSidenavClose()"> Acabado de construcción</a></small>
 
         <mat-divider></mat-divider>
     </div>
 
-    <h2 matSubheader><small>Presupuesto</small></h2>
-    <a mat-list-item href='/' (click)="onSidenavClose()">Rubros</a>
-    <a mat-list-item href='/' (click)="onSidenavClose()">Costo Indirecto</a>
+    <div *ngIf="user && user.isAdministrador()">
+        <h2 matSubheader><small>Atencion a clientes</small></h2>
+        <a mat-list-item href='/contacto-list' (click)="onSidenavClose()">Contactos</a>
+        <a mat-list-item href='/usuarios-list' (click)="onSidenavClose()">Usuarios</a>
+    </div>
 
     <mat-divider></mat-divider>
-
-    <div *ngIf="user && user.isPlanificador()">
-        <h2 matSubheader><small>Configuraciones</small></h2>
-        <a mat-list-item href='/prefact/areaVivienda' (click)="onSidenavClose()">Configuraciones</a>        
-        <mat-divider></mat-divider>
-    </div>
-    <h2 matSubheader><small>Nosotros</small></h2>
-    <a mat-list-item href='/prefact/areaVivienda' (click)="onSidenavClose()">Version</a>
+    
 </mat-nav-list>

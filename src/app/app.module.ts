@@ -18,6 +18,7 @@ import { UtilitariosModule } from './utilitarios/utilitarios.module';
 import { CookieService } from 'ngx-cookie-service';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { AuthInterceptor } from './auth/interceptors/auth.interceptor';
+import { EmpresaModule } from './empresa/empresa.module';
 
 
 
@@ -34,6 +35,7 @@ import { AuthInterceptor } from './auth/interceptors/auth.interceptor';
     FlexLayoutModule,
     FontAwesomeModule,
     AuthModule,
+    EmpresaModule,
     UtilitariosModule,
     StoreModule.forRoot(appReducers, {metaReducers}),
     EffectsModule.forRoot(EffectsArrayAuth),

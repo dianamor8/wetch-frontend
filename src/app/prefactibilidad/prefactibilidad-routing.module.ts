@@ -17,7 +17,7 @@ const routes: Routes = [
   { path: 'ambiente-list', component: AmbienteListComponent, canActivate:[RedirectToLoginGuard] },
   { path: 'ambiente/:id', component: AmbienteDetailComponent, canActivate:[RedirectToLoginGuard]},
   { path: 'ambiente-new', component: AmbienteAddComponent, canActivate:[RedirectToLoginGuard]},
-  { path: 'acabado-list', component: AcabadoListComponent, canActivate:[RedirectToLoginGuard] },
+  { path: 'acabado-list', component: AcabadoListComponent, canActivate:[RedirectToLoginGuard] },  
 ];
 
 @NgModule({

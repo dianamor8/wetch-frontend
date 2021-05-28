@@ -16,7 +16,8 @@ footer {
 
 .logo {
     width: 100%;
-    height: auto;       
+    height: auto;    
+    margin-bottom: 0;   
 }
 
 .contact-footer {
@@ -131,8 +132,7 @@ footer {
         width: 50%;
         height: auto;
         align-self: center;
-        margin-top: 12px;
-        margin-bottom: 10px;
+        margin-top: 12px;        
     }
 
     .services__items {

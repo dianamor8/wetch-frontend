@@ -1,11 +1,10 @@
 export class Profile {
     
     public id:number|null;
-    public firstName:string;
-    public lastName:string;    
+    public nombres:string;
+    public apellidos:string;    
+    public telefono:string;    
+    public direccion:string;    
 
-    public constructor(init?: Partial<Profile>) {
-        Object.assign(this, init);
-    }
-
+    constructor(){}
 }

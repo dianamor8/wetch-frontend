@@ -1,0 +1,72 @@
+<div class="supercontainer">    
+    <div *ngIf="contactoSelected">
+        <app-contacto-detail [contacto]="contactoSelected"></app-contacto-detail>
+    </div>
+    <div fxLayout='row' fxLayoutAlign="center center">
+        <div fxFlex='100%'>
+            <div fxLayout fxLayoutAlign="end center">
+                <h2 fxFlex fxHide.lt-md class="title">Mensajes recibidos</h2>
+                <h3 fxFlex fxShow.lt-md fxHide class="title"> <strong> Mensajes recibidos</strong></h3>
+            </div>
+            <ng-container *ngIf="contactos.length > 0; else elseTemplate">
+                <mat-table [dataSource]="contactos" class="mat-elevation-z8">
+                    <!-- Id Column -->
+                    <ng-container matColumnDef="id">
+                        <mat-header-cell *matHeaderCellDef ngClass="w-5 headerTableColor"> No. </mat-header-cell>
+                        <mat-cell *matCellDef="let element; let i=index" ngClass="w-5"> {{i+1}} </mat-cell>
+                    </ng-container>
+
+                    <!-- Fecha -->
+                    <ng-container matColumnDef="fecha">
+                        <mat-header-cell *matHeaderCellDef ngClass="headerTableColor"> Fecha
+                        </mat-header-cell>
+                        <mat-cell *matCellDef="let element"> {{element.fecha | date:"d/MM/YYYY hh:mm:ss"}} </mat-cell>
+                    </ng-container>
+
+                    <!-- Nombre -->
+                    <ng-container matColumnDef="email">
+                        <mat-header-cell *matHeaderCellDef ngClass="headerTableColor"> Correo electrónico
+                        </mat-header-cell>
+                        <mat-cell *matCellDef="let element"> {{element.email}} </mat-cell>
+                    </ng-container>
+
+                    <!-- Asunto -->
+                    <ng-container matColumnDef="asunto">
+                        <mat-header-cell *matHeaderCellDef ngClass="headerTableColor"> Asunto
+                        </mat-header-cell>
+                        <mat-cell *matCellDef="let element"> {{element.asunto | slice: 0:30}} </mat-cell>
+                    </ng-container>
+
+                    <!-- Actions Column -->
+                    <ng-container matColumnDef="actions">
+                        <mat-header-cell *matHeaderCellDef class="th-left w-15 headerTableColor"> Acciones
+                        </mat-header-cell>
+                        <mat-cell *matCellDef="let element" class="th-left w-15">
+                            <button mat-button class="min-with-button" (click)="onSelectEdit(element)">                            
+                                <mat-icon *ngIf="element.visto">drafts</mat-icon>
+                                <mat-icon *ngIf="!element.visto">email</mat-icon>
+                            </button>
+                            <button mat-button color="warn" class="min-with-button" (click)="deleteElement(element)">
+                                <mat-icon>delete</mat-icon>
+                            </button>
+                        </mat-cell>
+                    </ng-container>
+
+                    <mat-header-row *matHeaderRowDef="displayedColumnsTable"></mat-header-row>
+                    <mat-row *matRowDef="let row; columns: displayedColumnsTable;"></mat-row>
+                </mat-table>
+            </ng-container>
+            <ng-template #elseTemplate>
+                <em>
+                    <p>Aún no se han agregado elementos</p>
+                </em>
+            </ng-template>
+
+        </div>
+    </div>
+
+    
+</div>
+
+
+<br>

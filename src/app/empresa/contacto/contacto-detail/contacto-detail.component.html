@@ -1,0 +1,38 @@
+<div class="supercontainer">
+    <h1 class="title__pages">Comunicaciones recibidas</h1>
+    <h2 class='title'>Detalle del mensaje</h2>        
+    <form [formGroup]="contactoForm" fxLayout="row wrap" fxLayoutAlign="space-between center" >
+        <!-- REMITENTE -->
+        <section class='section-form' fxFlex.xs="100%" fxFl9x.sm="90%" fxFlex.md="46%" fxFlex.xl="46%" fxFlex.lg="46%">
+            <mat-form-field class="item-form">
+                <mat-label>Nombre</mat-label>
+                <input matInput [formControl]="nombre" placeholder="Nombres" class="style" [value]="contacto.nombre">                                
+            </mat-form-field>            
+        </section>
+
+        <!-- EMAIL -->
+        <section class='section-form' fxFlex.xs="100%" fxFl9x.sm="90%" fxFlex.md="46%" fxFlex.xl="46%" fxFlex.lg="46%">            
+            <mat-form-field class="item-form">
+                <mat-label>Email</mat-label>
+                <input matInput type="email" [formControl]="email" placeholder="Correo electrónico" class="style" [value]="contacto.email">                
+            </mat-form-field>
+        </section>
+
+        <!-- ASUNTO -->
+        <section class='section-form' fxFlex.xs="100%" fxFl9x.sm="90%" fxFlex.md="100%" fxFlex.xl="100%" fxFlex.lg="100%">
+            <mat-form-field class="item-form">
+                <mat-label>Asunto</mat-label>
+                <input matInput [formControl]="asunto" placeholder="Asunto" type="text" class="style" [value]="contacto.asunto">                                
+            </mat-form-field>            
+        </section>
+
+
+        <!-- MESSAGE -->
+        <section class='section-form' fxFlex.xs="100%" fxFl9x.sm="90%" fxFlex.md="100%" fxFlex.xl="100%" fxFlex.lg="100%">
+            <mat-form-field class="item-form">
+                <mat-label>Mensaje</mat-label>
+                <textarea matInput [formControl]="message" placeholder="Escribe tu mensaje y pronto nos contactaremos contigo. " type="text" class="style" [value]="contacto.message"></textarea>                               
+            </mat-form-field>            
+        </section>                      
+    </form>
+</div>
