@@ -14,20 +14,21 @@ import { PrefactibilidadAddComponent } from './components/Prefactibilidad/prefac
 import { RouterModule } from '@angular/router';
 import { FindAmbienteComponent } from './components/Prefactibilidad/find-ambiente/find-ambiente.component';
 import { ResultsComponent } from './components/Prefactibilidad/results/results.component';
+import { SimuladorComponent } from './components/Prefactibilidad/simulador/simulador.component';
 
 
 @NgModule({
-  declarations: [ProyectoListComponent, ProyectoAddComponent, ProyectoDetailComponent, ProyectoDeleteComponent, ProyectoEstudiosComponent, PrefactibilidadDeleteComponent, PrefactibilidadAddComponent, FindAmbienteComponent, ResultsComponent],
+  declarations: [ProyectoListComponent, ProyectoAddComponent, ProyectoDetailComponent, ProyectoDeleteComponent, ProyectoEstudiosComponent, PrefactibilidadDeleteComponent, PrefactibilidadAddComponent, FindAmbienteComponent, ResultsComponent, SimuladorComponent],
   imports: [
     CommonModule,
     ProyectosRoutingModule,
     MaterialModule,
-    RouterModule,
+    RouterModule    
   ],  
   providers:[
     MatDatepickerModule
   ],
   entryComponents:[ProyectoDeleteComponent, FindAmbienteComponent, PrefactibilidadDeleteComponent],
-  // schemas: [ CUSTOM_ELEMENTS_SCHEMA ]
+  schemas: [ CUSTOM_ELEMENTS_SCHEMA ]
 })
 export class ProyectosModule { }

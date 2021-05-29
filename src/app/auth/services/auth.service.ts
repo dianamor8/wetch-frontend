@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
 import { catchError, delay, tap } from 'rxjs/operators';
 import { Profile } from '../models/profile';
-import { User } from '../models/user';
+import { User, UserSystem } from '../models/user';
 import { environment } from './../../../environments/environment';
 
 
@@ -22,6 +22,9 @@ export class AuthService {
   changePassword_url = environment.apiUrl+'/api/change-password';
   validateNewUser_url = environment.apiUrl+'/api/validateAccount';
   profile_url = environment.apiUrl+'/api/profile';
+  usersSystem_url = environment.apiUrl+'/api/users-list';
+  roles_url = environment.apiUrl+'/api/roles-update';
+  removeUser_url = environment.apiUrl+'/api/remove-user';
 
   httpOptions = {
     headers: new HttpHeaders({ 'Content-Type': 'application/json' })
@@ -113,6 +116,19 @@ export class AuthService {
   //ACTUALIZAR PROFILE
   updateProfile(profile:Profile):Observable<Profile>{        
     return this.http.put<Profile>(this.profile_url+`/${profile.id}`, profile, {withCredentials:true});    
+  }
+
+  // OBTENER TODOS LOS USUARIOS DEL SISTEMA. 
+  getAllUsersSystem():Observable<UserSystem[]>{    
+    return this.http.get<UserSystem[]>(this.usersSystem_url, {withCredentials:true});    
+  }
+
+  updateRoles(userSystem:UserSystem):Observable<UserSystem>{    
+    return this.http.post<UserSystem>(this.roles_url, userSystem, {withCredentials:true});
+  }
+
+  updateStatusUser(userSystem:UserSystem):Observable<UserSystem>{    
+    return this.http.post<UserSystem>(this.removeUser_url, userSystem, {withCredentials:true});
   }
 
 }

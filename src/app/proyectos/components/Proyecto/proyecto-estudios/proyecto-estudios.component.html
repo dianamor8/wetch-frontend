@@ -39,19 +39,25 @@
                             <td mat-cell *matCellDef="let row"> {{row.fecha | date:'d/MM/yyyy' }} </td>
                         </ng-container>
 
+                        
+
                         <!-- Subtotal Area Construccion Column -->
-                        <ng-container matColumnDef="subtotalAreaConstruccion">
-                            <th mat-header-cell *matHeaderCellDef mat-sort-header ngClass="headerTableColor"> Subt. Area
-                                Construcción </th>
-                            <td mat-cell *matCellDef="let row"> {{ row.subtotalAreaConstruccion }} </td>
+                        <ng-container matColumnDef="areaConstruccion">
+                            <th mat-header-cell *matHeaderCellDef mat-sort-header ngClass="headerTableColor"> Área de Construcción</th>
+                            <td mat-cell *matCellDef="let row"> {{ row.areaTotalConstruccion }}m<sup><small>2</small></sup>   </td>
+                        </ng-container>
+                        
+                        <!-- Subtotal Area Construccion Column -->
+                        <ng-container matColumnDef="costoConstruccion">
+                            <th mat-header-cell *matHeaderCellDef mat-sort-header ngClass="headerTableColor"> Costo de Construcción</th>
+                            <td mat-cell *matCellDef="let row"> ${{ row.costoTotalConstruccion }} </td>
                         </ng-container>
 
 
                         <!-- Area Total Column -->
-                        <ng-container matColumnDef="areaTotalConstruccion">
-                            <th mat-header-cell *matHeaderCellDef mat-sort-header ngClass="headerTableColor"> Subt. Area
-                                Construcción </th>
-                            <td mat-cell *matCellDef="let row"> {{ row.areaTotalConstruccion }} </td>
+                        <ng-container matColumnDef="inversionTotal">
+                            <th mat-header-cell *matHeaderCellDef mat-sort-header ngClass="headerTableColor"> Inversión Total </th>
+                            <td mat-cell *matCellDef="let row"> ${{ row.inversionTotal }} </td>
                         </ng-container>
 
 

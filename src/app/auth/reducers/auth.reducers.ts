@@ -1,9 +1,12 @@
 import { createReducer, on } from "@ngrx/store";
-import { login, loginError, loginSuccess, resetPassword, resetPasswordError, resetPasswordSuccess, siginup, siginupError, siginupSuccess, cookieAuthentication, cookieAuthenticationError, cookieAuthenticationSuccess, logout, logoutSuccess, logoutError, changePassword, changePasswordSuccess, changePasswordError, addToken, updateProfile, updateProfileSuccess, updateProfileError } from "../actions";
-import { User  } from "../models/user";
+import { login, loginError, loginSuccess, resetPassword, resetPasswordError, resetPasswordSuccess, siginup, siginupError, siginupSuccess, cookieAuthentication, cookieAuthenticationError, cookieAuthenticationSuccess, logout, logoutSuccess, logoutError, changePassword, changePasswordSuccess, changePasswordError, addToken, updateProfile, updateProfileSuccess, updateProfileError, getAllUsersSystem, getAllUsersSystemSuccess, getAllUsersSystemError, updateUsersSystem, updateUsersSystemSuccess, updateUsersSystemError, statusUsersSystem, statusUsersSystemSuccess, statusUsersSystemError } from "../actions";
+import { User, UserSystem  } from "../models/user";
+
+
 
 export interface AuthState{
-    userAuth: User | null;    
+    userAuth: User | null;
+    usersSystem: UserSystem[] | null;    
     access_token:string;
     token_type:string;
     loading:boolean;
@@ -19,7 +22,8 @@ export const initialState:AuthState = {
     loading:false,
     loaded: false, 
     error:null,
-    cookieAuthenticate:null
+    cookieAuthenticate:null,
+    usersSystem:[]
 }
 
 const __authReducer = createReducer(
@@ -231,6 +235,90 @@ const __authReducer = createReducer(
         }
     })),
 
+    on(getAllUsersSystem, (state) => ({
+        ...state, 
+        error:null, 
+        loading:true,
+        loaded:false
+    })),
+    on(getAllUsersSystemSuccess, (state, {usersSystem})=>({
+        ...state,
+        loading:false,
+        loaded:true,
+        usersSystem: [...usersSystem],
+        error:null
+    })),
+    on(getAllUsersSystemError, (state, {payload})=>({
+        ...state,
+        loading:false,
+        loaded:false,        
+        error:{
+            url:payload.url,
+            status:payload.status,
+            statusText:payload.statusText,            
+            message:payload.error.message
+        }
+    })), 
+
+    on(updateUsersSystem, (state) => ({
+        ...state, 
+        error:null, 
+        loading:true,
+        loaded:false
+    })),
+    on(updateUsersSystemSuccess, (state, {userSystem})=>({
+        ...state,
+        loading:false,
+        loaded:true,        
+        usersSystem: state.usersSystem.map(ussys =>{
+            if(ussys.id === userSystem.id){                
+                return {...ussys, ...userSystem}
+            }
+            return ussys;
+        }),
+        error:null
+    })),
+    on(updateUsersSystemError, (state, {payload})=>({
+        ...state,
+        loading:false,
+        loaded:false,        
+        error:{
+            url:payload.url,
+            status:payload.status,
+            statusText:payload.statusText,            
+            message:payload.error.message
+        }
+    })), 
+
+    on(statusUsersSystem, (state) => ({
+        ...state, 
+        error:null, 
+        loading:true,
+        loaded:false
+    })),
+    on(statusUsersSystemSuccess, (state, {userSystem})=>({
+        ...state,
+        loading:false,
+        loaded:true,        
+        usersSystem: state.usersSystem.map(ussys =>{
+            if(ussys.id === userSystem.id){                
+                return {...ussys, ...userSystem}
+            }
+            return ussys;
+        }),
+        error:null
+    })),
+    on(statusUsersSystemError, (state, {payload})=>({
+        ...state,
+        loading:false,
+        loaded:false,        
+        error:{
+            url:payload.url,
+            status:payload.status,
+            statusText:payload.statusText,            
+            message:payload.error.message
+        }
+    })), 
 );
 
 export function displayMessageErrors(errors:any):string{

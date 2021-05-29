@@ -100,14 +100,22 @@ export class User {
         return false;
     }
 
-    isEscritor():boolean{
+    isCliente():boolean{
         if(!this.roles){
             return false;
         }
-        if(this.roles.filter((rol)=>rol.name==='Escritor').length!==0){
+        if(this.roles.filter((rol)=>rol.name==='Cliente').length!==0){
             return true;
         }
         return false;
+    }
+
+    hasPermission(nombrePermiso:string):boolean{
+      let rolaux = this.roles.find(rol=>{
+        let permissionaux= rol.permissions.find(permission=> permission.name === nombrePermiso);
+          return permissionaux?true:false
+        });
+      return rolaux ? true:false;
     }
 }
   
@@ -143,6 +151,8 @@ export class Role {
     public constructor(init?: Partial<Role>) {
         Object.assign(this, init);        
     }
+
+    
 }
   
 export class Permission {
@@ -169,4 +179,15 @@ export class Permission {
         Object.assign(this, init);        
     }
    
+}
+
+export class UserSystem {
+  id:number;
+  name:string;
+  email:string;
+  admin:boolean;
+  planificador:boolean;
+  cliente:boolean;
+  active:boolean;
+  constructor(){}
 }

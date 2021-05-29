@@ -19,15 +19,14 @@ import { CookieService } from 'ngx-cookie-service';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { AuthInterceptor } from './auth/interceptors/auth.interceptor';
 import { EmpresaModule } from './empresa/empresa.module';
-
-
+import { HighchartsChartModule } from 'highcharts-angular';
 
 @NgModule({
   declarations: [
     AppComponent
   ],
   imports: [
-    BrowserModule,
+    BrowserModule,        
     AppRoutingModule,
     LayoutModule,
     BrowserAnimationsModule,
@@ -37,6 +36,7 @@ import { EmpresaModule } from './empresa/empresa.module';
     AuthModule,
     EmpresaModule,
     UtilitariosModule,
+    HighchartsChartModule,
     StoreModule.forRoot(appReducers, {metaReducers}),
     EffectsModule.forRoot(EffectsArrayAuth),
     StoreDevtoolsModule.instrument({

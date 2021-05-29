@@ -1,0 +1,18 @@
+<form [formGroup]="eliminarForm" (ngSubmit)="delete()" >
+    <h3 mat-dialog-title>Inactivar Usuario</h3>
+    <div mat-dialog-content fxLayout="column">
+        <p class="margin section-form">Al desactivar esta función, el usuario no tendrá acceso al sistema en su próximo inicio de sesión.</p>
+        <p class="margin section-form">¿Está seguro de inactivar al usuario <strong> <em> {{userSystem.name}} </em></strong>?</p>        
+        <section class='section-form' fxFlex.xs="100%" fxFlex.sm="100%" fxFlex.md="100%" fxFlex.xl="100%" fxFlex.lg="100%">                                    
+            <mat-form-field appearance="outline" class="item-form">
+                <input matInput [formControl]="eliminar" placeholder="eliminar">
+                <mat-hint>Escriba la palabra 'eliminar' para continuar </mat-hint>
+                <mat-error *ngIf="eliminar.hasError('required')">Este campo es requerido</mat-error>
+            </mat-form-field>
+        </section>
+    </div>
+    <div mat-dialog-actions class="btn-right">
+        <button mat-button mat-dialog-close>Cerrar</button>
+        <button mat-raised-button color="warn" type="submit" [disabled]="!eliminarForm.valid">Desactivar</button>
+    </div>
+</form>

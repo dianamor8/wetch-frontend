@@ -12,7 +12,13 @@ export class Proyecto {
   descripcion:string;
   prefactibilidads: Prefactibilidad[];
   ubicacion: Ubicacion;
-  propietario:User;
+  propietario:Propietario;
+  constructor(){}
+}
+
+export class Propietario{
+  id:number;
+  nombre:string;
   constructor(){}
 }
 

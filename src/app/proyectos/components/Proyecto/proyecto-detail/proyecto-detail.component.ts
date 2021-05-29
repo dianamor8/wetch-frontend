@@ -123,7 +123,7 @@ export class ProyectoDetailComponent implements OnInit {
     this.bSubmitted = true;
     if(this.proyectoForm.valid){
       this.proyecto = {...this.proyecto, ...this.proyectoForm.value};
-      this.proyecto.propietario = this.user;
+      // this.proyecto.propietario.id = this.user.id;
       this.proyecto.fecha = new Date(this.datePipe.transform(this.proyectoForm.get('fecha').value, 'yyyy-MM-dd h:mm:ss'));      
       let ubicacion = {...this.proyecto.ubicacion, ...this.direccionForm.value};
       this.proyecto.ubicacion = ubicacion;

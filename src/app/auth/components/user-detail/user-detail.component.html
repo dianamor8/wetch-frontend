@@ -1,0 +1,34 @@
+<div class="supercontainer">
+    <h1 class="title__pages">Usuario</h1>    
+    <form [formGroup]="userSystemForm" fxLayout="row wrap" fxLayoutAlign="start center" >
+        <!-- USUARIO -->
+        <section class='section-form' fxFlex.xs="100%" fxFl9x.sm="90%" fxFlex.md="45%" fxFlex.xl="45%" fxFlex.lg="45%">
+            <mat-form-field class="item-form">
+                <mat-label>Usuario</mat-label>
+                <input matInput [formControl]="name" placeholder="Nombres" class="style" [value]="userSystem.name">                                
+            </mat-form-field>            
+        </section>         
+        <section class='section-form' fxFlex.xs="100%" fxFl9x.sm="90%" fxFlex.md="45%" fxFlex.xl="45%" fxFlex.lg="45%">
+            <mat-form-field class="item-form">
+                <mat-label>Email</mat-label>
+                <input matInput [formControl]="email" placeholder="Email" class="style" [value]="userSystem.email">                                
+            </mat-form-field>            
+        </section>         
+        
+        <!-- ADMIN -->
+        <section class='section-form' fxFlex.xs="100%" fxFl9x.sm="100%" fxFlex.md="100%" fxFlex.xl="100%" fxFlex.lg="100%" fxLayout="row wrap" fxLayoutGap='16px' fxLayoutAlign='start center' >            
+            
+            <p><mat-checkbox formControlName='admin' [checked]="userSystem.admin">Administrador</mat-checkbox></p>        
+            <p><mat-checkbox formControlName='planificador' [checked]="userSystem.planificador">Planificador</mat-checkbox></p>        
+            <p><mat-checkbox formControlName='cliente' [checked]="userSystem.cliente">Cliente</mat-checkbox></p>        
+            
+        </section> 
+        <span></span>
+        <section class='section-form' fxFlex.xs="100%" fxFlex.sm="100%" fxFlex.md="100%"
+            fxFlex.xl="100%" fxFlex.lg="100%" fxFlexAlign='start center'>                        
+            <button mat-raised-button color="primary" type="button" (click)="save()" [disabled]="!userSystemForm.valid">Actualizar Usuario</button>
+        </section>
+
+    </form>
+</div>
+<br> 

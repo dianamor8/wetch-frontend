@@ -1,0 +1,50 @@
+.container-table {
+    max-width: 90%;
+}
+
+.supercontainer {
+    margin: 10px;
+}
+
+.w-5{
+    max-width: 5%;
+}
+
+.w-15{
+    max-width: 15%;
+}
+
+
+.w-30{
+    max-width: 15%;
+}
+
+.text-align-center {
+    text-align: center;
+}
+
+.headerTableColor {
+    background-color: var(--wetch-gray);
+}
+
+.min-with-button {
+    min-width: 35px;
+    padding: 0;
+}
+
+table {
+    width: 100%;
+}
+
+.mat-form-field {
+    font-size: 14px;
+    width: 100%;
+}
+
+.activo{
+    background-color: greenyellow;
+}
+
+.noActivo{
+    background-color: red;
+}

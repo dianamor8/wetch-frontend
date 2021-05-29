@@ -4,7 +4,7 @@ import { Store } from '@ngrx/store';
 import { AppState } from 'src/app/app.reducer';
 import { User } from 'src/app/auth/models/user';
 import { addProyecto } from 'src/app/proyectos/actions';
-import { Canton, Parroquia, Provincia, Proyecto, Ubicacion } from 'src/app/proyectos/models/proyecto';
+import { Canton, Parroquia, Propietario, Provincia, Proyecto, Ubicacion } from 'src/app/proyectos/models/proyecto';
 import { proyectosReducer, ProyectosState } from 'src/app/proyectos/reducers';
 import { ProyectosService } from 'src/app/proyectos/service/proyectos.service';
 import { DatePipe } from '@angular/common';
@@ -93,8 +93,12 @@ export class ProyectoAddComponent implements OnInit {
   save():void{
     this.bSubmitted = true;
     if(this.proyectoForm.valid){
+      let propietario = new Propietario();
+      propietario.id= this.user.id;
+      propietario.nombre = this.user.name;
+
       this.proyecto = {...new Proyecto(), ...this.proyectoForm.value};
-      this.proyecto.propietario = this.user;
+      this.proyecto.propietario = propietario;      
       this.proyecto.fecha = new Date(this.datePipe.transform(this.proyectoForm.get('fecha').value, 'yyyy-MM-dd h:mm:ss'));      
       let ubicacion = {...new Ubicacion(), ...this.direccionForm.value};
       this.proyecto.ubicacion = ubicacion;

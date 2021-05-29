@@ -9,3 +9,8 @@ export const getProfile = createSelector(
     user, 
     (user:User) => user!=null? user.profile : null 
 );
+
+export const getUser = createSelector(
+    user, 
+    (user:User) => user!=null? user : null 
+);

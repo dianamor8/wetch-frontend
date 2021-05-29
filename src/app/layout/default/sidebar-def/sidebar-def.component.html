@@ -9,20 +9,28 @@
     </div>
 
     <div *ngIf="user && user.isPlanificador()">
-        <h2 matSubheader><small>Prefactibilidad</small></h2>        
-        <a mat-list-item href='/prefactibilidad/tipo-area-vivienda' (click)="onSidenavClose()"> Área de Vivienda </a>
-        <a mat-list-item href='/prefactibilidad/ambiente-list' (click)="onSidenavClose()"> Ambientes </a>
-        <small> <a mat-list-item href='/prefactibilidad/acabado-list' (click)="onSidenavClose()"> Acabado de construcción</a></small>
-
+        <h2 matSubheader><small>Proyectos</small></h2>        
+        <a mat-list-item href='/proyectos/proyectos-list' (click)="onSidenavClose()"> Mis Proyectos </a>        
         <mat-divider></mat-divider>
     </div>
 
     <div *ngIf="user && user.isAdministrador()">
+        <h2 matSubheader><small>Prefactibilidad</small></h2>        
+        <a mat-list-item href='/prefactibilidad/tipo-area-vivienda' (click)="onSidenavClose()"> Área de Vivienda </a>
+        <a mat-list-item href='/prefactibilidad/ambiente-list' (click)="onSidenavClose()"> Ambientes </a>
+        <small> <a mat-list-item href='/prefactibilidad/acabado-list' (click)="onSidenavClose()"> Acabado de construcción</a></small>
+        <mat-divider></mat-divider>
+
         <h2 matSubheader><small>Atencion a clientes</small></h2>
         <a mat-list-item href='/contacto-list' (click)="onSidenavClose()">Contactos</a>
-        <a mat-list-item href='/usuarios-list' (click)="onSidenavClose()">Usuarios</a>
+        <a mat-list-item href='/user-list' (click)="onSidenavClose()">Usuarios</a>
     </div>
 
     <mat-divider></mat-divider>
+
+    <div *ngIf="user && user.isCliente()">
+        <h2 matSubheader><small>Simuladores</small></h2>        
+        <a mat-list-item href='/proyectos/simulador' (click)="onSidenavClose()"> Simulador de prefactibilidad  </a>        
+    </div>
     
 </mat-nav-list>

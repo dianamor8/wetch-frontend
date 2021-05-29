@@ -173,8 +173,7 @@ export class PrefactibilidadAddComponent implements OnInit, OnDestroy {
     }    
 
     this.store.select(getProyectoById(this.idProyecto)).subscribe((proy: Proyecto) => {
-      this.proyecto = proy;
-      console.log(this.proyecto)
+      this.proyecto = proy;      
       
       let arrPref = this.proyecto.prefactibilidads.filter((prefact:Prefactibilidad) => prefact.id === this.idPrefactibilidad);
       if(arrPref.length>0){
@@ -743,9 +742,11 @@ export class PrefactibilidadAddComponent implements OnInit, OnDestroy {
   }
 
   agregarItemsSeleccionados(ambientes: Ambiente[]):void{
+    if(ambientes){
     ambientes.forEach(ambiente => {
       this.agregarItem(ambiente);
     });
+   }
   }
 
   agregarItem(nuevoAmbiente:Ambiente):void{    

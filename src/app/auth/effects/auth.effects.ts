@@ -119,6 +119,52 @@ export class AuthEffects {
                 ))
             ));
         
+            getAllUsersSystem$ = createEffect(()=>this.actions$.pipe(
+            ofType(authAccions.getAllUsersSystem),
+            mergeMap((resp)=>
+                this.authService.getAllUsersSystem().pipe(                                 
+                    map((response)=>                                                
+                        {                                                
+                            return authAccions.getAllUsersSystemSuccess({usersSystem: response})}
+                    ),                
+                    catchError((err)=> of(authAccions.getAllUsersSystemError({payload:err}))),
+                ))
+            ));
+
+            updateRoles$ = createEffect(()=>this.actions$.pipe(
+                ofType(authAccions.updateUsersSystem),
+                mergeMap((resp)=>
+                    this.authService.updateRoles(resp.userSystem).pipe(                                 
+                        map((response)=>                                                
+                            {   this.messageService.showNotification('Actualizado con éxito', 'Éxito','Ok', 'success', 4000);                                     
+                                return authAccions.updateUsersSystemSuccess({userSystem:response})}
+                        ),                
+                        catchError((err)=> 
+                        {
+                            this.messageService.showNotification('No fue posible actualizar', 'Error','Ok', 'error', 4000);
+                            return of(authAccions.updateUsersSystemError({payload:err}))
+                        }
+                        ),
+                    ))
+                ));
+
+                updateStatus$ = createEffect(()=>this.actions$.pipe(
+                    ofType(authAccions.statusUsersSystem),
+                    mergeMap((resp)=>
+                        this.authService.updateStatusUser(resp.userSystem).pipe(                                 
+                            map((response)=>                                                
+                                {   this.messageService.showNotification('Actualizado con éxito', 'Éxito','Ok', 'success', 4000);                                     
+                                    return authAccions.statusUsersSystemSuccess({userSystem:response})}
+                            ),                
+                            catchError((err)=> 
+                            {
+                                this.messageService.showNotification('No fue posible actualizar', 'Error','Ok', 'error', 4000);
+                                return of(authAccions.statusUsersSystemError({payload:err}))
+                            }
+                            ),
+                        ))
+                    ));
+        
     //EFECTS TO REDIRECT
 
     $LoginRedirectTo = createEffect(()=>this.actions$.pipe(

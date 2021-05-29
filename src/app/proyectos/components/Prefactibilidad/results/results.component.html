@@ -1,185 +1,236 @@
-    <div fxLayout="row wrap" fxLayoutAlign="space-between start" *ngIf="prefactibilidad">
-        <div fxFlex="100%" fxLayout="row wrap" fxLayoutAlign="space-between  center">    
-            <button mat-raised-button routerLink='/proyectos/proyecto-estudios/{{proyecto.id}}'>
-                <mat-icon>reply</mat-icon>
-                Regresar
-            </button>        
-            <h2 class="title-results title__pages">Resultados </h2> 
-            
-            <button mat-raised-button routerLink='/proyectos/proyecto-estudios/{{proyecto.id}}'>
-                <mat-icon>print</mat-icon>
-                Imprimir
-            </button>        
+<div fxLayout="row wrap" fxLayoutAlign="space-between start" *ngIf="prefactibilidad">
+  <div fxFlex="100%" fxLayout="row wrap" fxLayoutAlign="space-between  center">
+    <button mat-raised-button routerLink='/proyectos/proyecto-estudios/{{proyecto.id}}'>
+      <mat-icon>reply</mat-icon>
+      Regresar
+    </button>
+    <h2 class="title-results title__pages">Resultados </h2>
+
+    <button mat-raised-button routerLink='/proyectos/proyecto-estudios/{{proyecto.id}}'>
+      <mat-icon>print</mat-icon>
+      Imprimir
+    </button>
+  </div>
+  <div fxFlex="100%">
+
+    <h3 class="title-results"><strong>{{ proyecto.titulo | uppercase }}</strong> </h3>
+
+    <!-- <p> <strong>Ubicación: </strong> {{proyecto.ubicacion.provincia.provincia}}/{{proyecto.ubicacion.canton}}/{{proyecto.ubicacion.parroquia}} </p> -->
+    <mat-accordion class="example-headers-align" multi fxLayout="row wrap" fxLayoutAlign="space-between none">
+      <!-- DATOS GENERALES -->
+      <span fxFlex.xs="100%" fxFlex.sm="100%" fxFlex.md="100%" fxFlex.xl="100%" fxFlex.lg="100%"></span>
+      <mat-expansion-panel [expanded]='true' fxFlex.xs="100%" fxFlex.sm="100%" fxFlex.md="48%" fxFlex.xl="48%"
+        fxFlex.lg="48%">
+        <mat-expansion-panel-header>
+          <mat-panel-title>
+            <strong>A. DATOS GENERALES</strong>
+          </mat-panel-title>
+        </mat-expansion-panel-header>
+
+        <table style="width:100%">
+          <tr>
+            <td>
+              <p>Fecha:</p>
+            </td>
+            <td>{{proyecto.fecha | date:'d/MM/yyyy'}}</td>
+          </tr>
+          <tr>
+            <td>
+              <p> Cliente: </p>
+            </td>
+            <td>{{proyecto.solicitante}}</td>
+          </tr>
+          <tr>
+            <td>
+              <p>Direccion:</p>
+            </td>
+            <td>{{proyecto.ubicacion.direccion}}</td>
+          </tr>
+          <tr>
+            <td>
+              <p>Cálculo realizado con área: </p>
+            </td>
+            <td>{{prefactibilidad.typeArea.nombre}}</td>
+          </tr>
+          <tr>
+            <td>
+              <p>Acabados: </p>
+            </td>
+            <td>{{prefactibilidad.acabado.nombre}}</td>
+          </tr>
+        </table>
+
+      </mat-expansion-panel>
+
+
+      <!-- TERRENO -->
+      <mat-expansion-panel [expanded]='true' fxFlex.xs="100%" fxFlex.sm="100%" fxFlex.md="48%" fxFlex.xl="48%"
+        fxFlex.lg="48%">
+        <mat-expansion-panel-header>
+          <mat-panel-title>
+            <strong>B. TERRENO </strong>
+          </mat-panel-title>
+
+        </mat-expansion-panel-header>
+
+
+        <table style="width:100%">
+          <tr>
+            <td>
+              <p>Área total de terreno:</p>
+            </td>
+            <td>{{prefactibilidad.areaConstruccion.areaTotal}} m<sup><small>2</small></sup></td>
+          </tr>
+          <tr>
+            <td>
+              <p>Costo del terreno por m<sup><small>2</small></sup>:</p>
+            </td>
+            <td>${{prefactibilidad.areaConstruccion.valorSueloUrbano}}</td>
+          </tr>
+          <tr>
+            <td>
+              <p>Área de ocupación del suelo: </p>
+            </td>
+            <td>{{prefactibilidad.areaConstruccion.areaCOS}}m<sup><small>2</small></sup></td>
+          </tr>
+          <tr>
+            <td>
+              <p>Coeficiente de ocupación del suelo: </p>
+            </td>
+            <td>{{prefactibilidad.areaConstruccion.cos | number:'1.2-2'}}%</td>
+          </tr>
+
+          <tr>
+            <td>
+              <p>Costo total del terreno:</p>
+            </td>
+            <td>${{prefactibilidad.areaConstruccion.costoTotalTerreno}}</td>
+          </tr>
+        </table>
+
+      </mat-expansion-panel>
+
+      <!-- CONSTRUCCION -->
+      <mat-expansion-panel [expanded]='true' fxFlex.xs="100%" fxFlex.sm="100%" fxFlex.md="48%" fxFlex.xl="48%"
+        fxFlex.lg="48%">
+        <mat-expansion-panel-header>
+          <mat-panel-title>
+            <strong>C. CONSTRUCCION </strong>
+          </mat-panel-title>
+
+        </mat-expansion-panel-header>
+
+        <table style="width:100%">
+          <tr>
+            <td>
+              <p>Área de construcción:</p>
+            </td>
+            <td>{{prefactibilidad.areaTotalConstruccion}} m<sup><small>2</small></sup></td>
+          </tr>
+          <tr>
+            <td>
+              <p>Número de plantas de la edificación:</p>
+            </td>
+            <td>{{prefactibilidad.nroPlantas | number:'1.2-2'}}</td>
+          </tr>
+          <tr>
+            <td>
+              <p>Costo de construcción: </p>
+            </td>
+            <td>${{prefactibilidad.costoConstruccion}}</td>
+          </tr>
+          <tr>
+            <td>
+              <p>Costo de Dirección Técnica: </p>
+            </td>
+            <td>${{prefactibilidad.costoDireccionTecnica}}</td>
+          </tr>
+
+          <tr>
+            <td>
+              <p>Costo Total de Construccion: </p>
+            </td>
+            <td>${{prefactibilidad.costoTotalConstruccion }}</td>
+          </tr>
+        </table>
+      </mat-expansion-panel>
+
+      <!-- ESTUDIOS -->
+      <mat-expansion-panel [expanded]='true' fxFlex.xs="100%" fxFlex.sm="100%" fxFlex.md="48%" fxFlex.xl="48%"
+        fxFlex.lg="48%">
+        <mat-expansion-panel-header>
+          <mat-panel-title>
+            <strong>D. ESTUDIOS </strong>
+          </mat-panel-title>
+
+        </mat-expansion-panel-header>
+
+
+        <table style="width:100%">
+          <tr>
+            <td>
+              <p>Estudios Técnicos requeridos: </p>
+            </td>
+            <td>Arquitectónico, Estructural, Suelos</td>
+          </tr>
+          <tr>
+            <td>
+              <p>Costo de los estudios en función del área de construcción:</p>
+            </td>
+            <td>${{prefactibilidad.costoEstudioPorMetro}} usd/m<sup><small>2</small></sup></td>
+          </tr>
+          <tr>
+            <td>
+              <p>Costo total de los estudios: </p>
+            </td>
+            <td>${{prefactibilidad.costoEstudios}}</td>
+          </tr>
+        </table>
+      </mat-expansion-panel>
+
+      <!-- INVERSIÓN TOTAL -->
+      <mat-expansion-panel [expanded]='true' fxFlex.xs="100%" fxFlex.sm="100%" fxFlex.md="48%" fxFlex.xl="48%"
+        fxFlex.lg="48%">
+        <mat-expansion-panel-header>
+          <mat-panel-title>
+            <strong>E. INVERSIÓN TOTAL </strong>
+          </mat-panel-title>
+
+        </mat-expansion-panel-header>
+
+        <table style="width:100%">
+          <tr>
+            <td>
+              <p>La inversión total es de: </p>
+            </td>
+            <td><strong>${{prefactibilidad.inversionTotal}}</strong></td>
+          </tr>
+        </table>
+
+      </mat-expansion-panel>
+
+      <!-- DIAGRAMA DE INVERSION -->
+      <mat-expansion-panel [expanded]='true' fxFlex.xs="100%" fxFlex.sm="100%" fxFlex.md="48%" fxFlex.xl="48%"
+        fxFlex.lg="48%">
+        <mat-expansion-panel-header>
+          <mat-panel-title>
+            <strong>DIAGRAMA </strong>
+          </mat-panel-title>
+
+        </mat-expansion-panel-header>
+        <div class="container-panel-results">
+          <div fxFlex.xs="100%" fxFlex.sm="100%" fxFlex.md="45%" fxFlex.xl="45%" fxFlex.lg="45%">
+
+            <highcharts-chart 
+              [Highcharts]="Highcharts"              
+              [options]="chartOptions"             
+              style="width: 100%; height: 400px; display: block;"
+            ></highcharts-chart>
+
+          </div>
         </div>
-        <div fxFlex="100%">
+      </mat-expansion-panel>
+    </mat-accordion>
+  </div>
+</div>
 
-            <h3 class="title-results"><strong>{{ proyecto.titulo | uppercase }}</strong> </h3> 
-            
-            <!-- <p> <strong>Ubicación: </strong> {{proyecto.ubicacion.provincia.provincia}}/{{proyecto.ubicacion.canton}}/{{proyecto.ubicacion.parroquia}} </p> -->
-            <mat-accordion class="example-headers-align" multi fxLayout="row wrap" fxLayoutAlign="space-between none">
-                <!-- DATOS GENERALES -->
-                <span fxFlex.xs="100%" fxFlex.sm="100%" fxFlex.md="100%" fxFlex.xl="100%" fxFlex.lg="100%"></span>
-                <mat-expansion-panel [expanded]='true' fxFlex.xs="100%" fxFlex.sm="100%" fxFlex.md="48%" fxFlex.xl="48%" fxFlex.lg="48%"> 
-                  <mat-expansion-panel-header>
-                    <mat-panel-title>
-                       <strong>A. DATOS GENERALES</strong>
-                    </mat-panel-title>                        
-                  </mat-expansion-panel-header>
-                  
-                    <table style="width:100%">                          
-                        <tr>
-                            <td> <p>Fecha:</p> </td>
-                            <td>{{proyecto.fecha | date:'d/MM/yyyy'}}</td>    
-                          </tr>
-                        <tr>
-                          <td> <p> Cliente: </p></td>
-                          <td>{{proyecto.solicitante}}</td>    
-                        </tr>
-                        <tr>
-                          <td><p>Direccion:</p></td>
-                          <td>{{proyecto.ubicacion.direccion}}</td>    
-                        </tr>
-                        <tr>
-                          <td><p>Cálculo realizado con área: </p></td>
-                          <td>{{prefactibilidad.typeArea.nombre}}</td>    
-                        </tr>
-                        <tr>
-                            <td><p>Acabados: </p></td>
-                            <td>{{prefactibilidad.acabado.nombre}}</td>    
-                          </tr>
-                      </table>
-                 
-                </mat-expansion-panel>
-                
-
-                <!-- TERRENO -->
-                <mat-expansion-panel [expanded]='true'  fxFlex.xs="100%" fxFlex.sm="100%" fxFlex.md="48%" fxFlex.xl="48%" fxFlex.lg="48%"> 
-                    <mat-expansion-panel-header>
-                      <mat-panel-title>
-                        <strong>B. TERRENO </strong>
-                      </mat-panel-title>
-                      
-                    </mat-expansion-panel-header>
-                    
-
-                        <table style="width:100%">  
-                            <tr>
-                              <td><p>Área total de terreno:</p></td>
-                              <td>{{prefactibilidad.areaConstruccion.areaTotal}} m<sup><small>2</small></sup></td>    
-                            </tr>
-                            <tr>
-                              <td><p>Costo del terreno por m<sup><small>2</small></sup>:</p></td>
-                              <td>${{prefactibilidad.areaConstruccion.valorSueloUrbano}}</td>    
-                            </tr>
-                            <tr>
-                              <td><p>Área de ocupación del suelo: </p> </td>
-                              <td>{{prefactibilidad.areaConstruccion.areaCOS}}m<sup><small>2</small></sup></td>    
-                            </tr>
-                            <tr>
-                                <td><p>Coeficiente de ocupación del suelo: </p></td>
-                                <td>{{prefactibilidad.areaConstruccion.cos | number:'1.2-2'}}%</td>    
-                              </tr>
-
-                              <tr>
-                                <td><p>Costo total del terreno:</p> </td>
-                                <td>${{prefactibilidad.areaConstruccion.costoTotalTerreno}}</td>    
-                              </tr>
-                          </table>
-                                         
-                  </mat-expansion-panel>
-
-                  <!-- CONSTRUCCION -->
-                <mat-expansion-panel [expanded]='true' fxFlex.xs="100%" fxFlex.sm="100%" fxFlex.md="48%" fxFlex.xl="48%" fxFlex.lg="48%"> 
-                    <mat-expansion-panel-header>
-                      <mat-panel-title>
-                        <strong>C. CONSTRUCCION </strong>
-                      </mat-panel-title>
-                      
-                    </mat-expansion-panel-header>
-
-                    <table style="width:100%">  
-                        <tr>
-                          <td><p>Área de construcción:</p></td>
-                          <td>{{prefactibilidad.areaTotalConstruccion}} m<sup><small>2</small></sup></td>    
-                        </tr>
-                        <tr>
-                          <td><p>Número de plantas de la edificación:</p></td>
-                          <td>{{prefactibilidad.nroPlantas | number:'1.2-2'}}</td>    
-                        </tr>
-                        <tr>
-                          <td><p>Costo de construcción: </p> </td>
-                          <td>${{prefactibilidad.costoConstruccion}}</td>    
-                        </tr>
-                        <tr>
-                            <td><p>Costo de Dirección Técnica: </p></td>
-                            <td>${{prefactibilidad.costoDireccionTecnica}}</td>    
-                          </tr>
-
-                          <tr>
-                            <td><p>Costo Total de Construccion: </p> </td>
-                            <td>${{prefactibilidad.costoTotalConstruccion }}</td>    
-                          </tr>
-                      </table>                    
-                  </mat-expansion-panel>
-
-                  <!-- ESTUDIOS -->
-                <mat-expansion-panel [expanded]='true' fxFlex.xs="100%" fxFlex.sm="100%" fxFlex.md="48%" fxFlex.xl="48%" fxFlex.lg="48%"> 
-                    <mat-expansion-panel-header>
-                      <mat-panel-title>
-                        <strong>D. ESTUDIOS </strong>
-                      </mat-panel-title>
-                      
-                    </mat-expansion-panel-header>
-
-
-                    <table style="width:100%">  
-                        <tr>
-                          <td><p>Estudios Técnicos requeridos: </p></td>
-                          <td>Arquitectónico, Estructural, Suelos</td>    
-                        </tr>
-                        <tr>
-                          <td><p>Costo de los estudios en función del área de construcción:</p></td>
-                          <td>${{prefactibilidad.costoEstudioPorMetro}} usd/m<sup><small>2</small></sup></td>    
-                        </tr>
-                        <tr>
-                          <td><p>Costo total de los estudios: </p> </td>
-                          <td>${{prefactibilidad.costoEstudios}}</td>    
-                        </tr>                       
-                      </table>                                        
-                  </mat-expansion-panel>
-
-                     <!-- INVERSIÓN TOTAL -->
-                     <mat-expansion-panel [expanded]='true' fxFlex.xs="100%" fxFlex.sm="100%" fxFlex.md="48%" fxFlex.xl="48%" fxFlex.lg="48%"> 
-                        <mat-expansion-panel-header>
-                          <mat-panel-title>
-                            <strong>E. INVERSIÓN TOTAL </strong>
-                          </mat-panel-title>
-                          
-                        </mat-expansion-panel-header>
-
-                        <table style="width:100%">  
-                            <tr>
-                              <td><p>La inversión total es de: </p></td>
-                              <td><strong>${{prefactibilidad.inversionTotal}}</strong></td>    
-                            </tr>                                               
-                          </table> 
-                                           
-                      </mat-expansion-panel>
-
-                       <!-- DIAGRAMA DE INVERSION -->
-                     <!-- <mat-expansion-panel [expanded]='true' fxFlex.xs="100%" fxFlex.sm="100%" fxFlex.md="48%" fxFlex.xl="48%" fxFlex.lg="48%"> 
-                        <mat-expansion-panel-header>
-                          <mat-panel-title>
-                            <strong>DIAGRAMA </strong>
-                          </mat-panel-title>
-                          
-                        </mat-expansion-panel-header>
-                        <div class="container-panel-results">
-                            <div fxFlex.xs="100%" fxFlex.sm="100%" fxFlex.md="45%" fxFlex.xl="45%" fxFlex.lg="45%">
-                                <p>DIBUJO DEL DIAGRAMA</p>
-                            </div>
-                        </div>                        
-                      </mat-expansion-panel> -->
-            </mat-accordion>
-        </div>
-    </div>

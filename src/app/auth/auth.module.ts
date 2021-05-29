@@ -12,15 +12,22 @@ import { UserAsyncValidator } from './validators/user.async.validator';
 import { ChangePasswordComponent } from './components/change-password/change-password.component';
 import { ValidateAccountComponent } from './components/validate-account/validate-account.component';
 import { ProfileComponent } from './components/profile/profile.component';
+import { UserListComponent } from './components/user-list/user-list.component';
+import { UserDeleteComponent } from './components/user-delete/user-delete.component';
+import { UserDetailComponent } from './components/user-detail/user-detail.component';
+import { UserActiveComponent } from './components/user-active/user-active.component';
 
 
 @NgModule({
-  declarations: [ LoginComponent, RegisterComponent, MyAsyncValidator, ResetPasswordComponent, UserAsyncValidator, ChangePasswordComponent, ValidateAccountComponent, ProfileComponent],
+  declarations: [ LoginComponent, RegisterComponent, MyAsyncValidator, ResetPasswordComponent, UserAsyncValidator, ChangePasswordComponent, ValidateAccountComponent, ProfileComponent, UserListComponent, UserDeleteComponent, UserDetailComponent, UserActiveComponent],
   imports: [
     CommonModule,
     AuthRoutingModule,
     MaterialModule,
     HttpClientModule
+  ],
+  entryComponents:[
+    UserDeleteComponent, UserActiveComponent
   ]
 })
 export class AuthModule { }

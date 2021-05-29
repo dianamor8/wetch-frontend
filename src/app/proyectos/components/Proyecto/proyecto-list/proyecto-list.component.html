@@ -13,10 +13,10 @@
                     <mat-icon>add</mat-icon>Nuevo
                 </button>
             </div>
-            <ng-container *ngIf="proyectos.length > 0; else elseTemplate">
+            <ng-container *ngIf="misProyectos.length > 0; else elseTemplate">
                 <div class="content">
                     <div fxLayout="row wrap" fxLayoutGap="16px">
-                        <div *ngFor="let proyecto of proyectos" fxflex="25%" fxFlex.xs="100%" fxFlex.sm="45%" fxFlex.md="31%" fxFlex.xl="33%" fxFlex.lg="31%" class="points" >
+                        <div *ngFor="let proyecto of misProyectos" fxflex="25%" fxFlex.xs="100%" fxFlex.sm="45%" fxFlex.md="31%" fxFlex.xl="33%" fxFlex.lg="31%" class="points" >
                             <mat-card class="mat-elevation-z8">
                                 <mat-card-header fxLayout='column'>                                                                                       
                                     <div fxLayout='row' fxLayoutAlign='space-between center'>
@@ -36,7 +36,9 @@
                                           </mat-menu>
                                     </div>
                                     <div>                                        
-                                        <mat-card-subtitle> <small>Última actualización: {{proyecto.updated_at | date:'M/d/yy, h:mm a'}}</small> </mat-card-subtitle>
+                                        <mat-card-subtitle> <small>Última actualización: {{proyecto.updated_at | date:'M/d/yy, h:mm a'}}</small>  <br>
+                                            <small>Creado por: {{proyecto.propietario.nombre }}</small>
+                                        </mat-card-subtitle>                                        
                                     </div>
                                 </mat-card-header>                
                                 <mat-card-content class="card-content">
@@ -63,5 +65,65 @@
     </div>
 </div>
 <br>
+
+<div class="supercontainer" *ngIf="user.isAdministrador()">
+    <div fxLayout='row' fxLayoutAlign="center center">
+        <div fxFlex='100%'>
+            <div fxLayout fxLayoutAlign="end center">
+                <h2 fxFlex fxHide.lt-md class="title__pages">Proyectos de Empresa</h2>
+                <h3 fxFlex fxShow.lt-md fxHide class="title__pages"> <strong>Proyectos de Empresa</strong></h3>                                
+            </div>
+            <ng-container *ngIf="proyectos.length > 0; else elseTemplate">
+                <div class="content">
+                    <div fxLayout="row wrap" fxLayoutGap="16px">
+                        <div *ngFor="let proyecto of proyectos" fxflex="25%" fxFlex.xs="100%" fxFlex.sm="45%" fxFlex.md="31%" fxFlex.xl="33%" fxFlex.lg="31%" class="points" >
+                            <mat-card class="mat-elevation-z8">
+                                <mat-card-header fxLayout='column'>                                                                                       
+                                    <div fxLayout='row' fxLayoutAlign='space-between center'>
+                                        <mat-card-title>{{proyecto.titulo}}</mat-card-title>
+                                        <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="Example icon-button with a menu">
+                                            <mat-icon class='points'>more_vert</mat-icon>
+                                          </button>
+                                          <mat-menu #menu="matMenu" xPosition="before">
+                                            <button mat-menu-item (click)="onSelectEdit(proyecto)">
+                                              <mat-icon color="primary">create</mat-icon>
+                                              <span>Editar</span>
+                                            </button>
+                                            <button mat-menu-item (click)="deleteElement(proyecto)">
+                                              <mat-icon color="warn">delete_sweep</mat-icon>
+                                              <span>Eliminar</span>
+                                            </button>                                            
+                                          </mat-menu>
+                                    </div>
+                                    <div>                                        
+                                        <mat-card-subtitle> <small>Última actualización: {{proyecto.updated_at | date:'M/d/yy, h:mm a'}}</small>  <br>
+                                            <small>Creado por: {{proyecto.propietario.nombre }}</small>
+                                        </mat-card-subtitle>
+                                    </div>
+                                    
+                                </mat-card-header>                
+                                <mat-card-content class="card-content">
+                                    <small><p class="margin-cero"><em>Estudios de Prefactibilidad: </em> {{proyecto.prefactibilidads.length}}</p>
+                                    <p class="margin-cero"><em>Cálculo de Presupuesto: </em> {{proyecto.prefactibilidads.length}}</p></small>                    
+                                </mat-card-content>
+                                <mat-card-actions class="button-card">
+                                    <button mat-raised-button color="accent" class="min-with-button" (click)="onAddEstudios(proyecto)">
+                                        Agregar estudios
+                                    </button>                                                                
+                                </mat-card-actions>
+                              </mat-card>
+                        </div>
+                    </div>
+                </div>
+                
+            </ng-container>
+            <ng-template #elseTemplate>
+                <em>
+                    <p>Aún no se han agregado elementos</p>
+                </em>
+            </ng-template>
+        </div>
+    </div>
+</div>
 
 

@@ -1,0 +1,108 @@
+<div class="supercontainer">
+    <div *ngIf="userSelected">
+        <app-user-detail [userSystem]="userSelected"></app-user-detail>
+    </div>
+    <div fxLayout='row' fxLayoutAlign="center center">
+        <div fxFlex='100%'>
+            <div fxLayout fxLayoutAlign="end center">
+                <h2 fxFlex fxHide.lt-md  class="title__pages">Lista de usuarios</h2>
+                <h3 fxFlex fxShow.lt-md fxHide class="title__pages"> <strong> Lista de usuarios</strong></h3>                
+            </div>
+            <ng-container *ngIf="users.length > 0; else elseTemplate">
+
+                <mat-form-field>
+                    <mat-label>Buscar</mat-label>
+                    <input matInput (keyup)="applyFilter($event)" placeholder="Escriba un texto para la búsqueda" #input>
+                </mat-form-field>
+
+                <div class="mat-elevation-z8">
+                    <table mat-table [dataSource]="dataSource" matSort>
+                        <!-- Nro. Column -->
+                      <ng-container matColumnDef="id" class="w-5">
+                        <th mat-header-cell *matHeaderCellDef  ngClass="w-5 headerTableColor"> Id. </th>
+                        <td mat-cell *matCellDef="let row;" ngClass="w-5"> {{row.id}} </td>
+                      </ng-container>
+
+                      <!-- Nombre Column -->
+                      <ng-container matColumnDef="name" class="w-30">
+                        <th mat-header-cell *matHeaderCellDef mat-sort-header ngClass="headerTableColor"> Nombre </th>
+                        <td mat-cell *matCellDef="let row"> {{row.name}} </td>
+                      </ng-container>
+                  
+                      <!-- Email Column -->
+                      <ng-container matColumnDef="email">
+                        <th mat-header-cell *matHeaderCellDef mat-sort-header ngClass="headerTableColor"> Email </th>
+                        <td mat-cell *matCellDef="let row"> {{ row.email }} </td>
+                      </ng-container>
+                  
+                      <!-- Administrador Column -->
+                      <ng-container matColumnDef="admin">
+                        <th mat-header-cell *matHeaderCellDef ngClass="headerTableColor text-align-center"> Administrador </th>
+                        <td mat-cell *matCellDef="let row"  class="text-align-center">                                                         
+                            {{changeToText(row.admin)}}
+                        </td>
+                      </ng-container>
+
+                      <!-- Planificador Column -->
+                      <ng-container matColumnDef="planificador">
+                        <th mat-header-cell *matHeaderCellDef ngClass="headerTableColor text-align-center"> Planificador </th>
+                        <td mat-cell *matCellDef="let row;"   class="text-align-center">                                                                                     
+                            {{changeToText(row.planificador)}}
+                        </td>
+                      </ng-container>
+
+                      <!-- Cliente Column -->
+                      <ng-container matColumnDef="cliente">
+                        <th mat-header-cell *matHeaderCellDef ngClass="headerTableColor text-align-center"> Cliente </th>
+                        <td mat-cell *matCellDef="let row;"   class="text-align-center">                                                                                     
+                            {{changeToText(row.cliente)}}
+                        </td>
+                      </ng-container>
+
+                      <!-- Active Column -->
+                      <ng-container matColumnDef="active">
+                        <th mat-header-cell *matHeaderCellDef ngClass="headerTableColor text-align-center"> Activo </th>
+                        <td mat-cell *matCellDef="let row;"   class="text-align-center" [ngClass]="row.active ? 'activo' : 'noActivo'">                                                                                     
+                            {{changeToText(row.active)}}
+                        </td>
+                      </ng-container>
+
+                      <!-- Actions Column -->
+                      <ng-container matColumnDef="actions" class="w-15">
+                        <th mat-header-cell *matHeaderCellDef class="th-left w-15 headerTableColor text-align-center"> Acciones </th>
+                        <td mat-cell *matCellDef="let row;" class="th-left w-15 text-align-center">                        
+                            <button mat-button class="min-with-button"  (click)="onSelectEdit(row)">
+                                <mat-icon>create</mat-icon>
+                            </button>
+
+                            <button *ngIf="row.active" mat-button color="warn" class="min-with-button" (click)="deleteElement(row)">
+                                <mat-icon>delete</mat-icon>
+                            </button>
+
+                            <button *ngIf="!row.active" mat-button color="primary" class="min-with-button" (click)="activeElement(row)">
+                              <mat-icon>check_circle</mat-icon>
+                          </button>
+                        </td>
+                      </ng-container>
+                  
+                      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+                  
+                      <!-- Fila que se muestra cuando no hay datos coincidentes. -->
+                      <tr class="mat-row" *matNoDataRow>
+                        <td class="mat-cell" colspan="4">No hay datos que coincidan con la búsqueda "{{input.value}}"</td>
+                      </tr>
+                    </table>
+                  
+                    <mat-paginator [pageSizeOptions]="[5, 10, 15, 20]"></mat-paginator>                     
+                  </div>
+            </ng-container>
+            <ng-template #elseTemplate>
+                <em>
+                    <p>Aún no se han agregado elementos</p>
+                </em>
+            </ng-template>
+        </div>
+    </div>
+</div>
+

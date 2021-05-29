@@ -25,7 +25,7 @@ export class ProyectoEstudiosComponent implements AfterViewInit, OnInit {
   user:User;
   id:number;
 
-  displayedColumns: string[] = ['id', 'fecha', 'subtotalAreaConstruccion', 'areaTotalConstruccion', 'actions'];
+  displayedColumns: string[] = ['id', 'fecha', 'areaConstruccion','costoConstruccion', 'inversionTotal', 'actions'];
   dataSource: MatTableDataSource<Prefactibilidad>;
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;

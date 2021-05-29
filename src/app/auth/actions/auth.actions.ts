@@ -1,7 +1,7 @@
 import { HttpHeaders } from "@angular/common/http";
 import { createAction, props } from "@ngrx/store";
 import { Profile } from "../models/profile";
-import { User } from "../models/user";
+import { User, UserSystem } from "../models/user";
 
 export const login = createAction(
     '[AUTH] Login', props<{email:string; password:string, returnUrl:string}>()
@@ -91,4 +91,41 @@ export const updateProfileSuccess = createAction(
 
 export const updateProfileError  = createAction(
     '[AUTH] Update Profile Error', props<{payload: any}>()
+);
+
+export const getAllUsersSystem = createAction(
+    '[AUTH] Get all UsersSystem'
+);
+
+export const getAllUsersSystemSuccess = createAction(
+    '[AUTH] Get all UsersSystem Success', props<{usersSystem:UserSystem[]}>()
+);
+
+export const getAllUsersSystemError  = createAction(
+    '[AUTH] Get all UsersSystem Error', props<{payload: any}>()
+);
+
+export const updateUsersSystem = createAction(
+    '[AUTH] Update UsersSystem', props<{userSystem:UserSystem}>()
+);
+
+export const updateUsersSystemSuccess = createAction(
+    '[AUTH] Update UsersSystem Success', props<{userSystem:UserSystem}>()
+);
+
+export const updateUsersSystemError  = createAction(
+    '[AUTH] Update UsersSystem Error', props<{payload: any}>()
+);
+
+
+export const statusUsersSystem = createAction(
+    '[AUTH] Status UsersSystem', props<{userSystem:UserSystem}>()
+);
+
+export const statusUsersSystemSuccess = createAction(
+    '[AUTH] Status UsersSystem Success', props<{userSystem:UserSystem}>()
+);
+
+export const statusUsersSystemError  = createAction(
+    '[AUTH] Status UsersSystem Error', props<{payload: any}>()
 );
